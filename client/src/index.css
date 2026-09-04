@@ -34,3 +34,27 @@
   border-radius: 0.75rem;
   z-index: 10;
 }
+
+/* WCAG High Contrast Mode */
+html.high-contrast {
+  filter: contrast(115%);
+}
+html.high-contrast button,
+html.high-contrast a,
+html.high-contrast input,
+html.high-contrast select,
+html.high-contrast .card {
+  border-width: 2px !important;
+  border-color: #0f172a !important;
+}
+
+/* WCAG Reduced Motion */
+html.reduced-motion *,
+html.reduced-motion *::before,
+html.reduced-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+

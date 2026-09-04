@@ -63,16 +63,20 @@ export const FrictionFingerprint: React.FC = () => {
     );
   }
 
+  const p = profile as any;
   const factors = [
-    { key: 'transport', label: 'Transport Availability', factor: profile.transport, icon: Bus },
-    { key: 'travel', label: 'Travel Distance & Road Quality', factor: profile.travel, icon: MapPin },
-    { key: 'cost', label: 'Financial & Out-of-Pocket Cost', factor: profile.cost, icon: Coins },
-    { key: 'familySupport', label: 'Family & Caregiver Support', factor: profile.familySupport, icon: Users2 },
-    { key: 'digitalAccess', label: 'Digital Access & Literacy', factor: profile.digitalAccess, icon: Laptop },
-    { key: 'appointmentTiming', label: 'Appointment Timing & Wage Loss', factor: profile.appointmentTiming, icon: Clock },
-    { key: 'documentation', label: 'Documentation Readiness', factor: profile.documentation, icon: FileCheck2 },
-    { key: 'language', label: 'Language & Dialect Match', factor: profile.language, icon: Languages },
+    { key: 'transport', label: 'Transport Availability', factor: p.transport, icon: Bus },
+    { key: 'travel', label: 'Travel Distance & Road Quality', factor: p.travel, icon: MapPin },
+    { key: 'cost', label: 'Financial & Out-of-Pocket Cost', factor: p.cost, icon: Coins },
+    { key: 'familySupport', label: 'Family & Caregiver Support', factor: p.familySupport || p.familysupport, icon: Users2 },
+    { key: 'digitalAccess', label: 'Digital Access & Literacy', factor: p.digitalAccess || p.digitalaccess, icon: Laptop },
+    { key: 'appointmentTiming', label: 'Appointment Timing & Wage Loss', factor: p.appointmentTiming || p.appointmenttiming, icon: Clock },
+    { key: 'documentation', label: 'Documentation Readiness', factor: p.documentation, icon: FileCheck2 },
+    { key: 'language', label: 'Language & Dialect Match', factor: p.language, icon: Languages },
   ];
+
+  const overallScore = p.overallAccessibilityScore ?? p.overallaccessibilityscore ?? 65;
+  const frictionLevel = p.frictionLevel || p.frictionlevel || 'MODERATE';
 
   return (
     <div className="space-y-8 max-w-6xl mx-auto">
@@ -85,7 +89,7 @@ export const FrictionFingerprint: React.FC = () => {
                 <Sparkles className="w-6 h-6 text-brand-500" />
                 Patient Friction Fingerprint™
               </h2>
-              <StatusBadge status={profile.frictionLevel} size="sm" />
+              <StatusBadge status={frictionLevel} size="sm" />
             </div>
             <p className="text-xs text-slate-500 mt-0.5">
               Deterministic, explainable quantification of non-clinical healthcare barriers
@@ -96,7 +100,7 @@ export const FrictionFingerprint: React.FC = () => {
             <div className="text-right">
               <span className="text-[10px] text-slate-400 font-bold uppercase block">Overall Accessibility</span>
               <span className="text-2xl font-black text-brand-700">
-                {profile.overallAccessibilityScore} / 100
+                {overallScore} / 100
               </span>
             </div>
           </div>

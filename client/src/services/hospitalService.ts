@@ -56,4 +56,19 @@ export const hospitalService = {
     const res = await api.put('/hospitals/profile/me', data);
     return res.data;
   },
+
+  async addDepartment(data: any): Promise<{ success: boolean; department: HospitalDepartment; message: string }> {
+    const res = await api.post('/hospitals/departments', data);
+    return res.data;
+  },
+
+  async updateDepartment(deptId: string, data: any): Promise<{ success: boolean; department: HospitalDepartment; message: string }> {
+    const res = await api.put(`/hospitals/departments/${deptId}`, data);
+    return res.data;
+  },
+
+  async deleteDepartment(deptId: string): Promise<{ success: boolean; message: string }> {
+    const res = await api.delete(`/hospitals/departments/${deptId}`);
+    return res.data;
+  },
 };

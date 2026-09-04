@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema, Types } from 'mongoose';
+import { createSQLModel } from '../database/sqlModel.js';
 
 export type NotificationType =
   | 'REQUEST_UPDATE'
@@ -7,37 +7,23 @@ export type NotificationType =
   | 'DOCUMENT_ALERT'
   | 'SYSTEM_ALERT';
 
-export interface INotification extends Document {
-  userId: Types.ObjectId;
-  role: 'patient' | 'hospital' | 'admin';
+export interface INotification {
+  _id?: any;
+  id?: any;
+  userId: any;
+  role?: 'patient' | 'hospital' | 'admin';
   title: string;
   message: string;
-  type: NotificationType;
-  relatedId?: Types.ObjectId;
+  type: NotificationType | string;
+  relatedId?: any;
   relatedType?: string;
-  isRead: boolean;
+  isRead?: boolean;
   actionUrl?: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: string | Date;
+  updatedAt?: string | Date;
+  save?: () => Promise<any>;
+  toObject?: () => any;
+  toJSON?: () => any;
 }
 
-const NotificationSchema = new Schema<INotification>(
-  {
-    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true, index: true },
-    role: { type: String, enum: ['patient', 'hospital', 'admin'], required: true },
-    title: { type: String, required: true },
-    message: { type: String, required: true },
-    type: {
-      type: String,
-      enum: ['REQUEST_UPDATE', 'NEW_REQUEST', 'CONSENT_UPDATE', 'DOCUMENT_ALERT', 'SYSTEM_ALERT'],
-      default: 'SYSTEM_ALERT',
-    },
-    relatedId: { type: Schema.Types.ObjectId },
-    relatedType: { type: String },
-    isRead: { type: Boolean, default: false, index: true },
-    actionUrl: { type: String },
-  },
-  { timestamps: true }
-);
-
-export const Notification = mongoose.model<INotification>('Notification', NotificationSchema);
+export const Notification: any = createSQLModel<INotification>('notifications');

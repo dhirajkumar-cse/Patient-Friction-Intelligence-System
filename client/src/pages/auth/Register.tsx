@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Input, Select } from '../../components/common/Input';
 import { Button } from '../../components/common/Button';
@@ -7,7 +7,9 @@ import { ErrorAlert } from '../../components/common/ErrorAlert';
 import { User, Building2, Mail, Lock, Phone, MapPin } from 'lucide-react';
 
 export const Register: React.FC = () => {
-  const [role, setRole] = useState<'patient' | 'hospital'>('patient');
+  const [searchParams] = useSearchParams();
+  const initialRole = searchParams.get('role') === 'hospital' ? 'hospital' : 'patient';
+  const [role, setRole] = useState<'patient' | 'hospital'>(initialRole);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

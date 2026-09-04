@@ -57,7 +57,7 @@ export class RiskEngine {
       primaryRiskFactors.push({
         factorName: 'Geographic Distance',
         severity: friction.travel.score >= 75 ? 'CRITICAL' : 'HIGH',
-        operationalImpact: `Transit distance (${friction.travel.contributingParameters.distanceKm} km) requires extensive physical travel fatigue.`,
+        operationalImpact: `Transit distance (${friction.travel.contributingParameters?.distanceKm || 'long'} km) requires extensive physical travel fatigue.`,
       });
     }
     if (friction.cost.score >= 50) {

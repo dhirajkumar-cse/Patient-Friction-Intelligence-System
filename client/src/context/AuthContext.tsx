@@ -9,9 +9,11 @@ interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, pass: string) => Promise<LoginResponse>;
+  loginWithGoogle: (credential: string, role?: string, profileData?: any) => Promise<LoginResponse>;
   register: (data: any) => Promise<LoginResponse>;
   logout: () => Promise<void>;
   refreshProfile: () => Promise<void>;
+  setAuthSession: (token: string, user: User, profile?: any) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -28,7 +30,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [token, setToken] = useState<string | null>(() => {
     return localStorage.getItem('pfis_auth_token');
   });
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const checkSession = async () => {
@@ -63,6 +65,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsLoading(true);
     try {
       const res = await authService.login(email, pass);
+      if (res.success && res.token) {
+        setToken(res.token);
+        setUser(res.user);
+        setProfile(res.profile || null);
+        localStorage.setItem('pfis_auth_token', res.token);
+        localStorage.setItem('pfis_auth_user', JSON.stringify(res.user));
+        if (res.profile) {
+          localStorage.setItem('pfis_auth_profile', JSON.stringify(res.profile));
+        }
+      }
+      return res;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const loginWithGoogle = async (credential: string, role?: string, profileData?: any): Promise<LoginResponse> => {
+    setIsLoading(true);
+    try {
+      const res = await authService.loginWithGoogle(credential, role, profileData);
       if (res.success && res.token) {
         setToken(res.token);
         setUser(res.user);
@@ -120,6 +142,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const setAuthSession = (newToken: string, newUser: User, newProfile?: any) => {
+    setToken(newToken);
+    setUser(newUser);
+    setProfile(newProfile || null);
+    localStorage.setItem('pfis_auth_token', newToken);
+    localStorage.setItem('pfis_auth_user', JSON.stringify(newUser));
+    if (newProfile) {
+      localStorage.setItem('pfis_auth_profile', JSON.stringify(newProfile));
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -129,9 +162,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isAuthenticated: !!user && !!token,
         isLoading,
         login,
+        loginWithGoogle,
         register,
         logout,
         refreshProfile,
+        setAuthSession,
       }}
     >
       {children}

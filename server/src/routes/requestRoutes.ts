@@ -18,6 +18,7 @@ router.get('/', (req, res) => {
 // Patient request creation & list
 router.post('/', requireRole('patient'), RequestController.createRequest);
 router.get('/patient', requireRole('patient'), RequestController.getPatientRequests);
+router.get('/my', requireRole('patient'), RequestController.getPatientRequests);
 
 // Hospital request review
 router.get('/hospital', requireRole('hospital', 'admin'), RequestController.getHospitalRequests);

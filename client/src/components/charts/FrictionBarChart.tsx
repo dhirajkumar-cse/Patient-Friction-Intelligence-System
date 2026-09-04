@@ -16,15 +16,28 @@ export const FrictionBarChart: React.FC<{
 }> = ({ profile, height = 300 }) => {
   if (!profile) return null;
 
+  const p = profile as any;
   const data = [
-    { name: 'Transport', score: profile.transport.score, level: profile.transport.level },
-    { name: 'Travel Dist.', score: profile.travel.score, level: profile.travel.level },
-    { name: 'Cost', score: profile.cost.score, level: profile.cost.level },
-    { name: 'Family Supp.', score: profile.familySupport.score, level: profile.familySupport.level },
-    { name: 'Digital', score: profile.digitalAccess.score, level: profile.digitalAccess.level },
-    { name: 'Timing', score: profile.appointmentTiming.score, level: profile.appointmentTiming.level },
-    { name: 'Document.', score: profile.documentation.score, level: profile.documentation.level },
-    { name: 'Language', score: profile.language.score, level: profile.language.level },
+    { name: 'Transport', score: (p.transport?.score ?? 0), level: (p.transport?.level ?? 'LOW') },
+    { name: 'Travel Dist.', score: (p.travel?.score ?? 0), level: (p.travel?.level ?? 'LOW') },
+    { name: 'Cost', score: (p.cost?.score ?? 0), level: (p.cost?.level ?? 'LOW') },
+    {
+      name: 'Family Supp.',
+      score: (p.familySupport?.score ?? p.familysupport?.score ?? 0),
+      level: (p.familySupport?.level ?? p.familysupport?.level ?? 'LOW'),
+    },
+    {
+      name: 'Digital',
+      score: (p.digitalAccess?.score ?? p.digitalaccess?.score ?? 0),
+      level: (p.digitalAccess?.level ?? p.digitalaccess?.level ?? 'LOW'),
+    },
+    {
+      name: 'Timing',
+      score: (p.appointmentTiming?.score ?? p.appointmenttiming?.score ?? 0),
+      level: (p.appointmentTiming?.level ?? p.appointmenttiming?.level ?? 'LOW'),
+    },
+    { name: 'Document.', score: (p.documentation?.score ?? 0), level: (p.documentation?.level ?? 'LOW') },
+    { name: 'Language', score: (p.language?.score ?? 0), level: (p.language?.level ?? 'LOW') },
   ].sort((a, b) => b.score - a.score);
 
   const getBarColor = (score: number) => {

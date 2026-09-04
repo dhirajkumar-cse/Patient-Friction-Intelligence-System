@@ -26,7 +26,7 @@ export const authenticate = async (
     const payload = verifyToken(token);
     const user = await User.findById(payload.userId);
 
-    if (!user || !user.isActive) {
+    if (!user || user.isActive === false || user.is_active === false) {
       res.status(401).json({
         success: false,
         message: 'User session is invalid or has been deactivated.',

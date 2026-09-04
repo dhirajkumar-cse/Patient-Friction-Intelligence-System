@@ -19,6 +19,7 @@ import {
   AlertTriangle,
   ArrowRight,
   ExternalLink,
+  Navigation,
   UserCheck,
   Stethoscope,
   Phone,
@@ -76,8 +77,9 @@ export const NearbyHospitals: React.FC = () => {
               const dName = typeof d === 'string' ? d : d.name;
               return dName.toLowerCase().includes(q);
             });
-            const docMatch = (h.doctorsList || []).some((doc: any) => doc.name?.toLowerCase().includes(q));
-            return nameMatch || cityMatch || addressMatch || diagMatch || deptMatch || docMatch;
+            const docMatch = (h.doctorsList || []).some((doc: any) => (doc.name || doc.headDoctorName || '').toLowerCase().includes(q));
+            const conditionMatch = (h.allTreatedConditions || []).some((c: string) => c.toLowerCase().includes(q));
+            return nameMatch || cityMatch || addressMatch || diagMatch || deptMatch || docMatch || conditionMatch;
           });
         }
         setHospitals(list);
@@ -165,7 +167,7 @@ export const NearbyHospitals: React.FC = () => {
         <form onSubmit={handleSearchSubmit} className="flex items-center gap-2">
           <div className="relative flex-1">
             <Input
-              placeholder="Search by Hospital Name, City, Doctor Name (e.g. Dr. Gurpreet), or Department..."
+              placeholder="Search by Hospital, City, Disease (e.g. Heart, Sugar, Dengue, Fracture), Doctor, or Department..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               icon={<Search className="w-4 h-4" />}
@@ -185,7 +187,7 @@ export const NearbyHospitals: React.FC = () => {
           <span className="text-slate-400 font-semibold flex items-center gap-1">
             <Sparkles className="w-3 h-3 text-teal-500" /> Quick Search:
           </span>
-          {['Phagwara', 'Jalandhar', 'Cardiology', 'Orthopedics', 'Dr. Gurpreet Singh', 'Dr. Raman Chawla', 'Emergency 24/7'].map((chip) => (
+          {['Phagwara', 'Jalandhar', 'Heart & BP', 'Sugar & Diabetes', 'Bone & Fractures', 'Fever & Dengue', 'Maternity / Delivery', 'Emergency 24/7'].map((chip) => (
             <button
               key={chip}
               type="button"
@@ -269,8 +271,8 @@ export const NearbyHospitals: React.FC = () => {
       <HospitalMap
         userLocation={{ latitude: coords.latitude, longitude: coords.longitude }}
         hospitals={hospitals}
-        selectedHospitalId={selectedHospital?._id}
-        onSelectHospital={(h) => navigate(`/patient/hospitals/${h._id}`)}
+        selectedHospitalId={selectedHospital?._id || (selectedHospital as any)?.id}
+        onSelectHospital={(h) => navigate(`/patient/hospitals/${h._id || (h as any).id}`)}
         radiusKm={radiusKm}
         height="400px"
       />
@@ -335,6 +337,10 @@ export const NearbyHospitals: React.FC = () => {
                               🚨 24/7 Emergency
                             </span>
                           )}
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 flex items-center gap-1">
+                            <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                            100% Verified Profile
+                          </span>
                         </div>
 
                         <h4 className="text-base font-bold text-slate-900 dark:text-white mt-1 leading-snug">
@@ -473,6 +479,36 @@ export const NearbyHospitals: React.FC = () => {
                       </div>
                     )}
 
+                    {/* TREATED ILLNESSES & CONDITIONS (बीमारियों का इलाज) */}
+                    {hosp.allTreatedConditions && hosp.allTreatedConditions.length > 0 && (
+                      <div className="space-y-1.5 bg-emerald-50/70 dark:bg-emerald-950/30 p-2.5 rounded-xl border border-emerald-200/80 dark:border-emerald-900/60">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="font-bold text-emerald-900 dark:text-emerald-200 flex items-center gap-1.5 text-[11px]">
+                            <span>🩺</span>
+                            बीमारियों का इलाज (Illnesses Treated):
+                          </span>
+                          <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bold">
+                            {hosp.allTreatedConditions.length} Conditions Treated
+                          </span>
+                        </div>
+                        <div className="flex flex-wrap gap-1 pt-0.5">
+                          {hosp.allTreatedConditions.slice(0, 8).map((cond: string, idx: number) => (
+                            <span
+                              key={idx}
+                              className="text-[10px] bg-white dark:bg-slate-900 text-emerald-900 dark:text-emerald-200 px-2 py-0.5 rounded-md font-medium border border-emerald-200/80 dark:border-emerald-800 shadow-2xs"
+                            >
+                              ✓ {cond}
+                            </span>
+                          ))}
+                          {hosp.allTreatedConditions.length > 8 && (
+                            <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bold px-1 py-0.5">
+                              +{hosp.allTreatedConditions.length - 8} more
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
                     {/* Quick Hospital Details: Wait time, Timings & Phone */}
                     <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-600 dark:text-slate-400 pt-1">
                       <div className="flex items-center gap-1.5">
@@ -516,20 +552,21 @@ export const NearbyHospitals: React.FC = () => {
                       variant="primary"
                       size="sm"
                       className="flex-1"
-                      onClick={() => navigate(`/patient/hospitals/${hosp._id}`)}
+                      onClick={() => navigate(`/patient/hospitals/${hosp._id || (hosp as any).id}`)}
                       icon={<ArrowRight className="w-4 h-4" />}
                     >
                       View All Doctors & Book Token
                     </Button>
 
                     <a
-                      href={`https://www.google.com/maps/dir/?api=1&destination=${hosp.latitude},${hosp.longitude}`}
+                      href={`https://www.google.com/maps/dir/?api=1${coords ? `&origin=${coords.latitude},${coords.longitude}` : ''}&destination=${hosp.latitude},${hosp.longitude}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-brand-600 transition-colors"
-                      title="Open Directions in Google Maps"
+                      className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-blue-200 dark:border-blue-800 bg-blue-50/80 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/50 text-xs font-bold transition-all shadow-sm"
+                      title="Open Turn-by-Turn GPS Navigation in Google Maps"
                     >
-                      <ExternalLink className="w-4 h-4" />
+                      <Navigation className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 fill-blue-600/20 animate-pulse" />
+                      <span className="hidden sm:inline">Google Maps</span>
                     </a>
 
                     <TTSButton

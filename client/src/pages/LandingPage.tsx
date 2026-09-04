@@ -17,6 +17,7 @@ import {
   Building2,
   Cpu,
   AlertCircle,
+  Shield,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Button } from '../components/common/Button';
@@ -81,14 +82,19 @@ export const LandingPage: React.FC = () => {
               </Link>
               {!isAuthenticated ? (
                 <>
-                  <Link to="/login">
-                    <Button variant="secondary" size="lg">
-                      {t('landing.patientLogin', 'Patient Login')}
+                  <Link to="/login?role=admin">
+                    <Button variant="primary" size="lg" icon={<Shield className="w-4 h-4" />}>
+                      Admin Sign In
                     </Button>
                   </Link>
                   <Link to="/login?role=hospital">
                     <Button variant="outline" size="lg" icon={<Building2 className="w-4 h-4" />}>
                       {t('landing.hospitalPortal', 'Hospital Portal')}
+                    </Button>
+                  </Link>
+                  <Link to="/login?role=patient">
+                    <Button variant="ghost" size="lg">
+                      {t('landing.patientLogin', 'Patient Portal')}
                     </Button>
                   </Link>
                 </>

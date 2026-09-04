@@ -55,14 +55,23 @@ export const runAutomaticSeed = async () => {
   const hospitalPasswordHash = await bcrypt.hash('Hospital@123', salt);
   const adminPasswordHash = await bcrypt.hash('Admin@123', salt);
 
-  // 1. Create Admin Account
-  console.log('[Seed] Creating Admin Account (admin@pfis.org)...');
+  // 1. Create Admin Accounts
+  console.log('[Seed] Creating Admin Accounts (admin@pfis.org, dhirajkumar464748@gmail.com)...');
   await User.create({
     name: 'PFIS Regional Health Director',
     email: 'admin@pfis.org',
     passwordHash: adminPasswordHash,
     role: 'admin',
     phone: '+91 98765 00001',
+    isActive: true,
+  });
+
+  await User.create({
+    name: 'Dhiraj Kumar (Executive Admin)',
+    email: 'dhirajkumar464748@gmail.com',
+    passwordHash: adminPasswordHash,
+    role: 'admin',
+    phone: '+91 98765 00002',
     isActive: true,
   });
 

@@ -20,6 +20,34 @@ export const authService = {
     return res.data;
   },
 
+  async loginWithGoogle(credential: string, role?: string, profileData?: any): Promise<LoginResponse> {
+    const res = await api.post<LoginResponse>('/auth/google', { credential, role, profileData });
+    return res.data;
+  },
+
+  async getGoogleConfig(): Promise<{ success: boolean; configured: boolean; clientId: string; clientSecretConfigured: boolean }> {
+    const res = await api.get('/auth/google/config');
+    return res.data;
+  },
+
+  async saveGoogleClientId(clientId: string): Promise<{ success: boolean; message: string; clientId: string }> {
+    const res = await api.post('/auth/google/config', { clientId });
+    return res.data;
+  },
+
+  async getGoogleAuthUrl(role: string, clientId?: string): Promise<{ success: boolean; url: string }> {
+    const params = new URLSearchParams();
+    if (role) params.append('role', role);
+    if (clientId) params.append('clientId', clientId);
+    const res = await api.get(`/auth/google/url?${params.toString()}`);
+    return res.data;
+  },
+
+  async googleCallback(code: string, role?: string, clientId?: string): Promise<LoginResponse> {
+    const res = await api.post<LoginResponse>('/auth/google/callback', { code, role, clientId });
+    return res.data;
+  },
+
   async getMe(): Promise<{ success: boolean; user: User; profile: any }> {
     const res = await api.get('/auth/me');
     return res.data;

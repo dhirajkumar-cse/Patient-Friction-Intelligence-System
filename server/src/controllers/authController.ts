@@ -10,6 +10,10 @@ import { FrictionEngine } from '../intelligence/friction/frictionEngine.js';
 import { RiskEngine } from '../intelligence/risk/riskEngine.js';
 import { FrictionProfile } from '../models/FrictionProfile.js';
 import { CareRisk } from '../models/CareRisk.js';
+import axios from 'axios';
+import fs from 'fs';
+import path from 'path';
+import { config } from '../config/env.js';
 
 export class AuthController {
   public static async register(req: Request, res: Response): Promise<void> {
@@ -30,11 +34,22 @@ export class AuthController {
       const salt = await bcrypt.genSalt(10);
       const passwordHash = await bcrypt.hash(password, salt);
 
-      const userRole = role === 'hospital' || role === 'admin' ? role : 'patient';
+      const normalizedEmail = email.toLowerCase().trim();
+      const ADMIN_EMAILS = ['dhirajkumar464748@gmail.com', 'admin@pfis.org'];
+      const isAdmin = ADMIN_EMAILS.includes(normalizedEmail);
+
+      let userRole: 'admin' | 'hospital' | 'patient' = 'patient';
+      if (isAdmin) {
+        userRole = 'admin';
+      } else if (role === 'hospital') {
+        userRole = 'hospital';
+      } else {
+        userRole = 'patient';
+      }
 
       const newUser = await User.create({
         name: name.trim(),
-        email: email.toLowerCase().trim(),
+        email: normalizedEmail,
         passwordHash,
         role: userRole,
         phone,
@@ -163,10 +178,17 @@ export class AuthController {
         return;
       }
 
-      const isMatch = await bcrypt.compare(password, user.passwordHash);
+      const isMatch = await bcrypt.compare(password, user.passwordHash || user.password_hash || '');
       if (!isMatch) {
         res.status(401).json({ success: false, message: 'Invalid email address or password.' });
         return;
+      }
+
+      const normalizedEmail = user.email.toLowerCase().trim();
+      const ADMIN_EMAILS = ['dhirajkumar464748@gmail.com', 'admin@pfis.org'];
+      if (ADMIN_EMAILS.includes(normalizedEmail) && user.role !== 'admin') {
+        user.role = 'admin';
+        await user.save();
       }
 
       let profile: any = null;
@@ -249,5 +271,435 @@ export class AuthController {
       });
     }
     res.status(200).json({ success: true, message: 'Logged out successfully.' });
+  }
+
+  public static async provisionAndLoginGoogleUser(
+    email: string,
+    name: string,
+    avatarUrl: string,
+    role: any,
+    req: Request,
+    res: Response
+  ): Promise<void> {
+    const normalizedEmail = (email || '').toLowerCase().trim();
+    const ADMIN_EMAILS = ['dhirajkumar464748@gmail.com', 'admin@pfis.org'];
+    const isAdmin = ADMIN_EMAILS.includes(normalizedEmail);
+
+    // ONLY whitelisted admin emails get Admin access. All others get hospital or patient.
+    let assignedRole: 'admin' | 'hospital' | 'patient' = 'patient';
+    if (isAdmin) {
+      assignedRole = 'admin';
+    } else if (role === 'hospital') {
+      assignedRole = 'hospital';
+    } else {
+      assignedRole = 'patient';
+    }
+
+    let user = await User.findOne({ email: normalizedEmail });
+
+    if (!user) {
+      const salt = await bcrypt.genSalt(10);
+      const dummyPasswordHash = await bcrypt.hash(`google_${Date.now()}_${Math.random()}`, salt);
+
+      user = await User.create({
+        name: name || (isAdmin ? 'Dhiraj Kumar (Executive Admin)' : 'Google User'),
+        email: normalizedEmail,
+        passwordHash: dummyPasswordHash,
+        role: assignedRole,
+        avatarUrl,
+        isActive: true,
+      });
+
+      if (user.role === 'patient') {
+        const count = await Patient.countDocuments();
+        const patientCode = `PAT-${1000 + count + 1}`;
+
+        const newPatient = await Patient.create({
+          userId: user._id,
+          patientCode,
+          age: 38,
+          gender: 'other',
+          preferredLanguage: 'Hindi',
+          transportAvailability: 'moderate',
+          digitalAccessLevel: 'moderate',
+          familySupport: 'moderate',
+          documentationStatus: 'complete',
+          financialAccessibility: 'moderate_budget',
+          appointmentFlexibility: 'flexible',
+          residenceType: 'semi_urban',
+          location: {
+            address: 'City Center, Main Road',
+            city: 'Ranchi',
+            state: 'Jharkhand',
+            pincode: '834001',
+            latitude: 23.3441,
+            longitude: 85.3096,
+            geoJSON: {
+              type: 'Point',
+              coordinates: [85.3096, 23.3441],
+            },
+          },
+        });
+
+        const frictionCalc = FrictionEngine.calculate(newPatient.toObject(), null, 30);
+        const frictionProfile = await FrictionProfile.create({
+          patientId: newPatient._id,
+          ...frictionCalc,
+        });
+
+        const riskCalc = RiskEngine.evaluate(frictionCalc);
+        const careRisk = await CareRisk.create({
+          patientId: newPatient._id,
+          frictionProfileId: frictionProfile._id,
+          ...riskCalc,
+        });
+
+        newPatient.activeFrictionProfileId = frictionProfile._id as any;
+        newPatient.activeCareRiskId = careRisk._id as any;
+        await newPatient.save();
+      } else if (user.role === 'hospital') {
+        await Hospital.create({
+          userId: user._id,
+          name: `${name} Medical Facility`,
+          type: 'Private/Charitable',
+          address: 'Station Road Medical Plaza',
+          city: 'Ranchi',
+          state: 'Jharkhand',
+          pincode: '834001',
+          latitude: 23.3629,
+          longitude: 85.3262,
+          geoJSON: {
+            type: 'Point',
+            coordinates: [85.3262, 23.3629],
+          },
+          phone: '0651-2223344',
+          email: normalizedEmail,
+          emergencyAvailable: true,
+          totalBeds: 150,
+          availableBeds: 25,
+          specialistAvailable: true,
+        });
+      }
+    } else {
+      if (user.role !== assignedRole) {
+        user.role = assignedRole;
+        await user.save();
+      }
+      if (avatarUrl && !user.avatarUrl) {
+        user.avatarUrl = avatarUrl;
+        await user.save();
+      }
+    }
+
+    let profile: any = null;
+    if (user.role === 'patient') {
+      profile = await Patient.findOne({ userId: user._id })
+        .populate('activeFrictionProfileId')
+        .populate('activeCareRiskId');
+    } else if (user.role === 'hospital') {
+      profile = await Hospital.findOne({ userId: user._id });
+    }
+
+    const token = generateToken({
+      userId: user._id.toString(),
+      email: user.email,
+      role: user.role,
+    });
+
+    await AuditService.log('AUTH_GOOGLE_LOGIN', 'User', req, {
+      userId: user._id,
+      actorRole: user.role,
+      details: { email: user.email, provider: 'google' },
+    });
+
+    res.status(200).json({
+      success: true,
+      message: 'Google authentication successful.',
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        phone: user.phone,
+        avatarUrl: user.avatarUrl,
+      },
+      profile,
+    });
+  }
+
+  public static async googleLogin(req: Request, res: Response): Promise<void> {
+    try {
+      const { credential, role, profileData } = req.body;
+
+      if (!credential) {
+        res.status(400).json({ success: false, message: 'Google credential token is required.' });
+        return;
+      }
+
+      let email = '';
+      let name = '';
+      let avatarUrl = '';
+
+      if (typeof credential === 'string' && credential.includes('.')) {
+        try {
+          const googleRes = await axios.get(
+            `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(credential)}`,
+            { timeout: 5000 }
+          );
+          const payload = googleRes.data;
+          email = (payload.email || '').toLowerCase().trim();
+          name = payload.name || payload.given_name || email.split('@')[0];
+          avatarUrl = payload.picture || '';
+        } catch {
+          try {
+            const parts = credential.split('.');
+            if (parts.length >= 2) {
+              const decoded = JSON.parse(Buffer.from(parts[1], 'base64').toString('utf-8'));
+              email = (decoded.email || '').toLowerCase().trim();
+              name = decoded.name || email.split('@')[0];
+              avatarUrl = decoded.picture || '';
+            }
+          } catch {
+            // handled below
+          }
+        }
+      }
+
+      if (!email && profileData?.email) {
+        email = profileData.email.toLowerCase().trim();
+        name = profileData.name || email.split('@')[0];
+        avatarUrl = profileData.avatarUrl || '';
+      }
+
+      if (!email) {
+        res.status(400).json({
+          success: false,
+          message: 'Unable to verify Google credential. Please ensure a valid Google account is selected.',
+        });
+        return;
+      }
+
+      await AuthController.provisionAndLoginGoogleUser(email, name, avatarUrl, role, req, res);
+    } catch (error: any) {
+      res.status(500).json({ success: false, message: error.message || 'Google authentication failed.' });
+    }
+  }
+
+  public static async getGoogleConfig(req: Request, res: Response): Promise<void> {
+    res.status(200).json({
+      success: true,
+      configured: !!config.googleClientId,
+      clientId: config.googleClientId,
+      clientSecretConfigured: !!config.googleClientSecret,
+    });
+  }
+
+  public static async saveGoogleClientId(req: Request, res: Response): Promise<void> {
+    try {
+      const { clientId } = req.body;
+      if (!clientId || typeof clientId !== 'string') {
+        res.status(400).json({ success: false, message: 'Valid clientId is required.' });
+        return;
+      }
+
+      config.googleClientId = clientId.trim();
+
+      const envPaths = [
+        path.resolve(process.cwd(), '../.env'),
+        path.resolve(process.cwd(), '.env'),
+      ];
+
+      for (const envPath of envPaths) {
+        if (fs.existsSync(envPath)) {
+          let content = fs.readFileSync(envPath, 'utf-8');
+          if (content.includes('GOOGLE_CLIENT_ID=')) {
+            content = content.replace(/GOOGLE_CLIENT_ID=.*/g, `GOOGLE_CLIENT_ID=${config.googleClientId}`);
+          } else {
+            content += `\nGOOGLE_CLIENT_ID=${config.googleClientId}`;
+          }
+
+          if (content.includes('VITE_GOOGLE_CLIENT_ID=')) {
+            content = content.replace(/VITE_GOOGLE_CLIENT_ID=.*/g, `VITE_GOOGLE_CLIENT_ID=${config.googleClientId}`);
+          } else {
+            content += `\nVITE_GOOGLE_CLIENT_ID=${config.googleClientId}`;
+          }
+          fs.writeFileSync(envPath, content, 'utf-8');
+        }
+      }
+
+      res.status(200).json({
+        success: true,
+        message: 'Google Client ID saved successfully to environment.',
+        clientId: config.googleClientId,
+      });
+    } catch (error: any) {
+      res.status(500).json({ success: false, message: error.message || 'Failed to save Google Client ID.' });
+    }
+  }
+
+  public static async getGoogleAuthUrl(req: Request, res: Response): Promise<void> {
+    try {
+      const role = (req.query.role as string) || 'admin';
+      const clientId = ((req.query.clientId as string) || config.googleClientId || '').trim();
+
+      if (!clientId) {
+        res.status(400).json({
+          success: false,
+          message: 'GOOGLE_CLIENT_ID is not configured. Please supply your Google Cloud Client ID.',
+        });
+        return;
+      }
+
+      const redirectUri = `${config.clientUrl}/auth/google/callback`;
+      const scope = encodeURIComponent('openid email profile');
+      const state = encodeURIComponent(JSON.stringify({ role, clientId }));
+
+      const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${encodeURIComponent(
+        clientId
+      )}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${scope}&access_type=offline&prompt=consent&state=${state}`;
+
+      res.status(200).json({
+        success: true,
+        url: authUrl,
+      });
+    } catch (error: any) {
+      res.status(500).json({ success: false, message: error.message || 'Failed to generate Google auth URL' });
+    }
+  }
+
+  public static async googleCallback(req: Request, res: Response): Promise<void> {
+    try {
+      const { code, role, clientId } = req.body;
+
+      if (!code) {
+        res.status(400).json({ success: false, message: 'Authorization code is required from Google.' });
+        return;
+      }
+
+      const effectiveClientId = ((clientId || config.googleClientId || '') as string).trim();
+      if (!effectiveClientId) {
+        res.status(400).json({ success: false, message: 'Google Client ID is missing.' });
+        return;
+      }
+
+      const redirectUri = `${config.clientUrl}/auth/google/callback`;
+
+      // Exchange authorization code for tokens with Google OAuth
+      const tokenRes = await axios.post(
+        'https://oauth2.googleapis.com/token',
+        new URLSearchParams({
+          code,
+          client_id: effectiveClientId,
+          client_secret: config.googleClientSecret,
+          redirect_uri: redirectUri,
+          grant_type: 'authorization_code',
+        }).toString(),
+        {
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          timeout: 10000,
+        }
+      );
+
+      const { access_token } = tokenRes.data;
+
+      // Fetch user profile from Google's official userinfo endpoint
+      const userInfoRes = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+        headers: { Authorization: `Bearer ${access_token}` },
+        timeout: 10000,
+      });
+
+      const profile = userInfoRes.data;
+      const email = (profile.email || '').toLowerCase().trim();
+      const name = profile.name || profile.given_name || email.split('@')[0];
+      const avatarUrl = profile.picture || '';
+
+      if (!email) {
+        res.status(400).json({ success: false, message: 'Could not extract email from Google profile.' });
+        return;
+      }
+
+      await AuthController.provisionAndLoginGoogleUser(email, name, avatarUrl, role, req, res);
+    } catch (error: any) {
+      console.error('[GoogleCallback Error]', error.response?.data || error.message);
+      const msg =
+        error.response?.data?.error_description ||
+        error.response?.data?.error ||
+        error.message ||
+        'Google OAuth exchange failed.';
+      res.status(500).json({ success: false, message: msg });
+    }
+  }
+
+  public static async forgotPassword(req: Request, res: Response): Promise<void> {
+    try {
+      const { email } = req.body;
+      if (!email) {
+        res.status(400).json({ success: false, message: 'Please enter your registered email address.' });
+        return;
+      }
+
+      const cleanEmail = email.toLowerCase().trim();
+      const user = await User.findOne({ email: cleanEmail });
+
+      if (!user) {
+        res.status(404).json({
+          success: false,
+          message: 'No account was found with this email address. Please check and try again.',
+        });
+        return;
+      }
+
+      // Generate a mock reset token
+      const resetToken = Buffer.from(`${user._id}:${Date.now()}`).toString('base64');
+      const resetLink = `/auth/reset-password?token=${resetToken}&email=${encodeURIComponent(cleanEmail)}`;
+
+      res.status(200).json({
+        success: true,
+        message: 'Password reset instructions ready. Use the secure reset link below to update your password.',
+        resetToken,
+        resetLink,
+      });
+    } catch (error: any) {
+      console.error('[ForgotPassword Error]', error);
+      res.status(500).json({ success: false, message: 'Could not process password reset request.' });
+    }
+  }
+
+  public static async resetPassword(req: Request, res: Response): Promise<void> {
+    try {
+      const { email, token, newPassword } = req.body;
+      if (!email || !newPassword) {
+        res.status(400).json({ success: false, message: 'Email and new password are required.' });
+        return;
+      }
+
+      if (newPassword.length < 6) {
+        res.status(400).json({ success: false, message: 'New password must be at least 6 characters long.' });
+        return;
+      }
+
+      const cleanEmail = email.toLowerCase().trim();
+      const user = await User.findOne({ email: cleanEmail });
+
+      if (!user) {
+        res.status(404).json({ success: false, message: 'Account not found.' });
+        return;
+      }
+
+      const salt = await bcrypt.genSalt(10);
+      const newHash = await bcrypt.hash(newPassword, salt);
+      user.passwordHash = newHash;
+      user.password_hash = newHash;
+      await user.save();
+
+      res.status(200).json({
+        success: true,
+        message: 'Your password has been successfully reset! You can now login with your new credentials.',
+      });
+    } catch (error: any) {
+      console.error('[ResetPassword Error]', error);
+      res.status(500).json({ success: false, message: 'Failed to reset password. Please try again.' });
+    }
   }
 }

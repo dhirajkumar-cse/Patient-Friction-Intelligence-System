@@ -54,6 +54,7 @@ export interface HospitalDepartment {
   availableTokensToday: number;
   consultationFee: number;
   isAcceptingRequests: boolean;
+  treatedConditions?: string[];
 }
 
 export interface Hospital {
@@ -95,6 +96,7 @@ export interface Hospital {
   }[];
   totalAvailableTokens?: number;
   totalDailyTokens?: number;
+  allTreatedConditions?: string[];
   ambulanceService?: {
     totalAmbulances: number;
     availableAmbulances: number;

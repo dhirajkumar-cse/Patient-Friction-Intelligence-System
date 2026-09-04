@@ -41,6 +41,21 @@ export const adminService = {
     return res.data;
   },
 
+  async deleteHospital(id: string): Promise<{ success: boolean; message: string }> {
+    const res = await api.delete(`/admin/hospitals/${id}`);
+    return res.data;
+  },
+
+  async createHospital(data: any): Promise<{ success: boolean; message: string; hospital: any }> {
+    const res = await api.post('/admin/hospitals', data);
+    return res.data;
+  },
+
+  async updateHospital(id: string, data: any): Promise<{ success: boolean; message: string; hospital: any }> {
+    const res = await api.put(`/admin/hospitals/${id}`, data);
+    return res.data;
+  },
+
   async getAuditLogs(limit?: number): Promise<{ success: boolean; count: number; logs: any[] }> {
     const res = await api.get('/admin/audit-logs', { params: { limit } });
     return res.data;

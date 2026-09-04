@@ -20,13 +20,13 @@ interface LocationContextType {
   setManualLocation: (loc: Partial<UserCoords>) => void;
 }
 
-// Default fallback coordinate (Ranchi Regional Medical Hub)
+// Default fallback coordinate (Phagwara / Punjab Regional Medical Hub)
 const DEFAULT_COORDS: UserCoords = {
-  latitude: 23.3441,
-  longitude: 85.3096,
-  address: 'Ranchi Central, Jharkhand',
-  city: 'Ranchi',
-  pincode: '834001',
+  latitude: 31.2229,
+  longitude: 75.7725,
+  address: 'GT Road, Phagwara, Punjab',
+  city: 'Phagwara',
+  pincode: '144401',
   isManual: true,
 };
 
@@ -40,6 +40,13 @@ export const LocationProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [permissionStatus, setPermissionStatus] = useState<LocationPermissionStatus>('prompt');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Automatically attempt real browser GPS detection on initial load
+    if (navigator.geolocation) {
+      requestCurrentLocation();
+    }
+  }, []);
 
   const requestCurrentLocation = async (): Promise<void> => {
     setIsLoading(true);

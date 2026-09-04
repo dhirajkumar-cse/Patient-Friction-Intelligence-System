@@ -26,7 +26,7 @@ export class AdminController {
       const frictionProfiles = await FrictionProfile.find().select(
         'overallFrictionScore overallAccessibilityScore frictionLevel topBarrier'
       );
-      const totalFrictionScore = frictionProfiles.reduce((sum, p) => sum + p.overallFrictionScore, 0);
+      const totalFrictionScore = frictionProfiles.reduce((sum: number, p: any) => sum + (p.overallFrictionScore || 0), 0);
       const avgFriction =
         frictionProfiles.length > 0 ? Math.round(totalFrictionScore / frictionProfiles.length) : 58;
 
@@ -34,9 +34,9 @@ export class AdminController {
         riskCategory: { $in: ['HIGH', 'CRITICAL'] },
       });
 
-      // Dynamic barrier distribution count from real MongoDB friction profiles
+      // Dynamic barrier distribution count from real friction profiles
       const barrierCounts: Record<string, number> = {};
-      frictionProfiles.forEach((p) => {
+      frictionProfiles.forEach((p: any) => {
         const barrier = p.topBarrier || 'Transport Availability';
         barrierCounts[barrier] = (barrierCounts[barrier] || 0) + 1;
       });
@@ -432,7 +432,7 @@ export class AdminController {
       const limit = parseInt(req.query.limit as string, 10) || 20;
 
       const patients = await Patient.find()
-        .populate('userId', 'name email phone')
+        .populate('userId', 'name email phone avatarUrl')
         .populate('activeFrictionProfileId')
         .populate('activeCareRiskId')
         .sort({ createdAt: -1 })
@@ -456,10 +456,38 @@ export class AdminController {
   public static async getAllHospitals(req: Request, res: Response): Promise<void> {
     try {
       const hospitals = await Hospital.find().sort({ createdAt: -1 });
+
+      const hospitalsWithDepts = await Promise.all(
+        hospitals.map(async (h: any) => {
+          const hid = h._id || h.id;
+          const depts = await HospitalDepartment.find({ hospitalId: hid });
+          const allTreatedConditions = Array.from(
+            new Set(depts.flatMap((d: any) => d.treatedConditions || []))
+          );
+          const totalAvailableTokens = depts.reduce(
+            (sum: number, d: any) => sum + (d.availableTokensToday ?? d.available_tokens ?? 25),
+            0
+          );
+          const totalDailyTokens = depts.reduce(
+            (sum: number, d: any) => sum + (d.dailyTokenCapacity ?? d.total_daily_tokens ?? 50),
+            0
+          );
+
+          return {
+            ...(typeof h.toObject === 'function' ? h.toObject() : h),
+            departments: depts,
+            doctorsCount: depts.filter((d: any) => d.headDoctorName).length || depts.length,
+            allTreatedConditions,
+            totalAvailableTokens,
+            totalDailyTokens,
+          };
+        })
+      );
+
       res.status(200).json({
         success: true,
-        count: hospitals.length,
-        hospitals,
+        count: hospitalsWithDepts.length,
+        hospitals: hospitalsWithDepts,
       });
     } catch (error: any) {
       res.status(500).json({ success: false, message: error.message || 'Failed to fetch hospitals.' });
@@ -643,7 +671,7 @@ export class AdminController {
 
       await AuditService.log('HOSPITAL_DELETED', 'Hospital', req, {
         userId: req.user?._id,
-        resourceId: id,
+        resourceId: id as string,
       });
 
       res.status(200).json({

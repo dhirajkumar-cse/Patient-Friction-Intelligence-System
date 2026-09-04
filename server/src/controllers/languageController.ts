@@ -63,7 +63,7 @@ export class LanguageController {
       const total = patients.length || 1;
       const counts: Record<string, number> = {};
 
-      patients.forEach((p) => {
+      patients.forEach((p: any) => {
         const lang = p.preferredLanguage || 'en';
         counts[lang] = (counts[lang] || 0) + 1;
       });

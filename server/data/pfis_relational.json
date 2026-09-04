@@ -1,0 +1,1931 @@
+{
+  "users": [
+    {
+      "id": "34400414-59f5-414c-bb0c-b916fb590f7b",
+      "email": "admin@pfis.org",
+      "password_hash": "$2a$10$PiSdN0qcvRK0pJJH63vIHuEOvO./kS3oyGZvo9B7WGl9YpQur3etO",
+      "name": "PFIS Executive Admin",
+      "role": "admin",
+      "phone": "+91 98765 43210",
+      "google_id": null,
+      "created_at": "2026-09-04T08:10:56.465Z",
+      "updated_at": "2026-09-04T08:10:56.465Z"
+    },
+    {
+      "id": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "email": "dhirajkumar464748@gmail.com",
+      "password_hash": "$2a$10$PiSdN0qcvRK0pJJH63vIHuEOvO./kS3oyGZvo9B7WGl9YpQur3etO",
+      "name": "Dhiraj Kumar (Executive Admin)",
+      "role": "admin",
+      "phone": "+91 91234 56789",
+      "google_id": null,
+      "created_at": "2026-09-04T08:10:56.467Z",
+      "updated_at": "2026-09-04T10:21:28.203Z",
+      "passwordhash": "$2a$10$PiSdN0qcvRK0pJJH63vIHuEOvO./kS3oyGZvo9B7WGl9YpQur3etO",
+      "createdat": "2026-09-04T08:10:56.467Z",
+      "updatedat": "2026-09-04T10:21:28.203Z",
+      "avatarurl": "https://lh3.googleusercontent.com/a/ACg8ocL7kDciCqbuhAfwXtz_RrirEcN1sMvDXhCc0OTp3AMC6LA5tZO7MQ=s96-c",
+      "googleid": null
+    },
+    {
+      "id": "a59e5de4-3e01-435c-bf8a-1ea906276118",
+      "email": "staff@hospital.org",
+      "password_hash": "$2a$10$Z4WIYUptVyR0pZGR/w58VulfS8MBmClYSPD3qawzqhQuIDZdvs5wC",
+      "name": "Dr. Gurpreet Singh (Nodal Officer)",
+      "role": "hospital",
+      "phone": "+91 98765 11223",
+      "google_id": null,
+      "created_at": "2026-09-04T08:10:56.468Z",
+      "updated_at": "2026-09-04T08:10:56.468Z"
+    },
+    {
+      "id": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "email": "patient@pfis.org",
+      "password_hash": "$2a$10$xaoepwnwU60AeDT/g0x/d.ZKNPlwbQDHPs/4.iAGydBwX2qS4bDai",
+      "name": "Sunita Devi",
+      "role": "patient",
+      "phone": "+91 98140 12345",
+      "google_id": null,
+      "created_at": "2026-09-04T08:10:56.469Z",
+      "updated_at": "2026-09-04T08:17:24.739Z",
+      "passwordhash": "$2a$10$xaoepwnwU60AeDT/g0x/d.ZKNPlwbQDHPs/4.iAGydBwX2qS4bDai",
+      "createdat": "2026-09-04T08:10:56.469Z",
+      "updatedat": "2026-09-04T08:17:24.739Z"
+    },
+    {
+      "name": "Dhiraj Kumar",
+      "email": "dhirajkumar45710@gmail.com",
+      "passwordhash": "$2a$10$jF.QHMga7aiUxvidF56p6OtRSl6hsWrxVam6E.b/lgflFkHfhWZna",
+      "role": "hospital",
+      "avatarurl": "https://lh3.googleusercontent.com/a/ACg8ocI3lUGPLu4K_JK9X7R32skQYBt1Oqztslfl1d9d1T0K6p3MtA=s96-c",
+      "isactive": true,
+      "id": "4b3e3176-fadb-4a46-879c-85b14fef0ca4",
+      "_id": "4b3e3176-fadb-4a46-879c-85b14fef0ca4",
+      "created_at": "2026-09-04T08:23:44.197Z",
+      "createdat": "2026-09-04T08:23:44.197Z",
+      "updated_at": "2026-09-04T08:54:08.977Z",
+      "updatedat": "2026-09-04T08:54:08.977Z",
+      "password_hash": "$2a$10$jF.QHMga7aiUxvidF56p6OtRSl6hsWrxVam6E.b/lgflFkHfhWZna"
+    },
+    {
+      "name": "Dhiraj Kumar",
+      "email": "dhirajkushwaha6857@gmail.com",
+      "passwordhash": "$2a$10$.L8WxZRQlrtax4r44T.xT.MVeZDDxfz1W0YoE7ktrSmf2.8OE278q",
+      "role": "hospital",
+      "phone": "7256052183",
+      "id": "ced7f40c-046a-45d3-bd24-83d9b5718501",
+      "_id": "ced7f40c-046a-45d3-bd24-83d9b5718501",
+      "created_at": "2026-09-04T09:38:02.319Z",
+      "createdat": "2026-09-04T09:38:02.319Z",
+      "updated_at": "2026-09-04T09:38:02.319Z",
+      "updatedat": "2026-09-04T09:38:02.319Z",
+      "password_hash": "$2a$10$.L8WxZRQlrtax4r44T.xT.MVeZDDxfz1W0YoE7ktrSmf2.8OE278q"
+    },
+    {
+      "name": "Punjab Life Care Hospital Administrator",
+      "email": "admin@punjablifecare.org",
+      "passwordhash": "$2a$10$I7QePOGbR2wI05HO/DIRre8KG.sUU5uajuxCpFCQvRSR601lpN7TW",
+      "role": "hospital",
+      "phone": "01824-299999",
+      "isactive": true,
+      "id": "c88091a2-1515-4669-95ca-037b21459924",
+      "_id": "c88091a2-1515-4669-95ca-037b21459924",
+      "created_at": "2026-09-04T10:19:31.386Z",
+      "createdat": "2026-09-04T10:19:31.386Z",
+      "updated_at": "2026-09-04T10:19:31.387Z",
+      "updatedat": "2026-09-04T10:19:31.386Z",
+      "password_hash": "$2a$10$I7QePOGbR2wI05HO/DIRre8KG.sUU5uajuxCpFCQvRSR601lpN7TW"
+    }
+  ],
+  "patient_profiles": [
+    {
+      "id": "df934545-a5e1-4ed7-a0b4-faed1d13facb",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "full_name": "Sunita Devi",
+      "age": 60,
+      "gender": "Female",
+      "location": "Rural (Vill. Mehli, Near Phagwara, Punjab)",
+      "is_rural": true,
+      "distance_to_hospital_km": 65,
+      "transport_mode": "Infrequent Bus",
+      "digital_literacy": "None / Feature Phone",
+      "family_support": "Caregiver Constrained",
+      "wage_loss_risk": "Daily Wage Loss",
+      "preferred_language": "pa",
+      "smartphone_access": false,
+      "internet_type": "2G / Intermittent",
+      "disability_needs": "Limited Mobility / Needs Ground-Floor Wheelchair Support",
+      "appointment_flexibility": "Morning Window (Before 11 AM)",
+      "document_readiness": "Physical Paper / Missing Health Card",
+      "created_at": "2026-09-04T08:10:56.470Z",
+      "updated_at": "2026-09-04T08:10:56.470Z"
+    },
+    {
+      "userid": "4b3e3176-fadb-4a46-879c-85b14fef0ca4",
+      "patientcode": "PAT-1002",
+      "age": 38,
+      "gender": "other",
+      "preferredlanguage": "Hindi",
+      "transportavailability": "moderate",
+      "digitalaccesslevel": "moderate",
+      "familysupport": "moderate",
+      "documentationstatus": "complete",
+      "financialaccessibility": "moderate_budget",
+      "appointmentflexibility": "flexible",
+      "residencetype": "semi_urban",
+      "location": {
+        "address": "City Center, Main Road",
+        "city": "Ranchi",
+        "state": "Jharkhand",
+        "pincode": "834001",
+        "latitude": 23.3441,
+        "longitude": 85.3096,
+        "geoJSON": {
+          "type": "Point",
+          "coordinates": [
+            85.3096,
+            23.3441
+          ]
+        }
+      },
+      "id": "a9dad8d8-addb-4d5e-a26e-2fc747a01be6",
+      "_id": "a9dad8d8-addb-4d5e-a26e-2fc747a01be6",
+      "created_at": "2026-09-04T08:23:44.199Z",
+      "createdat": "2026-09-04T08:23:44.199Z",
+      "updated_at": "2026-09-04T08:23:44.206Z",
+      "updatedat": "2026-09-04T08:23:44.206Z",
+      "user_id": "4b3e3176-fadb-4a46-879c-85b14fef0ca4",
+      "activefrictionprofileid": "7500da24-5399-437e-aa27-75c04b8f5fef",
+      "activecareriskid": "d81e1249-95e9-4bec-abfd-cba5b84c58c7"
+    }
+  ],
+  "hospitals": [
+    {
+      "id": "ca3971e6-400a-4450-a717-91cb8dafc5a3",
+      "name": "Civil Hospital Phagwara (Government 24/7)",
+      "type": "Government Sub-Divisional Hospital",
+      "city": "Phagwara",
+      "address": "GT Road, Near Rest House, Phagwara, Punjab 144401",
+      "latitude": 31.2229,
+      "longitude": 75.7725,
+      "phone": "01824-260232",
+      "total_beds": 120,
+      "available_beds": 42,
+      "emergency_24x7": true,
+      "teleconsult_available": true,
+      "accessibility_facilities": "Wheelchair Ramps, Ground-Floor OPD, Jan Aushadhi Kendra, Free Ambulances",
+      "created_at": "2026-09-04T08:10:56.480Z",
+      "updated_at": "2026-09-04T08:10:56.480Z"
+    },
+    {
+      "userid": "ced7f40c-046a-45d3-bd24-83d9b5718501",
+      "name": "LPU_UNICENTER",
+      "type": "Government",
+      "address": "Village Ramgarh, Block B",
+      "city": "Ranchi",
+      "state": "Jharkhand",
+      "pincode": "834001",
+      "latitude": 23.3629,
+      "longitude": 85.3262,
+      "geojson": "{\"type\":\"Point\",\"coordinates\":[85.3262,23.3629]}",
+      "phone": "7256052183",
+      "email": "dhirajkushwaha6857@gmail.com",
+      "emergencyavailable": true,
+      "totalbeds": 300,
+      "availablebeds": 45,
+      "specialistavailable": true,
+      "id": "4959848b-5e5d-4230-a66c-6bfef9eacc70",
+      "_id": "4959848b-5e5d-4230-a66c-6bfef9eacc70",
+      "created_at": "2026-09-04T09:38:02.326Z",
+      "createdat": "2026-09-04T09:38:02.326Z",
+      "updated_at": "2026-09-04T09:38:02.326Z",
+      "updatedat": "2026-09-04T09:38:02.326Z",
+      "user_id": "ced7f40c-046a-45d3-bd24-83d9b5718501",
+      "languagessupported": "[\"Hindi\",\"Punjabi\",\"English\"]",
+      "diagnosticfacilities": "[\"24/7 Emergency Triage\",\"Digital X-Ray\",\"Pathology Lab\",\"ECG & Cardiac Care\",\"Ultrasound Sonography\"]"
+    }
+  ],
+  "hospital_services": [
+    {
+      "id": "s-civil-1",
+      "hospital_id": "ca3971e6-400a-4450-a717-91cb8dafc5a3",
+      "hospitalId": "ca3971e6-400a-4450-a717-91cb8dafc5a3",
+      "name": "General Medicine & Geriatric Screening",
+      "department": "General Medicine",
+      "headDoctorName": "Dr. Raman Chawla, MBBS, MD (Senior Physician)",
+      "head_doctor_name": "Dr. Raman Chawla, MBBS, MD (Senior Physician)",
+      "opdDays": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opdTimings": "09:00 AM - 02:00 PM",
+      "total_daily_tokens": 60,
+      "available_tokens": 28,
+      "dailyTokenCapacity": 60,
+      "availableTokensToday": 28,
+      "fee": 0,
+      "consultationFee": 0,
+      "description": "Comprehensive screening for fevers, diabetes, hypertension, and geriatric care.",
+      "treatedConditions": [
+        "Viral Fever, Dengue & Malaria",
+        "Diabetes Mellitus Type 1 & 2",
+        "High BP & Hypertension Management",
+        "Respiratory Infections & Asthma",
+        "Typhoid & Gastrointestinal Care",
+        "Geriatric Elderly Health Checks"
+      ],
+      "isAcceptingRequests": true
+    },
+    {
+      "id": "s-civil-2",
+      "hospital_id": "ca3971e6-400a-4450-a717-91cb8dafc5a3",
+      "hospitalId": "ca3971e6-400a-4450-a717-91cb8dafc5a3",
+      "name": "Cardiology & Hypertension Clinic",
+      "department": "Cardiology",
+      "headDoctorName": "Dr. Gurpreet Singh, MD, DM Cardiology",
+      "head_doctor_name": "Dr. Gurpreet Singh, MD, DM Cardiology",
+      "opdDays": [
+        "Monday",
+        "Wednesday",
+        "Friday"
+      ],
+      "opdTimings": "10:00 AM - 03:00 PM",
+      "total_daily_tokens": 35,
+      "available_tokens": 15,
+      "dailyTokenCapacity": 35,
+      "availableTokensToday": 15,
+      "fee": 0,
+      "consultationFee": 0,
+      "description": "Advanced non-invasive cardiac evaluation, ECG, 2D Echo, and coronary care.",
+      "treatedConditions": [
+        "Acute Chest Pain & Angina",
+        "Heart Attack Emergency",
+        "High Blood Pressure / Hypertension",
+        "Heart Failure & Palpitations",
+        "Coronary Artery Disease",
+        "Cholesterol & Lipid Management"
+      ],
+      "isAcceptingRequests": true
+    },
+    {
+      "id": "s-civil-3",
+      "hospital_id": "ca3971e6-400a-4450-a717-91cb8dafc5a3",
+      "hospitalId": "ca3971e6-400a-4450-a717-91cb8dafc5a3",
+      "name": "Orthopedics & Joint Care",
+      "department": "Orthopedics",
+      "headDoctorName": "Dr. Harpreet Gill, MS Ortho, DNB",
+      "head_doctor_name": "Dr. Harpreet Gill, MS Ortho, DNB",
+      "opdDays": [
+        "Tuesday",
+        "Thursday",
+        "Saturday"
+      ],
+      "opdTimings": "09:30 AM - 01:30 PM",
+      "total_daily_tokens": 30,
+      "available_tokens": 12,
+      "dailyTokenCapacity": 30,
+      "availableTokensToday": 12,
+      "fee": 0,
+      "consultationFee": 0,
+      "description": "Joint replacement, trauma care, fracture management, and spine rehabilitation.",
+      "treatedConditions": [
+        "Knee & Joint Arthritis",
+        "Bone Fractures & Accident Trauma",
+        "Slipped Disc & Sciatica",
+        "Joint & Knee Replacement Care",
+        "Chronic Back & Neck Pain",
+        "Ligament Tears & Sports Injury"
+      ],
+      "isAcceptingRequests": true
+    },
+    {
+      "id": "s-lpu-1",
+      "hospital_id": "4959848b-5e5d-4230-a66c-6bfef9eacc70",
+      "hospitalId": "4959848b-5e5d-4230-a66c-6bfef9eacc70",
+      "name": "General Medicine & Health Screening",
+      "department": "General Medicine",
+      "headDoctorName": "Dr. Sourabh Mukherjee, MBBS, MD (Chief Medical Officer)",
+      "head_doctor_name": "Dr. Sourabh Mukherjee, MBBS, MD (Chief Medical Officer)",
+      "opdDays": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opdTimings": "08:30 AM - 04:30 PM",
+      "total_daily_tokens": 80,
+      "available_tokens": 42,
+      "dailyTokenCapacity": 80,
+      "availableTokensToday": 42,
+      "fee": 0,
+      "consultationFee": 0,
+      "description": "Primary triage, acute infections, non-clinical journey navigation, and comprehensive student & staff health checks.",
+      "treatedConditions": [
+        "Viral Fever, Flu & Dengue",
+        "Diabetes & Blood Sugar Care",
+        "Blood Pressure & Hypertension",
+        "Asthma, Cough & Allergies",
+        "Stomach Infections & Typhoid",
+        "Emergency First Aid & Triage"
+      ],
+      "isAcceptingRequests": true
+    },
+    {
+      "id": "s-lpu-2",
+      "hospital_id": "4959848b-5e5d-4230-a66c-6bfef9eacc70",
+      "hospitalId": "4959848b-5e5d-4230-a66c-6bfef9eacc70",
+      "name": "Outpatient Clinic & Student Health",
+      "department": "Outpatient Clinic",
+      "headDoctorName": "Dr. Neha Agarwal, MD (Consultant Physician)",
+      "head_doctor_name": "Dr. Neha Agarwal, MD (Consultant Physician)",
+      "opdDays": [
+        "Monday",
+        "Wednesday",
+        "Friday"
+      ],
+      "opdTimings": "09:00 AM - 02:00 PM",
+      "total_daily_tokens": 45,
+      "available_tokens": 24,
+      "dailyTokenCapacity": 45,
+      "availableTokensToday": 24,
+      "fee": 0,
+      "consultationFee": 0,
+      "description": "Consultation for common ailments, chronic disease follow-ups, and preventive medicine.",
+      "treatedConditions": [
+        "Migraine & Severe Headache",
+        "Skin Rashes & Dermatitis",
+        "Digestive Health & Gastritis",
+        "Nutritional Deficiencies & Anemia",
+        "Travel & Routine Vaccinations"
+      ],
+      "isAcceptingRequests": true
+    },
+    {
+      "id": "s-lpu-3",
+      "hospital_id": "4959848b-5e5d-4230-a66c-6bfef9eacc70",
+      "hospitalId": "4959848b-5e5d-4230-a66c-6bfef9eacc70",
+      "name": "Sports Medicine & Joint Care",
+      "department": "Orthopedics",
+      "headDoctorName": "Dr. Sandeep Rathore, MS Ortho (Sports Injury Specialist)",
+      "head_doctor_name": "Dr. Sandeep Rathore, MS Ortho (Sports Injury Specialist)",
+      "opdDays": [
+        "Tuesday",
+        "Thursday",
+        "Saturday"
+      ],
+      "opdTimings": "10:00 AM - 03:00 PM",
+      "total_daily_tokens": 35,
+      "available_tokens": 18,
+      "dailyTokenCapacity": 35,
+      "availableTokensToday": 18,
+      "fee": 150,
+      "consultationFee": 150,
+      "description": "Management of athletic injuries, sprains, fractures, backache, and physical rehabilitation.",
+      "treatedConditions": [
+        "Sports Sprains & Muscle Strains",
+        "Bone Fractures & X-Ray Review",
+        "Knee, Ankle & Joint Pain",
+        "Ligament & Tendon Injuries",
+        "Back Pain & Spinal Posture"
+      ],
+      "isAcceptingRequests": true
+    },
+    {
+      "hospitalid": "ca3971e6-400a-4450-a717-91cb8dafc5a3",
+      "name": "Pediatrics & Child Care",
+      "description": "",
+      "headdoctorname": "Dr. Priya Verma, MD Pediatrics",
+      "head_doctor_name": "Dr. Priya Verma, MD Pediatrics",
+      "opddays": "[\"Monday\",\"Tuesday\",\"Wednesday\",\"Friday\"]",
+      "opdtimings": "10:00 AM - 01:00 PM",
+      "dailytokencapacity": 40,
+      "availabletokenstoday": 20,
+      "consultationfee": 0,
+      "treatedconditions": "[\"Childhood Asthma\",\"Measles & Mumps\",\"Pediatric Fevers\",\"Newborn Checkup\"]",
+      "isacceptingrequests": true,
+      "id": "2db0e5a8-eab3-4732-87ef-4a36ceb06b3a",
+      "_id": "2db0e5a8-eab3-4732-87ef-4a36ceb06b3a",
+      "created_at": "2026-09-04T10:33:14.006Z",
+      "createdat": "2026-09-04T10:33:14.006Z",
+      "updated_at": "2026-09-04T10:33:14.006Z",
+      "updatedat": "2026-09-04T10:33:14.006Z",
+      "hospital_id": "ca3971e6-400a-4450-a717-91cb8dafc5a3"
+    }
+  ],
+  "appointments": [
+    {
+      "patientid": "df934545-a5e1-4ed7-a0b4-faed1d13facb",
+      "stages": [
+        {
+          "stageName": "Medical Need",
+          "order": 1,
+          "status": "COMPLETED",
+          "frictionLevel": "LOW",
+          "observedBarrier": "Symptom recognized by household"
+        },
+        {
+          "stageName": "Hospital Search",
+          "order": 2,
+          "status": "COMPLETED",
+          "frictionLevel": "LOW",
+          "observedBarrier": "Facility identified via PFIS"
+        },
+        {
+          "stageName": "Travel",
+          "order": 3,
+          "status": "IN_PROGRESS",
+          "frictionLevel": "MEDIUM",
+          "observedBarrier": "35 km transit across rural roads",
+          "mitigationSuggestion": "Community Health Shuttle voucher"
+        },
+        {
+          "stageName": "Transport",
+          "order": 4,
+          "status": "PENDING",
+          "frictionLevel": "HIGH",
+          "observedBarrier": "Shared auto timetable irregularity"
+        },
+        {
+          "stageName": "Appointment",
+          "order": 5,
+          "status": "PENDING",
+          "frictionLevel": "MEDIUM",
+          "observedBarrier": "OPD queue token wait time"
+        },
+        {
+          "stageName": "Hospital Visit",
+          "order": 6,
+          "status": "PENDING",
+          "frictionLevel": "LOW",
+          "observedBarrier": "Registration desk verification"
+        },
+        {
+          "stageName": "Service",
+          "order": 7,
+          "status": "PENDING",
+          "frictionLevel": "MEDIUM",
+          "observedBarrier": "Diagnostic test routing"
+        },
+        {
+          "stageName": "Treatment",
+          "order": 8,
+          "status": "PENDING",
+          "frictionLevel": "LOW",
+          "observedBarrier": "Doctor consultation & prescription"
+        },
+        {
+          "stageName": "Follow-up",
+          "order": 9,
+          "status": "PENDING",
+          "frictionLevel": "HIGH",
+          "observedBarrier": "Repeat 30-day travel fatigue"
+        }
+      ],
+      "currentstageindex": 2,
+      "overalljourneyhealth": "SLIGHT_FRICTION",
+      "id": "53a17bfa-10da-4087-8b7f-083a07f8caad",
+      "_id": "53a17bfa-10da-4087-8b7f-083a07f8caad",
+      "created_at": "2026-09-04T08:40:49.572Z",
+      "createdat": "2026-09-04T08:40:49.572Z",
+      "updated_at": "2026-09-04T08:40:49.572Z",
+      "updatedat": "2026-09-04T08:40:49.572Z",
+      "patient_id": "df934545-a5e1-4ed7-a0b4-faed1d13facb"
+    }
+  ],
+  "teleconsultations": [],
+  "friction_profiles": [
+    {
+      "id": "caa423b4-51e8-4440-a382-d7ca83146287",
+      "patient_id": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "overall_score": 93,
+      "category": "Critical Access Difficulty",
+      "journey_completion_prob": 52,
+      "primary_barrier": "Travel Distance & Terrain",
+      "calculated_at": "2026-09-04T08:10:56.471Z",
+      "patientid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "totalreferred": 5,
+      "funnelmilestones": "[{\"stageName\":\"Referred\",\"patientCount\":5,\"retentionPercentage\":100,\"dropOffCount\":0,\"dropOffPercentage\":0,\"primaryBarrierCausingDropOff\":\"Initial Baseline Cohort\"},{\"stageName\":\"Consulted\",\"patientCount\":0,\"retentionPercentage\":0,\"dropOffCount\":5,\"dropOffPercentage\":100,\"primaryBarrierCausingDropOff\":\"Physical Transport Scarcity & Travel Distance\"},{\"stageName\":\"Diagnosed\",\"patientCount\":0,\"retentionPercentage\":0,\"dropOffCount\":0,\"dropOffPercentage\":0,\"primaryBarrierCausingDropOff\":\"Diagnostic Delays & Missing Documentation\"},{\"stageName\":\"Treatment Started\",\"patientCount\":0,\"retentionPercentage\":0,\"dropOffCount\":0,\"dropOffPercentage\":0,\"primaryBarrierCausingDropOff\":\"Out-of-Pocket Expense & Timing Inflexibility\"},{\"stageName\":\"Treatment Completed\",\"patientCount\":0,\"retentionPercentage\":0,\"dropOffCount\":0,\"dropOffPercentage\":0,\"primaryBarrierCausingDropOff\":\"Wage Loss & Repeated Travel Fatigue\"},{\"stageName\":\"Follow-up Completed\",\"patientCount\":0,\"retentionPercentage\":0,\"dropOffCount\":0,\"dropOffPercentage\":0,\"primaryBarrierCausingDropOff\":\"Lack of Escort Caregiver & Remote Distance\"}]",
+      "totalleakagepercentage": 100,
+      "observedperiod": "Live Real-time Data",
+      "updated_at": "2026-09-04T09:43:01.047Z",
+      "updatedat": "2026-09-04T09:43:01.047Z",
+      "overallscore": 93,
+      "journeycompletionprob": 52,
+      "primarybarrier": "Travel Distance & Terrain",
+      "calculatedat": "2026-09-04T08:10:56.471Z"
+    },
+    {
+      "patientid": "df934545-a5e1-4ed7-a0b4-faed1d13facb",
+      "travel": {
+        "dimension": "Travel",
+        "score": 70,
+        "weight": 0.15,
+        "level": "HIGH",
+        "reason": "Facility is located within 30.0 km, representing manageable geographic proximity.",
+        "contributingParameters": {
+          "distanceKm": 30,
+          "residenceType": "rural_remote"
+        }
+      },
+      "transport": {
+        "dimension": "Transport",
+        "score": 85,
+        "weight": 0.18,
+        "level": "CRITICAL",
+        "reason": "Dependent on infrequent rural buses or high-cost shared autos with irregular timetables.",
+        "contributingParameters": {
+          "transportLevel": "low",
+          "distanceKm": 30
+        }
+      },
+      "digitalaccess": {
+        "dimension": "Digital Access",
+        "score": 65,
+        "weight": 0.12,
+        "level": "HIGH",
+        "reason": "Feature phone or shared family smartphone with intermittent 2G/3G connectivity.",
+        "contributingParameters": {
+          "digitalLevel": "basic"
+        }
+      },
+      "language": {
+        "dimension": "Language",
+        "score": 15,
+        "weight": 0.08,
+        "level": "LOW",
+        "reason": "Hospital clinical staff directly support patient's preferred language (English).",
+        "contributingParameters": {
+          "preferredLanguage": "English",
+          "hospitalLanguages": [
+            "English",
+            "Hindi"
+          ]
+        }
+      },
+      "familysupport": {
+        "dimension": "Family Support",
+        "score": 65,
+        "weight": 0.12,
+        "level": "HIGH",
+        "reason": "Caregiver has conflicting wage-earning commitments and cannot consistently escort the patient.",
+        "contributingParameters": {
+          "familyLevel": "low",
+          "age": 60
+        }
+      },
+      "documentation": {
+        "dimension": "Documentation",
+        "score": 50,
+        "weight": 0.1,
+        "level": "HIGH",
+        "reason": "Has identity proof but lacks formalized doctor referral slip or scheme registration.",
+        "contributingParameters": {
+          "docStatus": "partial"
+        }
+      },
+      "cost": {
+        "dimension": "Cost",
+        "score": 90,
+        "weight": 0.15,
+        "level": "CRITICAL",
+        "reason": "Daily transit costs and out-of-pocket medicines pose an acute financial barrier for the household.",
+        "contributingParameters": {
+          "financialLevel": "severely_constrained",
+          "distanceKm": 30
+        }
+      },
+      "appointmenttiming": {
+        "dimension": "Appointment Timing",
+        "score": 85,
+        "weight": 0.1,
+        "level": "CRITICAL",
+        "reason": "Visiting the hospital during working hours results in direct loss of critical daily subsistence wages.",
+        "contributingParameters": {
+          "flexibility": "inflexible_daily_wage"
+        }
+      },
+      "overallfrictionscore": 70,
+      "overallaccessibilityscore": 30,
+      "frictionlevel": "CRITICAL",
+      "topbarrier": "Financial Accessibility",
+      "secondarybarrier": "Transport Availability",
+      "explanation": "Overall accessibility friction is evaluated at 70/100 (CRITICAL friction). The most severe operational barrier is Financial Accessibility (Score: 90/100), followed by Transport Availability (Score: 85/100). Daily transit costs and out-of-pocket medicines pose an acute financial barrier for the household.",
+      "id": "3f83bef9-b108-4294-a51d-731d70f6eaee",
+      "_id": "3f83bef9-b108-4294-a51d-731d70f6eaee",
+      "created_at": "2026-09-04T08:18:49.314Z",
+      "createdat": "2026-09-04T08:18:49.314Z",
+      "updated_at": "2026-09-04T08:18:49.315Z",
+      "updatedat": "2026-09-04T08:18:49.315Z",
+      "patient_id": "df934545-a5e1-4ed7-a0b4-faed1d13facb"
+    },
+    {
+      "patientid": "a9dad8d8-addb-4d5e-a26e-2fc747a01be6",
+      "travel": {
+        "dimension": "Travel",
+        "score": 60,
+        "weight": 0.15,
+        "level": "HIGH",
+        "reason": "Facility is located within 30.0 km, representing manageable geographic proximity.",
+        "contributingParameters": {
+          "distanceKm": 30,
+          "residenceType": "semi_urban"
+        }
+      },
+      "transport": {
+        "dimension": "Transport",
+        "score": 40,
+        "weight": 0.18,
+        "level": "MEDIUM",
+        "reason": "Moderate access via public bus or train network, requiring 1-2 interchange hops.",
+        "contributingParameters": {
+          "transportLevel": "moderate",
+          "distanceKm": 30
+        }
+      },
+      "digitalaccess": {
+        "dimension": "Digital Access",
+        "score": 30,
+        "weight": 0.12,
+        "level": "MEDIUM",
+        "reason": "Basic smartphone user needing assistance for multi-step verification and document uploads.",
+        "contributingParameters": {
+          "digitalLevel": "moderate"
+        }
+      },
+      "language": {
+        "dimension": "Language",
+        "score": 15,
+        "weight": 0.08,
+        "level": "LOW",
+        "reason": "Hospital clinical staff directly support patient's preferred language (Hindi).",
+        "contributingParameters": {
+          "preferredLanguage": "Hindi",
+          "hospitalLanguages": [
+            "English",
+            "Hindi"
+          ]
+        }
+      },
+      "familysupport": {
+        "dimension": "Family Support",
+        "score": 35,
+        "weight": 0.12,
+        "level": "MEDIUM",
+        "reason": "Family assistance available on weekends or with prior scheduling.",
+        "contributingParameters": {
+          "familyLevel": "moderate",
+          "age": 38
+        }
+      },
+      "documentation": {
+        "dimension": "Documentation",
+        "score": 15,
+        "weight": 0.1,
+        "level": "LOW",
+        "reason": "Complete identity, scheme entitlement (e.g. Ayushman Bharat/PM-JAY), and past medical records ready.",
+        "contributingParameters": {
+          "docStatus": "complete"
+        }
+      },
+      "cost": {
+        "dimension": "Cost",
+        "score": 50,
+        "weight": 0.15,
+        "level": "HIGH",
+        "reason": "Can manage basic consultation, but unplanned diagnostic fees or repeated journeys cause financial strain.",
+        "contributingParameters": {
+          "financialLevel": "moderate_budget",
+          "distanceKm": 30
+        }
+      },
+      "appointmenttiming": {
+        "dimension": "Appointment Timing",
+        "score": 15,
+        "weight": 0.1,
+        "level": "LOW",
+        "reason": "Flexible schedule permitting attendance during standard morning OPD slots.",
+        "contributingParameters": {
+          "flexibility": "flexible"
+        }
+      },
+      "overallfrictionscore": 36,
+      "overallaccessibilityscore": 64,
+      "frictionlevel": "MEDIUM",
+      "topbarrier": "Travel Distance & Terrain",
+      "secondarybarrier": "Financial Accessibility",
+      "explanation": "Overall accessibility friction is evaluated at 36/100 (MEDIUM friction). The most severe operational barrier is Travel Distance & Terrain (Score: 60/100), followed by Financial Accessibility (Score: 50/100). Facility is located within 30.0 km, representing manageable geographic proximity.",
+      "id": "7500da24-5399-437e-aa27-75c04b8f5fef",
+      "_id": "7500da24-5399-437e-aa27-75c04b8f5fef",
+      "created_at": "2026-09-04T08:23:44.203Z",
+      "createdat": "2026-09-04T08:23:44.203Z",
+      "updated_at": "2026-09-04T08:23:44.203Z",
+      "updatedat": "2026-09-04T08:23:44.203Z",
+      "patient_id": "a9dad8d8-addb-4d5e-a26e-2fc747a01be6"
+    }
+  ],
+  "friction_factors": [
+    {
+      "id": "98f3ca6f-7deb-41ab-8d71-9ff63a6311a6",
+      "friction_profile_id": "caa423b4-51e8-4440-a382-d7ca83146287",
+      "factor_name": "Travel Distance & Terrain",
+      "score": 20,
+      "severity": "Critical",
+      "explanation": "Distance of 65 km requires significant travel coordination and physical effort.",
+      "suggested_intervention": "Route to nearest sub-district hospital or community healthcare escort."
+    },
+    {
+      "id": "b96587c5-39c5-4054-867c-98d23bd511f5",
+      "friction_profile_id": "caa423b4-51e8-4440-a382-d7ca83146287",
+      "factor_name": "Transportation & Transit",
+      "score": 15,
+      "severity": "High",
+      "explanation": "Primary mode (Infrequent Bus) has scheduled dependencies or physical strain.",
+      "suggested_intervention": "Connect with doorstep patient ambulance or volunteer transit shuttle."
+    },
+    {
+      "id": "079e2f7a-1dd0-4a62-ad2b-c92b32e31973",
+      "friction_profile_id": "caa423b4-51e8-4440-a382-d7ca83146287",
+      "factor_name": "Digital & System Literacy",
+      "score": 14,
+      "severity": "High",
+      "explanation": "Difficulty navigating online portals, OTP verifications, and digital appointment slots.",
+      "suggested_intervention": "Activate Simple Language Mode and Voice (TTS) Assisted Navigation."
+    },
+    {
+      "id": "a4ed7e31-e425-4881-b8ed-9b4c85965205",
+      "friction_profile_id": "caa423b4-51e8-4440-a382-d7ca83146287",
+      "factor_name": "Wage Loss & Scheduling Timing",
+      "score": 14,
+      "severity": "High",
+      "explanation": "Hospital visit causes loss of daily earnings; requires exact-time OPD token to minimize waiting.",
+      "suggested_intervention": "Priority Fast-Track OPD token booking for morning window."
+    },
+    {
+      "id": "2a9af122-d42b-41f3-b093-00c0ba80c3be",
+      "friction_profile_id": "caa423b4-51e8-4440-a382-d7ca83146287",
+      "factor_name": "Caregiver & Escort Availability",
+      "score": 13,
+      "severity": "High",
+      "explanation": "Patient lacks dedicated family member to assist with hospital navigation and registration queues.",
+      "suggested_intervention": "Assign Sahayak Community Care Escort for hospital day-journey."
+    },
+    {
+      "id": "245bcdf6-bac1-436c-a823-54e9bf693932",
+      "friction_profile_id": "caa423b4-51e8-4440-a382-d7ca83146287",
+      "factor_name": "Document & Identification Readiness",
+      "score": 9,
+      "severity": "Moderate",
+      "explanation": "Missing or unorganized physical ID/insurance cards causing registration friction.",
+      "suggested_intervention": "Upload and verify documents in digital Document Vault before leaving home."
+    },
+    {
+      "id": "6df59002-0352-4209-bb08-5aff34a313c4",
+      "friction_profile_id": "caa423b4-51e8-4440-a382-d7ca83146287",
+      "factor_name": "Language & Form Comprehension",
+      "score": 8,
+      "severity": "Moderate",
+      "explanation": "Preferred communication in local language (PA) rather than complex medical English.",
+      "suggested_intervention": "Provide multilingual vernacular forms and audio-assisted summaries."
+    }
+  ],
+  "accessibility_risks": [
+    {
+      "id": "5fbaa59d-65ab-40a4-a588-7615b266ab32",
+      "patient_id": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "risk_level": "High",
+      "barrier_title": "Long Transit Distance & Irregular Bus Schedule",
+      "explanation": "Living 65 km away with infrequent public transit causes high journey attrition risk.",
+      "mitigation_action": "Assign hospital transit shuttle or suggest doorstep care escort (Sahayak).",
+      "created_at": "2026-09-04T08:10:56.479Z"
+    },
+    {
+      "id": "705f9b28-34df-4610-b413-3d8800993670",
+      "patient_id": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "risk_level": "Moderate",
+      "barrier_title": "Digital & Form Literacy Barrier",
+      "explanation": "Inability to operate smartphone or read English tokens creates queue friction.",
+      "mitigation_action": "Enable Simple Language Mode and assign audio assistance tokens.",
+      "created_at": "2026-09-04T08:10:56.479Z"
+    },
+    {
+      "patientid": "a9dad8d8-addb-4d5e-a26e-2fc747a01be6",
+      "frictionprofileid": "7500da24-5399-437e-aa27-75c04b8f5fef",
+      "carecompletionprobability": 66,
+      "accessibilityriskpercentage": 34,
+      "riskcategory": "MODERATE",
+      "bottleneckstage": "Post-Consultation Follow-up",
+      "primaryriskfactors": [
+        {
+          "factorName": "Geographic Distance",
+          "severity": "HIGH",
+          "operationalImpact": "Transit distance (30 km) requires extensive physical travel fatigue."
+        },
+        {
+          "factorName": "Out-of-Pocket Expense",
+          "severity": "HIGH",
+          "operationalImpact": "Cumulative travel and medicine costs risk premature abandonment of care regimen."
+        }
+      ],
+      "mitigationpathways": [
+        "Community Health Shuttle / Transit Voucher Support"
+      ],
+      "disclaimer": "Estimated operational accessibility index based on socio-geographic friction factors. This is NOT a clinical diagnosis or medical prediction.",
+      "id": "d81e1249-95e9-4bec-abfd-cba5b84c58c7",
+      "_id": "d81e1249-95e9-4bec-abfd-cba5b84c58c7",
+      "created_at": "2026-09-04T08:23:44.204Z",
+      "createdat": "2026-09-04T08:23:44.204Z",
+      "updated_at": "2026-09-04T08:23:44.204Z",
+      "updatedat": "2026-09-04T08:23:44.204Z",
+      "patient_id": "a9dad8d8-addb-4d5e-a26e-2fc747a01be6"
+    },
+    {
+      "patientid": "df934545-a5e1-4ed7-a0b4-faed1d13facb",
+      "carecompletionprobability": 32,
+      "accessibilityriskpercentage": 68,
+      "riskcategory": "CRITICAL",
+      "bottleneckstage": "Travel & Physical Transit",
+      "primaryriskfactors": [
+        {
+          "factorName": "Public Transit Scarcity",
+          "severity": "CRITICAL",
+          "operationalImpact": "High likelihood of delayed arrival and missed token allocations."
+        },
+        {
+          "factorName": "Geographic Distance",
+          "severity": "HIGH",
+          "operationalImpact": "Transit distance (30 km) requires extensive physical travel fatigue."
+        },
+        {
+          "factorName": "Out-of-Pocket Expense",
+          "severity": "CRITICAL",
+          "operationalImpact": "Cumulative travel and medicine costs risk premature abandonment of care regimen."
+        },
+        {
+          "factorName": "Digital Process Literacy",
+          "severity": "HIGH",
+          "operationalImpact": "Inability to receive SMS alerts or download lab reports remotely."
+        },
+        {
+          "factorName": "Caregiver Unavailability",
+          "severity": "HIGH",
+          "operationalImpact": "Patient requires dedicated escort for hospital corridor navigation and multi-counter registration."
+        }
+      ],
+      "mitigationpathways": [
+        "Community Health Shuttle / Transit Voucher Support",
+        "Village Health Worker (ASHA) Guided Booking & Offline Assistance",
+        "Pre-visit Scheme Documentation Verification Desk",
+        "Flexible Afternoon Slot or Tele-consultation Initial Screening"
+      ],
+      "disclaimer": "Estimated operational accessibility index based on socio-geographic friction factors. This is NOT a clinical diagnosis or medical prediction.",
+      "id": "89af55f0-e220-4c92-b095-e481a23edcc3",
+      "_id": "89af55f0-e220-4c92-b095-e481a23edcc3",
+      "created_at": "2026-09-04T08:27:36.306Z",
+      "createdat": "2026-09-04T08:27:36.306Z",
+      "updated_at": "2026-09-04T08:27:36.306Z",
+      "updatedat": "2026-09-04T08:27:36.306Z",
+      "patient_id": "df934545-a5e1-4ed7-a0b4-faed1d13facb"
+    }
+  ],
+  "requests": [
+    {
+      "id": "3f3f1846-b8f5-47e8-8378-c5ef00241007",
+      "patient_id": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "hospital_id": "f656cf8b-960d-4598-97f2-d0898d266976",
+      "request_type": "Transport Support",
+      "status": "Processing",
+      "details": "Requesting community transit shuttle for morning OPD visit from village Mehli.",
+      "priority": "High",
+      "created_at": "2026-09-04T08:10:56.496Z",
+      "updated_at": "2026-09-04T08:10:56.496Z"
+    },
+    {
+      "id": "1f87ec05-53ae-4e22-9be4-e8b14bac3cf1",
+      "patient_id": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "hospital_id": "f656cf8b-960d-4598-97f2-d0898d266976",
+      "request_type": "Accessibility Support",
+      "status": "Approved",
+      "details": "Ground floor wheelchair assistance requested upon arrival at hospital gate.",
+      "priority": "Standard",
+      "created_at": "2026-09-04T08:10:56.497Z",
+      "updated_at": "2026-09-04T08:10:56.497Z"
+    },
+    {
+      "patientid": "df934545-a5e1-4ed7-a0b4-faed1d13facb",
+      "hospitalid": "7f2bc1ec-60b1-4b94-9a4e-3886a72a6d8d",
+      "datashared": "[\"demographics\",\"reason_for_visit\",\"accessibility_friction\",\"uploaded_documents\"]",
+      "purpose": "Hospital Intake & Consultation for Orthopedics",
+      "status": "ACTIVE",
+      "grantedat": "\"2026-09-04T08:52:37.061Z\"",
+      "ipaddress": "::1",
+      "id": "2687ce2a-6a7e-42fa-9685-c8d3f59357f6",
+      "_id": "2687ce2a-6a7e-42fa-9685-c8d3f59357f6",
+      "created_at": "2026-09-04T08:52:37.061Z",
+      "createdat": "2026-09-04T08:52:37.061Z",
+      "updated_at": "2026-09-04T08:52:37.061Z",
+      "updatedat": "2026-09-04T08:52:37.061Z",
+      "patient_id": "df934545-a5e1-4ed7-a0b4-faed1d13facb",
+      "hospital_id": "7f2bc1ec-60b1-4b94-9a4e-3886a72a6d8d"
+    },
+    {
+      "patientid": "df934545-a5e1-4ed7-a0b4-faed1d13facb",
+      "hospitalid": "7f2bc1ec-60b1-4b94-9a4e-3886a72a6d8d",
+      "datashared": "[\"demographics\",\"reason_for_visit\",\"accessibility_friction\",\"uploaded_documents\"]",
+      "purpose": "Hospital Intake & Consultation for Orthopedics",
+      "status": "ACTIVE",
+      "grantedat": "\"2026-09-04T08:53:21.544Z\"",
+      "ipaddress": "::1",
+      "id": "c207cc27-04e2-4332-86c5-7d9d9176503c",
+      "_id": "c207cc27-04e2-4332-86c5-7d9d9176503c",
+      "created_at": "2026-09-04T08:53:21.544Z",
+      "createdat": "2026-09-04T08:53:21.544Z",
+      "updated_at": "2026-09-04T08:53:21.544Z",
+      "updatedat": "2026-09-04T08:53:21.544Z",
+      "patient_id": "df934545-a5e1-4ed7-a0b4-faed1d13facb",
+      "hospital_id": "7f2bc1ec-60b1-4b94-9a4e-3886a72a6d8d"
+    },
+    {
+      "patientid": "df934545-a5e1-4ed7-a0b4-faed1d13facb",
+      "hospitalid": "7f2bc1ec-60b1-4b94-9a4e-3886a72a6d8d",
+      "datashared": "[\"demographics\",\"reason_for_visit\",\"accessibility_friction\",\"uploaded_documents\"]",
+      "purpose": "Hospital Intake & Consultation for General Medicine",
+      "status": "ACTIVE",
+      "grantedat": "\"2026-09-04T09:41:00.381Z\"",
+      "ipaddress": "::1",
+      "id": "45effdd2-361e-4320-9268-2cdfafc35fc6",
+      "_id": "45effdd2-361e-4320-9268-2cdfafc35fc6",
+      "created_at": "2026-09-04T09:41:00.381Z",
+      "createdat": "2026-09-04T09:41:00.381Z",
+      "updated_at": "2026-09-04T09:41:00.382Z",
+      "updatedat": "2026-09-04T09:41:00.381Z",
+      "patient_id": "df934545-a5e1-4ed7-a0b4-faed1d13facb",
+      "hospital_id": "7f2bc1ec-60b1-4b94-9a4e-3886a72a6d8d"
+    }
+  ],
+  "documents": [
+    {
+      "id": "5eefd9b8-dc59-4cf9-95c4-10d0597ceafc",
+      "patient_id": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "category": "ID Proof",
+      "file_name": "Aadhaar_Card_Masked.pdf",
+      "file_url": "/demo-vault/Aadhaar_Card_Masked.pdf",
+      "file_size_kb": 245.5,
+      "mime_type": "application/pdf",
+      "uploaded_at": "2026-09-04T08:10:56.498Z"
+    },
+    {
+      "id": "e362596e-71f6-4cba-93d6-7855a7ec3af4",
+      "patient_id": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "category": "Medical Document",
+      "file_name": "Previous_OPD_Prescription_Slip.pdf",
+      "file_url": "/demo-vault/Previous_OPD_Prescription_Slip.pdf",
+      "file_size_kb": 412,
+      "mime_type": "application/pdf",
+      "uploaded_at": "2026-09-04T08:10:56.498Z"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "08cdbaf5-4b3f-471b-8dc7-807aa5431d46",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "title": "Welcome to PFIS Accessibility Portal",
+      "message": "Your non-clinical accessibility profile is active. You can review your travel friction and find nearby verified hospitals.",
+      "type": "success",
+      "is_read": false,
+      "link": "/patient/friction-profile",
+      "created_at": "2026-09-04T08:10:56.499Z"
+    },
+    {
+      "id": "4ade22ba-8374-4a5b-af9b-993990237c4e",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "title": "Transport Assistance Request Received",
+      "message": "Your request for morning transit assistance has been queued with Civil Hospital Phagwara support desk.",
+      "type": "info",
+      "is_read": false,
+      "link": "/patient/requests",
+      "created_at": "2026-09-04T08:10:56.500Z"
+    }
+  ],
+  "audit_logs": [
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": {
+        "email": "patient@pfis.org"
+      },
+      "timestamp": "2026-09-04T08:15:39.308Z",
+      "id": "d8bb4b0b-d26e-4799-bb54-a14e38ecb7c3",
+      "_id": "d8bb4b0b-d26e-4799-bb54-a14e38ecb7c3",
+      "created_at": "2026-09-04T08:15:39.308Z",
+      "createdat": "2026-09-04T08:15:39.308Z",
+      "updated_at": "2026-09-04T08:15:39.309Z",
+      "updatedat": "2026-09-04T08:15:39.309Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": {
+        "email": "dhirajkumar464748@gmail.com"
+      },
+      "timestamp": "2026-09-04T08:15:49.899Z",
+      "id": "db0c8c06-97ec-4ccc-b286-c4f6ecad277b",
+      "_id": "db0c8c06-97ec-4ccc-b286-c4f6ecad277b",
+      "created_at": "2026-09-04T08:15:49.899Z",
+      "createdat": "2026-09-04T08:15:49.899Z",
+      "updated_at": "2026-09-04T08:15:49.899Z",
+      "updatedat": "2026-09-04T08:15:49.899Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": {
+        "email": "patient@pfis.org"
+      },
+      "timestamp": "2026-09-04T08:17:09.890Z",
+      "id": "bb5bf6fd-8d8d-42f3-8291-6cd2073a1fb1",
+      "_id": "bb5bf6fd-8d8d-42f3-8291-6cd2073a1fb1",
+      "created_at": "2026-09-04T08:17:09.890Z",
+      "createdat": "2026-09-04T08:17:09.890Z",
+      "updated_at": "2026-09-04T08:17:09.890Z",
+      "updatedat": "2026-09-04T08:17:09.890Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": {
+        "email": "patient@pfis.org"
+      },
+      "timestamp": "2026-09-04T08:17:42.872Z",
+      "id": "68a04a3a-3636-41d5-8e40-7f376d861629",
+      "_id": "68a04a3a-3636-41d5-8e40-7f376d861629",
+      "created_at": "2026-09-04T08:17:42.872Z",
+      "createdat": "2026-09-04T08:17:42.872Z",
+      "updated_at": "2026-09-04T08:17:42.872Z",
+      "updatedat": "2026-09-04T08:17:42.872Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": {
+        "email": "patient@pfis.org"
+      },
+      "timestamp": "2026-09-04T08:17:54.311Z",
+      "id": "861fd14c-254e-49ed-8a1c-c9338b1f7ee8",
+      "_id": "861fd14c-254e-49ed-8a1c-c9338b1f7ee8",
+      "created_at": "2026-09-04T08:17:54.311Z",
+      "createdat": "2026-09-04T08:17:54.311Z",
+      "updated_at": "2026-09-04T08:17:54.311Z",
+      "updatedat": "2026-09-04T08:17:54.311Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": {
+        "email": "patient@pfis.org"
+      },
+      "timestamp": "2026-09-04T08:18:24.117Z",
+      "id": "e1103f7c-3760-4cc4-88c4-5018e3328af2",
+      "_id": "e1103f7c-3760-4cc4-88c4-5018e3328af2",
+      "created_at": "2026-09-04T08:18:24.117Z",
+      "createdat": "2026-09-04T08:18:24.117Z",
+      "updated_at": "2026-09-04T08:18:24.119Z",
+      "updatedat": "2026-09-04T08:18:24.119Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": {
+        "email": "patient@pfis.org"
+      },
+      "timestamp": "2026-09-04T08:18:49.289Z",
+      "id": "c9187b1b-56a6-4c0c-8bf9-de974a103cfd",
+      "_id": "c9187b1b-56a6-4c0c-8bf9-de974a103cfd",
+      "created_at": "2026-09-04T08:18:49.289Z",
+      "createdat": "2026-09-04T08:18:49.289Z",
+      "updated_at": "2026-09-04T08:18:49.290Z",
+      "updatedat": "2026-09-04T08:18:49.290Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": {
+        "email": "patient@pfis.org"
+      },
+      "timestamp": "2026-09-04T08:19:04.070Z",
+      "id": "d92a07cf-947e-4588-ac02-b262488df975",
+      "_id": "d92a07cf-947e-4588-ac02-b262488df975",
+      "created_at": "2026-09-04T08:19:04.070Z",
+      "createdat": "2026-09-04T08:19:04.070Z",
+      "updated_at": "2026-09-04T08:19:04.070Z",
+      "updatedat": "2026-09-04T08:19:04.070Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": {
+        "email": "patient@pfis.org"
+      },
+      "timestamp": "2026-09-04T08:19:14.573Z",
+      "id": "5a1327f3-5f95-4cd3-aab1-3ac2335e97b0",
+      "_id": "5a1327f3-5f95-4cd3-aab1-3ac2335e97b0",
+      "created_at": "2026-09-04T08:19:14.573Z",
+      "createdat": "2026-09-04T08:19:14.573Z",
+      "updated_at": "2026-09-04T08:19:14.573Z",
+      "updatedat": "2026-09-04T08:19:14.573Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": {
+        "email": "patient@pfis.org"
+      },
+      "timestamp": "2026-09-04T08:19:27.152Z",
+      "id": "88464cfe-a10d-46c3-a34c-7fd54883b065",
+      "_id": "88464cfe-a10d-46c3-a34c-7fd54883b065",
+      "created_at": "2026-09-04T08:19:27.152Z",
+      "createdat": "2026-09-04T08:19:27.152Z",
+      "updated_at": "2026-09-04T08:19:27.152Z",
+      "updatedat": "2026-09-04T08:19:27.152Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": {
+        "email": "patient@pfis.org"
+      },
+      "timestamp": "2026-09-04T08:19:46.582Z",
+      "id": "324550fa-0f2e-4e69-8fa9-e3cea5c2d60c",
+      "_id": "324550fa-0f2e-4e69-8fa9-e3cea5c2d60c",
+      "created_at": "2026-09-04T08:19:46.582Z",
+      "createdat": "2026-09-04T08:19:46.582Z",
+      "updated_at": "2026-09-04T08:19:46.585Z",
+      "updatedat": "2026-09-04T08:19:46.585Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": {
+        "email": "patient@pfis.org"
+      },
+      "timestamp": "2026-09-04T08:20:01.670Z",
+      "id": "35dc69d8-9c5e-47d7-b261-e6dd0909d82b",
+      "_id": "35dc69d8-9c5e-47d7-b261-e6dd0909d82b",
+      "created_at": "2026-09-04T08:20:01.670Z",
+      "createdat": "2026-09-04T08:20:01.670Z",
+      "updated_at": "2026-09-04T08:20:01.670Z",
+      "updatedat": "2026-09-04T08:20:01.670Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_GOOGLE_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": {
+        "email": "dhirajkumar464748@gmail.com",
+        "provider": "google"
+      },
+      "timestamp": "2026-09-04T08:22:07.251Z",
+      "id": "37b50710-6ac5-4e78-88a3-d2e923a9ae84",
+      "_id": "37b50710-6ac5-4e78-88a3-d2e923a9ae84",
+      "created_at": "2026-09-04T08:22:07.251Z",
+      "createdat": "2026-09-04T08:22:07.251Z",
+      "updated_at": "2026-09-04T08:22:07.251Z",
+      "updatedat": "2026-09-04T08:22:07.251Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_LOGOUT",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": {},
+      "timestamp": "2026-09-04T08:22:51.858Z",
+      "id": "7264b5db-4c63-4d5d-a2ae-1f9a192b7907",
+      "_id": "7264b5db-4c63-4d5d-a2ae-1f9a192b7907",
+      "created_at": "2026-09-04T08:22:51.858Z",
+      "createdat": "2026-09-04T08:22:51.858Z",
+      "updated_at": "2026-09-04T08:22:51.858Z",
+      "updatedat": "2026-09-04T08:22:51.858Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_GOOGLE_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": {
+        "email": "dhirajkumar464748@gmail.com",
+        "provider": "google"
+      },
+      "timestamp": "2026-09-04T08:23:15.870Z",
+      "id": "9ce33c7c-3185-497f-addd-26478de8daa3",
+      "_id": "9ce33c7c-3185-497f-addd-26478de8daa3",
+      "created_at": "2026-09-04T08:23:15.870Z",
+      "createdat": "2026-09-04T08:23:15.870Z",
+      "updated_at": "2026-09-04T08:23:15.870Z",
+      "updatedat": "2026-09-04T08:23:15.870Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_GOOGLE_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": {
+        "email": "dhirajkumar464748@gmail.com",
+        "provider": "google"
+      },
+      "timestamp": "2026-09-04T08:23:16.125Z",
+      "id": "3e2a8103-fcf7-41c5-902d-48ab33f8234a",
+      "_id": "3e2a8103-fcf7-41c5-902d-48ab33f8234a",
+      "created_at": "2026-09-04T08:23:16.125Z",
+      "createdat": "2026-09-04T08:23:16.125Z",
+      "updated_at": "2026-09-04T08:23:16.125Z",
+      "updatedat": "2026-09-04T08:23:16.125Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_LOGOUT",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": {},
+      "timestamp": "2026-09-04T08:23:28.641Z",
+      "id": "428eb0bc-cfd7-4d84-b873-7f898840ec69",
+      "_id": "428eb0bc-cfd7-4d84-b873-7f898840ec69",
+      "created_at": "2026-09-04T08:23:28.641Z",
+      "createdat": "2026-09-04T08:23:28.641Z",
+      "updated_at": "2026-09-04T08:23:28.641Z",
+      "updatedat": "2026-09-04T08:23:28.641Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "4b3e3176-fadb-4a46-879c-85b14fef0ca4",
+      "actorrole": "patient",
+      "action": "AUTH_GOOGLE_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": {
+        "email": "dhirajkumar45710@gmail.com",
+        "provider": "google"
+      },
+      "timestamp": "2026-09-04T08:23:44.208Z",
+      "id": "a41744e0-e123-4f53-a0e3-8f8474dcacae",
+      "_id": "a41744e0-e123-4f53-a0e3-8f8474dcacae",
+      "created_at": "2026-09-04T08:23:44.208Z",
+      "createdat": "2026-09-04T08:23:44.208Z",
+      "updated_at": "2026-09-04T08:23:44.208Z",
+      "updatedat": "2026-09-04T08:23:44.208Z",
+      "user_id": "4b3e3176-fadb-4a46-879c-85b14fef0ca4"
+    },
+    {
+      "userid": "4b3e3176-fadb-4a46-879c-85b14fef0ca4",
+      "actorrole": "patient",
+      "action": "AUTH_GOOGLE_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": {
+        "email": "dhirajkumar45710@gmail.com",
+        "provider": "google"
+      },
+      "timestamp": "2026-09-04T08:23:44.212Z",
+      "id": "952e39fb-d310-4906-9238-dcc339172056",
+      "_id": "952e39fb-d310-4906-9238-dcc339172056",
+      "created_at": "2026-09-04T08:23:44.212Z",
+      "createdat": "2026-09-04T08:23:44.212Z",
+      "updated_at": "2026-09-04T08:23:44.212Z",
+      "updatedat": "2026-09-04T08:23:44.212Z",
+      "user_id": "4b3e3176-fadb-4a46-879c-85b14fef0ca4"
+    },
+    {
+      "userid": "4b3e3176-fadb-4a46-879c-85b14fef0ca4",
+      "actorrole": "patient",
+      "action": "AUTH_LOGOUT",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": {},
+      "timestamp": "2026-09-04T08:26:37.463Z",
+      "id": "86583da5-e206-44ea-88fa-3a3f0b125392",
+      "_id": "86583da5-e206-44ea-88fa-3a3f0b125392",
+      "created_at": "2026-09-04T08:26:37.463Z",
+      "createdat": "2026-09-04T08:26:37.463Z",
+      "updated_at": "2026-09-04T08:26:37.463Z",
+      "updatedat": "2026-09-04T08:26:37.463Z",
+      "user_id": "4b3e3176-fadb-4a46-879c-85b14fef0ca4"
+    },
+    {
+      "userid": "4b3e3176-fadb-4a46-879c-85b14fef0ca4",
+      "actorrole": "hospital",
+      "action": "AUTH_GOOGLE_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": {
+        "email": "dhirajkumar45710@gmail.com",
+        "provider": "google"
+      },
+      "timestamp": "2026-09-04T08:26:53.239Z",
+      "id": "162e0cac-6dd0-4f7c-9656-4b165bebd39e",
+      "_id": "162e0cac-6dd0-4f7c-9656-4b165bebd39e",
+      "created_at": "2026-09-04T08:26:53.239Z",
+      "createdat": "2026-09-04T08:26:53.239Z",
+      "updated_at": "2026-09-04T08:26:53.239Z",
+      "updatedat": "2026-09-04T08:26:53.239Z",
+      "user_id": "4b3e3176-fadb-4a46-879c-85b14fef0ca4"
+    },
+    {
+      "userid": "4b3e3176-fadb-4a46-879c-85b14fef0ca4",
+      "actorrole": "hospital",
+      "action": "AUTH_LOGOUT",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": {},
+      "timestamp": "2026-09-04T08:27:31.048Z",
+      "id": "57dacb70-a27a-44c0-bb99-de177eb4c12a",
+      "_id": "57dacb70-a27a-44c0-bb99-de177eb4c12a",
+      "created_at": "2026-09-04T08:27:31.048Z",
+      "createdat": "2026-09-04T08:27:31.048Z",
+      "updated_at": "2026-09-04T08:27:31.048Z",
+      "updatedat": "2026-09-04T08:27:31.048Z",
+      "user_id": "4b3e3176-fadb-4a46-879c-85b14fef0ca4"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": {
+        "email": "patient@pfis.org"
+      },
+      "timestamp": "2026-09-04T08:27:36.183Z",
+      "id": "437f4deb-ccb9-4ecd-9fd3-6b1e44781344",
+      "_id": "437f4deb-ccb9-4ecd-9fd3-6b1e44781344",
+      "created_at": "2026-09-04T08:27:36.183Z",
+      "createdat": "2026-09-04T08:27:36.183Z",
+      "updated_at": "2026-09-04T08:27:36.183Z",
+      "updatedat": "2026-09-04T08:27:36.183Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": {
+        "email": "dhirajkumar464748@gmail.com"
+      },
+      "timestamp": "2026-09-04T08:39:59.880Z",
+      "id": "a0f786b8-4a63-43c3-9739-8b008e7eabdc",
+      "_id": "a0f786b8-4a63-43c3-9739-8b008e7eabdc",
+      "created_at": "2026-09-04T08:39:59.885Z",
+      "createdat": "2026-09-04T08:39:59.885Z",
+      "updated_at": "2026-09-04T08:39:59.885Z",
+      "updatedat": "2026-09-04T08:39:59.885Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": {
+        "email": "dhirajkumar464748@gmail.com"
+      },
+      "timestamp": "2026-09-04T08:40:49.529Z",
+      "id": "ee66606a-20a5-4c3b-a55b-584338960557",
+      "_id": "ee66606a-20a5-4c3b-a55b-584338960557",
+      "created_at": "2026-09-04T08:40:49.530Z",
+      "createdat": "2026-09-04T08:40:49.530Z",
+      "updated_at": "2026-09-04T08:40:49.530Z",
+      "updatedat": "2026-09-04T08:40:49.530Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": {
+        "email": "patient@pfis.org"
+      },
+      "timestamp": "2026-09-04T08:47:11.127Z",
+      "id": "78452b1e-082b-490c-8e26-00df5440c17a",
+      "_id": "78452b1e-082b-490c-8e26-00df5440c17a",
+      "created_at": "2026-09-04T08:47:11.127Z",
+      "createdat": "2026-09-04T08:47:11.127Z",
+      "updated_at": "2026-09-04T08:47:11.127Z",
+      "updatedat": "2026-09-04T08:47:11.127Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": "{\"email\":\"patient@pfis.org\"}",
+      "timestamp": "\"2026-09-04T08:49:58.865Z\"",
+      "id": "ff61f35c-47e3-4cd3-b2f7-49368fa24bca",
+      "_id": "ff61f35c-47e3-4cd3-b2f7-49368fa24bca",
+      "created_at": "2026-09-04T08:49:58.865Z",
+      "createdat": "2026-09-04T08:49:58.865Z",
+      "updated_at": "2026-09-04T08:49:58.865Z",
+      "updatedat": "2026-09-04T08:49:58.865Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGOUT",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": "{}",
+      "timestamp": "\"2026-09-04T08:53:45.860Z\"",
+      "id": "8e2fed5c-0e4c-4e52-8b43-f1d27f8f10ab",
+      "_id": "8e2fed5c-0e4c-4e52-8b43-f1d27f8f10ab",
+      "created_at": "2026-09-04T08:53:45.860Z",
+      "createdat": "2026-09-04T08:53:45.860Z",
+      "updated_at": "2026-09-04T08:53:45.860Z",
+      "updatedat": "2026-09-04T08:53:45.860Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "4b3e3176-fadb-4a46-879c-85b14fef0ca4",
+      "actorrole": "hospital",
+      "action": "AUTH_GOOGLE_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": "{\"email\":\"dhirajkumar45710@gmail.com\",\"provider\":\"google\"}",
+      "timestamp": "\"2026-09-04T08:54:08.985Z\"",
+      "id": "6c4e51f1-9127-424d-9f53-af1f890d9a0a",
+      "_id": "6c4e51f1-9127-424d-9f53-af1f890d9a0a",
+      "created_at": "2026-09-04T08:54:08.985Z",
+      "createdat": "2026-09-04T08:54:08.985Z",
+      "updated_at": "2026-09-04T08:54:08.985Z",
+      "updatedat": "2026-09-04T08:54:08.985Z",
+      "user_id": "4b3e3176-fadb-4a46-879c-85b14fef0ca4"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": "{\"email\":\"dhirajkumar464748@gmail.com\"}",
+      "timestamp": "\"2026-09-04T08:59:54.975Z\"",
+      "id": "7985bbe0-abe3-405f-a237-9965986222e8",
+      "_id": "7985bbe0-abe3-405f-a237-9965986222e8",
+      "created_at": "2026-09-04T08:59:54.975Z",
+      "createdat": "2026-09-04T08:59:54.975Z",
+      "updated_at": "2026-09-04T08:59:54.975Z",
+      "updatedat": "2026-09-04T08:59:54.975Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": "{\"email\":\"dhirajkumar464748@gmail.com\"}",
+      "timestamp": "\"2026-09-04T09:01:29.462Z\"",
+      "id": "8fb489a1-9659-487b-8e44-902bc176e0e1",
+      "_id": "8fb489a1-9659-487b-8e44-902bc176e0e1",
+      "created_at": "2026-09-04T09:01:29.464Z",
+      "createdat": "2026-09-04T09:01:29.464Z",
+      "updated_at": "2026-09-04T09:01:29.464Z",
+      "updatedat": "2026-09-04T09:01:29.464Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "4b3e3176-fadb-4a46-879c-85b14fef0ca4",
+      "actorrole": "hospital",
+      "action": "AUTH_LOGOUT",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": "{}",
+      "timestamp": "\"2026-09-04T09:34:23.987Z\"",
+      "id": "eb452f41-9b22-470b-ac93-fc90804b086e",
+      "_id": "eb452f41-9b22-470b-ac93-fc90804b086e",
+      "created_at": "2026-09-04T09:34:23.993Z",
+      "createdat": "2026-09-04T09:34:23.993Z",
+      "updated_at": "2026-09-04T09:34:23.994Z",
+      "updatedat": "2026-09-04T09:34:23.993Z",
+      "user_id": "4b3e3176-fadb-4a46-879c-85b14fef0ca4"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": "{\"email\":\"dhirajkumar464748@gmail.com\"}",
+      "timestamp": "\"2026-09-04T09:34:44.919Z\"",
+      "id": "6efbf859-090b-4168-bdd7-9bc97890fbc7",
+      "_id": "6efbf859-090b-4168-bdd7-9bc97890fbc7",
+      "created_at": "2026-09-04T09:34:44.919Z",
+      "createdat": "2026-09-04T09:34:44.919Z",
+      "updated_at": "2026-09-04T09:34:44.919Z",
+      "updatedat": "2026-09-04T09:34:44.919Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_LOGOUT",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": "{}",
+      "timestamp": "\"2026-09-04T09:35:56.568Z\"",
+      "id": "8ce73d86-fc6a-42cf-b560-b53b5e636fa5",
+      "_id": "8ce73d86-fc6a-42cf-b560-b53b5e636fa5",
+      "created_at": "2026-09-04T09:35:56.568Z",
+      "createdat": "2026-09-04T09:35:56.568Z",
+      "updated_at": "2026-09-04T09:35:56.569Z",
+      "updatedat": "2026-09-04T09:35:56.568Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "ced7f40c-046a-45d3-bd24-83d9b5718501",
+      "actorrole": "hospital",
+      "action": "AUTH_REGISTER",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": "{\"email\":\"dhirajkushwaha6857@gmail.com\",\"role\":\"hospital\"}",
+      "timestamp": "\"2026-09-04T09:38:02.336Z\"",
+      "id": "3ac24d43-8b13-4a0d-a0b2-956a9a22f7df",
+      "_id": "3ac24d43-8b13-4a0d-a0b2-956a9a22f7df",
+      "created_at": "2026-09-04T09:38:02.336Z",
+      "createdat": "2026-09-04T09:38:02.336Z",
+      "updated_at": "2026-09-04T09:38:02.337Z",
+      "updatedat": "2026-09-04T09:38:02.336Z",
+      "user_id": "ced7f40c-046a-45d3-bd24-83d9b5718501"
+    },
+    {
+      "userid": "ced7f40c-046a-45d3-bd24-83d9b5718501",
+      "actorrole": "hospital",
+      "action": "AUTH_LOGOUT",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": "{}",
+      "timestamp": "\"2026-09-04T09:39:15.560Z\"",
+      "id": "3b672c62-76b1-4fd2-a61d-5c55bb592097",
+      "_id": "3b672c62-76b1-4fd2-a61d-5c55bb592097",
+      "created_at": "2026-09-04T09:39:15.560Z",
+      "createdat": "2026-09-04T09:39:15.560Z",
+      "updated_at": "2026-09-04T09:39:15.560Z",
+      "updatedat": "2026-09-04T09:39:15.560Z",
+      "user_id": "ced7f40c-046a-45d3-bd24-83d9b5718501"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": "{\"email\":\"patient@pfis.org\"}",
+      "timestamp": "\"2026-09-04T09:39:19.937Z\"",
+      "id": "c3797d95-9026-4339-ac50-411ecb5dade7",
+      "_id": "c3797d95-9026-4339-ac50-411ecb5dade7",
+      "created_at": "2026-09-04T09:39:19.937Z",
+      "createdat": "2026-09-04T09:39:19.937Z",
+      "updated_at": "2026-09-04T09:39:19.937Z",
+      "updatedat": "2026-09-04T09:39:19.937Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGOUT",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": "{}",
+      "timestamp": "\"2026-09-04T09:41:44.494Z\"",
+      "id": "8d398753-c96f-430b-a76e-a2d830386d5d",
+      "_id": "8d398753-c96f-430b-a76e-a2d830386d5d",
+      "created_at": "2026-09-04T09:41:44.494Z",
+      "createdat": "2026-09-04T09:41:44.494Z",
+      "updated_at": "2026-09-04T09:41:44.494Z",
+      "updatedat": "2026-09-04T09:41:44.494Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": "{\"email\":\"dhirajkumar464748@gmail.com\"}",
+      "timestamp": "\"2026-09-04T09:41:54.990Z\"",
+      "id": "1f2851ab-3696-43fd-a4c4-e5122067c413",
+      "_id": "1f2851ab-3696-43fd-a4c4-e5122067c413",
+      "created_at": "2026-09-04T09:41:54.990Z",
+      "createdat": "2026-09-04T09:41:54.990Z",
+      "updated_at": "2026-09-04T09:41:54.990Z",
+      "updatedat": "2026-09-04T09:41:54.990Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": "{\"email\":\"dhirajkumar464748@gmail.com\"}",
+      "timestamp": "\"2026-09-04T10:19:31.028Z\"",
+      "id": "c7a13c02-d578-45c3-98c3-2e2364627bdc",
+      "_id": "c7a13c02-d578-45c3-98c3-2e2364627bdc",
+      "created_at": "2026-09-04T10:19:31.048Z",
+      "createdat": "2026-09-04T10:19:31.048Z",
+      "updated_at": "2026-09-04T10:19:31.049Z",
+      "updatedat": "2026-09-04T10:19:31.048Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "HOSPITAL_CREATED",
+      "resource": "Hospital",
+      "resourceid": "15bc05ef-05e2-4d34-be00-fea83b2a087f",
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": "{}",
+      "timestamp": "\"2026-09-04T10:19:31.412Z\"",
+      "id": "fb68f487-3aec-4ed9-91cb-8695003acc98",
+      "_id": "fb68f487-3aec-4ed9-91cb-8695003acc98",
+      "created_at": "2026-09-04T10:19:31.412Z",
+      "createdat": "2026-09-04T10:19:31.412Z",
+      "updated_at": "2026-09-04T10:19:31.412Z",
+      "updatedat": "2026-09-04T10:19:31.412Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "HOSPITAL_DELETED",
+      "resource": "Hospital",
+      "resourceid": "15bc05ef-05e2-4d34-be00-fea83b2a087f",
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": "{}",
+      "timestamp": "\"2026-09-04T10:19:31.480Z\"",
+      "id": "7c2368bb-9b30-4095-8097-bd17949510fb",
+      "_id": "7c2368bb-9b30-4095-8097-bd17949510fb",
+      "created_at": "2026-09-04T10:19:31.480Z",
+      "createdat": "2026-09-04T10:19:31.480Z",
+      "updated_at": "2026-09-04T10:19:31.480Z",
+      "updatedat": "2026-09-04T10:19:31.480Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_LOGOUT",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+      "details": "{}",
+      "timestamp": "\"2026-09-04T10:20:56.489Z\"",
+      "id": "4dbb6733-9b20-4b78-b76b-daeaa06e8728",
+      "_id": "4dbb6733-9b20-4b78-b76b-daeaa06e8728",
+      "created_at": "2026-09-04T10:20:56.489Z",
+      "createdat": "2026-09-04T10:20:56.489Z",
+      "updated_at": "2026-09-04T10:20:56.489Z",
+      "updatedat": "2026-09-04T10:20:56.489Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_GOOGLE_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+      "details": "{\"email\":\"dhirajkumar464748@gmail.com\",\"provider\":\"google\"}",
+      "timestamp": "\"2026-09-04T10:21:28.210Z\"",
+      "id": "5b88775a-b6e4-4988-9720-019599126d30",
+      "_id": "5b88775a-b6e4-4988-9720-019599126d30",
+      "created_at": "2026-09-04T10:21:28.210Z",
+      "createdat": "2026-09-04T10:21:28.210Z",
+      "updated_at": "2026-09-04T10:21:28.210Z",
+      "updatedat": "2026-09-04T10:21:28.210Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_LOGOUT",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+      "details": "{}",
+      "timestamp": "\"2026-09-04T10:22:27.031Z\"",
+      "id": "c1b84dd6-8de4-42e6-9665-49a27f524e7d",
+      "_id": "c1b84dd6-8de4-42e6-9665-49a27f524e7d",
+      "created_at": "2026-09-04T10:22:27.031Z",
+      "createdat": "2026-09-04T10:22:27.031Z",
+      "updated_at": "2026-09-04T10:22:27.031Z",
+      "updatedat": "2026-09-04T10:22:27.031Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "6750b5c9-906c-4eed-b46d-8990b853ad98",
+      "actorrole": "patient",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+      "details": "{\"email\":\"patient@pfis.org\"}",
+      "timestamp": "\"2026-09-04T10:22:31.815Z\"",
+      "id": "fc2a8be0-4c21-4f3e-a4d8-fd34d56c4864",
+      "_id": "fc2a8be0-4c21-4f3e-a4d8-fd34d56c4864",
+      "created_at": "2026-09-04T10:22:31.815Z",
+      "createdat": "2026-09-04T10:22:31.815Z",
+      "updated_at": "2026-09-04T10:22:31.815Z",
+      "updatedat": "2026-09-04T10:22:31.815Z",
+      "user_id": "6750b5c9-906c-4eed-b46d-8990b853ad98"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "AUTH_LOGIN",
+      "resource": "User",
+      "resourceid": null,
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": "{\"email\":\"dhirajkumar464748@gmail.com\"}",
+      "timestamp": "\"2026-09-04T10:33:13.948Z\"",
+      "id": "ac16ad0e-3815-4774-8b2a-6008f79a22d0",
+      "_id": "ac16ad0e-3815-4774-8b2a-6008f79a22d0",
+      "created_at": "2026-09-04T10:33:13.949Z",
+      "createdat": "2026-09-04T10:33:13.949Z",
+      "updated_at": "2026-09-04T10:33:13.950Z",
+      "updatedat": "2026-09-04T10:33:13.949Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    },
+    {
+      "userid": "99860eac-f5dc-4683-a462-7185fa1adcd3",
+      "actorrole": "admin",
+      "action": "DEPARTMENT_CREATED",
+      "resource": "HospitalDepartment",
+      "resourceid": "2db0e5a8-eab3-4732-87ef-4a36ceb06b3a",
+      "ipaddress": "::1",
+      "useragent": "node",
+      "details": "{}",
+      "timestamp": "\"2026-09-04T10:33:14.009Z\"",
+      "id": "4fd39109-a76a-4974-8b0b-01e5a3be8f0a",
+      "_id": "4fd39109-a76a-4974-8b0b-01e5a3be8f0a",
+      "created_at": "2026-09-04T10:33:14.009Z",
+      "createdat": "2026-09-04T10:33:14.009Z",
+      "updated_at": "2026-09-04T10:33:14.009Z",
+      "updatedat": "2026-09-04T10:33:14.009Z",
+      "user_id": "99860eac-f5dc-4683-a462-7185fa1adcd3"
+    }
+  ]
+}

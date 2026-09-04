@@ -16,15 +16,16 @@ export const FrictionRadarChart: React.FC<{
 }> = ({ profile, height = 320 }) => {
   if (!profile) return null;
 
+  const p = profile as any;
   const data = [
-    { subject: 'Travel Dist.', score: profile.travel.score, fullMark: 100 },
-    { subject: 'Transport', score: profile.transport.score, fullMark: 100 },
-    { subject: 'Digital Access', score: profile.digitalAccess.score, fullMark: 100 },
-    { subject: 'Language', score: profile.language.score, fullMark: 100 },
-    { subject: 'Family Supp.', score: profile.familySupport.score, fullMark: 100 },
-    { subject: 'Document.', score: profile.documentation.score, fullMark: 100 },
-    { subject: 'Cost Burden', score: profile.cost.score, fullMark: 100 },
-    { subject: 'OPD Timing', score: profile.appointmentTiming.score, fullMark: 100 },
+    { subject: 'Travel Dist.', score: (p.travel?.score ?? 0), fullMark: 100 },
+    { subject: 'Transport', score: (p.transport?.score ?? 0), fullMark: 100 },
+    { subject: 'Digital Access', score: (p.digitalAccess?.score ?? p.digitalaccess?.score ?? 0), fullMark: 100 },
+    { subject: 'Language', score: (p.language?.score ?? 0), fullMark: 100 },
+    { subject: 'Family Supp.', score: (p.familySupport?.score ?? p.familysupport?.score ?? 0), fullMark: 100 },
+    { subject: 'Document.', score: (p.documentation?.score ?? 0), fullMark: 100 },
+    { subject: 'Cost Burden', score: (p.cost?.score ?? 0), fullMark: 100 },
+    { subject: 'OPD Timing', score: (p.appointmentTiming?.score ?? p.appointmenttiming?.score ?? 0), fullMark: 100 },
   ];
 
   return (

@@ -1,30 +1,20 @@
-import mongoose, { Document, Schema, Types } from 'mongoose';
+import { createSQLModel } from '../database/sqlModel.js';
 
-export interface IAuditLog extends Document {
-  userId?: Types.ObjectId;
-  actorRole: string;
+export interface IAuditLog {
+  _id?: any;
+  id?: any;
+  userId?: any;
+  actorRole?: string;
   action: string;
   resource: string;
   resourceId?: string;
   ipAddress?: string;
   userAgent?: string;
-  details: Record<string, any>;
-  timestamp: Date;
+  details?: Record<string, any>;
+  timestamp?: Date | string;
+  save?: () => Promise<any>;
+  toObject?: () => any;
+  toJSON?: () => any;
 }
 
-const AuditLogSchema = new Schema<IAuditLog>(
-  {
-    userId: { type: Schema.Types.ObjectId, ref: 'User', index: true },
-    actorRole: { type: String, default: 'system' },
-    action: { type: String, required: true, index: true },
-    resource: { type: String, required: true },
-    resourceId: { type: String },
-    ipAddress: { type: String },
-    userAgent: { type: String },
-    details: { type: Schema.Types.Mixed, default: {} },
-    timestamp: { type: Date, default: Date.now, index: true },
-  },
-  { timestamps: false }
-);
-
-export const AuditLog = mongoose.model<IAuditLog>('AuditLog', AuditLogSchema);
+export const AuditLog: any = createSQLModel<IAuditLog>('audit_logs');

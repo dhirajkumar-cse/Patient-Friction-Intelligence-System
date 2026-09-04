@@ -1,40 +1,24 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import { createSQLModel } from '../database/sqlModel.js';
 
-export interface IIntervention extends Document {
+export interface IIntervention {
+  _id?: any;
+  id?: any;
   code: string;
   name: string;
-  category: 'Transport' | 'Diagnostics' | 'Community Staff' | 'Digital' | 'Logistics' | 'Administrative';
+  category: 'Transport' | 'Diagnostics' | 'Community Staff' | 'Digital' | 'Logistics' | 'Administrative' | string;
   description: string;
   targetBarrier: string;
-  unitCostINR: number; // Cost in INR
-  estimatedCompletionGainPercent: number; // percentage points improvement e.g. 25
+  unitCostINR: number;
+  estimatedCompletionGainPercent: number;
   estimatedReachPatients: number;
   costPerPatientINR: number;
-  geographicSuitability: string[];
-  isActive: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  geographicSuitability?: string[];
+  isActive?: boolean;
+  createdAt?: string | Date;
+  updatedAt?: string | Date;
+  save?: () => Promise<any>;
+  toObject?: () => any;
+  toJSON?: () => any;
 }
 
-const InterventionSchema = new Schema<IIntervention>(
-  {
-    code: { type: String, required: true, unique: true, index: true },
-    name: { type: String, required: true },
-    category: {
-      type: String,
-      enum: ['Transport', 'Diagnostics', 'Community Staff', 'Digital', 'Logistics', 'Administrative'],
-      required: true,
-    },
-    description: { type: String, required: true },
-    targetBarrier: { type: String, required: true },
-    unitCostINR: { type: Number, required: true, min: 0 },
-    estimatedCompletionGainPercent: { type: Number, required: true, min: 0, max: 100 },
-    estimatedReachPatients: { type: Number, required: true, min: 1 },
-    costPerPatientINR: { type: Number, required: true, min: 0 },
-    geographicSuitability: { type: [String], default: ['Rural', 'Semi-urban', 'Tribal'] },
-    isActive: { type: Boolean, default: true },
-  },
-  { timestamps: true }
-);
-
-export const Intervention = mongoose.model<IIntervention>('Intervention', InterventionSchema);
+export const Intervention: any = createSQLModel<IIntervention>('accessibility_risks');

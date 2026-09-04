@@ -211,6 +211,22 @@ export const Navbar: React.FC = () => {
                 >
                   Budget Optimizer
                 </Link>
+                <div className="flex items-center gap-1 ml-2 pl-2 border-l border-slate-200 dark:border-slate-800">
+                  <Link
+                    to="/patient/dashboard"
+                    className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-teal-50 text-teal-800 dark:bg-teal-950/60 dark:text-teal-300 hover:bg-teal-100 border border-teal-200 dark:border-teal-800 transition-all flex items-center gap-1"
+                    title="Open Patient Portal View"
+                  >
+                    <span>👤 Patient View</span>
+                  </Link>
+                  <Link
+                    to="/hospital/dashboard"
+                    className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-blue-50 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300 hover:bg-blue-100 border border-blue-200 dark:border-blue-800 transition-all flex items-center gap-1"
+                    title="Open Hospital Desk View"
+                  >
+                    <span>🏥 Hospital View</span>
+                  </Link>
+                </div>
               </>
             )}
 
@@ -378,10 +394,10 @@ export const Navbar: React.FC = () => {
             ) : (
               <div className="flex items-center gap-2">
                 <Link
-                  to="/login"
+                  to="/login?role=admin"
                   className="text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-teal-600 px-3 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 >
-                  {t('nav.login', 'Sign In')}
+                  {t('nav.login', 'Admin Sign In')}
                 </Link>
                 <Link
                   to="/register"

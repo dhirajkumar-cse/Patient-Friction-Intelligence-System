@@ -1,6 +1,8 @@
-import mongoose, { Document, Schema, Types } from 'mongoose';
+import { createSQLModel } from '../database/sqlModel.js';
 
-export interface ISimulation extends Document {
+export interface ISimulation {
+  _id?: any;
+  id?: any;
   title: string;
   scenarioName: string;
   baselineCompletionProbability: number;
@@ -9,33 +11,15 @@ export interface ISimulation extends Document {
   selectedInterventionCodes: string[];
   totalBudgetRequiredINR: number;
   estimatedPatientsHelped: number;
-  regionTargeted: string;
-  runByUserId?: Types.ObjectId;
+  regionTargeted?: string;
+  runByUserId?: any;
   notes?: string;
-  disclaimer: string;
-  createdAt: Date;
-  updatedAt: Date;
+  disclaimer?: string;
+  createdAt?: string | Date;
+  updatedAt?: string | Date;
+  save?: () => Promise<any>;
+  toObject?: () => any;
+  toJSON?: () => any;
 }
 
-const SimulationSchema = new Schema<ISimulation>(
-  {
-    title: { type: String, required: true },
-    scenarioName: { type: String, required: true },
-    baselineCompletionProbability: { type: Number, required: true },
-    simulatedCompletionProbability: { type: Number, required: true },
-    improvementDeltaPercent: { type: Number, required: true },
-    selectedInterventionCodes: { type: [String], required: true },
-    totalBudgetRequiredINR: { type: Number, required: true },
-    estimatedPatientsHelped: { type: Number, required: true },
-    regionTargeted: { type: String, default: 'All High Friction Districts' },
-    runByUserId: { type: Schema.Types.ObjectId, ref: 'User' },
-    notes: { type: String },
-    disclaimer: {
-      type: String,
-      default: 'Simulated estimate based on operational barrier reduction models. Non-clinical forecast.',
-    },
-  },
-  { timestamps: true }
-);
-
-export const Simulation = mongoose.model<ISimulation>('Simulation', SimulationSchema);
+export const Simulation: any = createSQLModel<ISimulation>('friction_profiles');
