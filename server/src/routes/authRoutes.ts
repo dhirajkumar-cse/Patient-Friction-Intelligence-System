@@ -6,10 +6,12 @@ const router = Router();
 
 router.post('/register', AuthController.register);
 router.post('/login', AuthController.login);
+router.get('/google', AuthController.initiateGoogleOAuth);
 router.post('/google', AuthController.googleLogin);
 router.get('/google/config', AuthController.getGoogleConfig);
 router.post('/google/config', AuthController.saveGoogleClientId);
 router.get('/google/url', AuthController.getGoogleAuthUrl);
+router.get('/google/callback', AuthController.handleGoogleCallbackGet);
 router.post('/google/callback', AuthController.googleCallback);
 router.post('/forgot-password', AuthController.forgotPassword);
 router.post('/reset-password', AuthController.resetPassword);

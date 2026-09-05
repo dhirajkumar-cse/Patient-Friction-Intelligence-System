@@ -24,7 +24,8 @@ export const config = {
   googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY || '',
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
   googleClientId: process.env.GOOGLE_CLIENT_ID || '',
-  clientUrl: process.env.CLIENT_URL || 'http://localhost:5173',
+  clientUrl: (process.env.CLIENT_URL || 'http://localhost:5173').replace(/\/+$/, ''),
+  serverUrl: (process.env.SERVER_URL || `http://localhost:${process.env.PORT || 5000}`).replace(/\/+$/, ''),
   nodeEnv: process.env.NODE_ENV || 'development',
   maxFileSizeMb: parseInt(process.env.MAX_FILE_SIZE_MB || '10', 10),
 };

@@ -351,6 +351,20 @@ function wrapModelInstance(tableName: string, raw: any): any {
     return this;
   };
 
+  instance.toObject = function () {
+    const copy: any = {};
+    for (const key of Object.keys(this)) {
+      if (typeof this[key] !== 'function') {
+        copy[key] = this[key];
+      }
+    }
+    return copy;
+  };
+
+  instance.toJSON = function () {
+    return this.toObject();
+  };
+
   return instance;
 }
 
@@ -493,6 +507,15 @@ export function createSQLModel<T = any>(tableName: string) {
       const instance = wrapModelInstance(tableName, raw);
       await instance.save();
       return instance;
+    }
+
+    static async insertMany(items: any[]): Promise<any[]> {
+      if (!Array.isArray(items) || items.length === 0) return [];
+      const instances = [];
+      for (const item of items) {
+        instances.push(await this.create(item));
+      }
+      return instances;
     }
 
     static async countDocuments(filter: any = {}): Promise<number> {

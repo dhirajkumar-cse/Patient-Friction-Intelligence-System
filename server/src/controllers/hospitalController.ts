@@ -187,7 +187,19 @@ export class HospitalController {
         return d <= Math.max(radiusKm, 35);
       }).length;
 
-      // Query registered hospitals in the database
+      // If fewer than 3 hospitals exist near the user's real GPS coordinates,
+      // discover real live hospitals from OpenStreetMap / Google Places immediately!
+      if (localCount < 3) {
+        try {
+          const discovered = await RealHospitalDiscoveryService.discoverRealHospitals(lat, lng, Math.max(radiusKm, 30));
+          if (discovered && discovered.length > 0) {
+            await RealHospitalDiscoveryService.syncDiscoveredHospitalsToDatabase(discovered);
+            allHospitals = await Hospital.find(query);
+          }
+        } catch (discErr) {
+          console.warn('[HospitalController] Real hospital discovery error:', discErr);
+        }
+      }
 
       // Compute distances, departments, doctor lists, and token seat capacity
       const hospitalsWithDetails = await Promise.all(

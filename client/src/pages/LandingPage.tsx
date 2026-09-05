@@ -38,21 +38,21 @@ export const LandingPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-24 pb-16 overflow-hidden">
+    <div className="space-y-12 sm:space-y-16 md:space-y-20 lg:space-y-24 pb-16 overflow-hidden">
       {/* 1. HERO SECTION */}
-      <section className="relative pt-12 pb-20 sm:pt-16 sm:pb-28 bg-gradient-to-b from-teal-50/70 via-white to-slate-50 border-b border-slate-200/80">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0d94880a_1px,transparent_1px),linear-gradient(to_bottom,#0d94880a_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+      <section className="relative pt-8 pb-14 sm:pt-14 sm:pb-24 lg:pt-16 lg:pb-28 bg-gradient-to-b from-teal-50/70 via-white to-slate-50 border-b border-slate-200/80">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0d948808_1px,transparent_1px),linear-gradient(to_bottom,#0d948808_1px,transparent_1px)] sm:bg-[linear-gradient(to_right,#0d94880a_1px,transparent_1px),linear-gradient(to_bottom,#0d94880a_1px,transparent_1px)] bg-[size:2.5rem_2.5rem] sm:bg-[size:4rem_4rem] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-4xl mx-auto space-y-6">
+          <div className="text-center max-w-4xl mx-auto space-y-4 sm:space-y-6">
             {/* Tag Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 text-xs font-bold border border-teal-200/80 dark:border-teal-800 shadow-xs mb-4">
-              <Sparkles className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
-              <span>{t('landing.heroTag', 'National Healthcare Accessibility Platform • Non-Clinical AI')}</span>
+            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 text-[11px] sm:text-xs font-bold border border-teal-200/80 dark:border-teal-800 shadow-xs mb-2 sm:mb-4 max-w-full">
+              <Sparkles className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400 shrink-0" />
+              <span className="truncate">{t('landing.heroTag', 'National Healthcare Accessibility Platform • Non-Clinical AI')}</span>
             </div>
 
             {/* Hero Main Heading */}
-            <h1 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight leading-[1.15]">
+            <h1 className="text-[clamp(1.875rem,5.2vw,4.25rem)] font-black text-slate-900 tracking-tight leading-[1.15] max-w-4xl mx-auto">
               {t('landing.heroTitle1', 'Healthcare may be available.')}{' '}
               <span className="bg-gradient-to-r from-brand-600 via-teal-600 to-teal-500 bg-clip-text text-transparent block mt-1">
                 {t('landing.heroTitle2', 'But is it actually accessible?')}
@@ -60,8 +60,8 @@ export const LandingPage: React.FC = () => {
             </h1>
 
             {/* Subheading with Audio Read */}
-            <div className="flex flex-col items-center gap-2">
-              <p className="text-base sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            <div className="flex flex-col items-center gap-3">
+              <p className="w-full max-w-[720px] mx-auto px-4 sm:px-0 text-[clamp(0.9375rem,1.2vw,1.125rem)] text-slate-600 leading-relaxed">
                 {t(
                   'landing.heroSubtitle',
                   'PFIS identifies the practical barriers—from transit deficits and documentation gaps to wage loss—that prevent patients from completing care, helping healthcare systems choose high-impact interventions.'
@@ -74,92 +74,125 @@ export const LandingPage: React.FC = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-3.5 pt-4">
-              <Link to="/patient/hospitals">
-                <Button variant="primary" size="lg" icon={<MapPin className="w-5 h-5" />}>
-                  {t('landing.findHospitals', 'Find Nearby Hospitals')}
-                </Button>
-              </Link>
-              {!isAuthenticated ? (
-                <>
-                  <Link to="/login?role=admin">
-                    <Button variant="primary" size="lg" icon={<Shield className="w-4 h-4" />}>
+            <div className="pt-2 sm:pt-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-3.5 w-full max-w-md sm:max-w-none mx-auto">
+                <Link to="/patient/hospitals" className="w-full sm:w-auto max-w-[360px] mx-auto sm:mx-0">
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    icon={<MapPin className="w-5 h-5 shrink-0" />}
+                    className="w-full min-h-[48px] px-6 text-sm sm:text-base font-semibold shadow-md"
+                  >
+                    {t('landing.findHospitals', 'Find Nearby Hospitals')}
+                  </Button>
+                </Link>
+
+                {!isAuthenticated ? (
+                  <Link to="/login?role=admin" className="w-full sm:w-auto max-w-[360px] mx-auto sm:mx-0">
+                    <Button
+                      variant="secondary"
+                      size="lg"
+                      icon={<Shield className="w-4 h-4 shrink-0" />}
+                      className="w-full min-h-[48px] px-6 text-sm sm:text-base font-semibold shadow-md"
+                    >
                       Admin Sign In
                     </Button>
                   </Link>
+                ) : (
+                  <Link
+                    to={
+                      user?.role === 'patient'
+                        ? '/patient/dashboard'
+                        : user?.role === 'hospital'
+                        ? '/hospital/dashboard'
+                        : '/admin/dashboard'
+                    }
+                    className="w-full sm:w-auto max-w-[360px] mx-auto sm:mx-0"
+                  >
+                    <Button
+                      variant="secondary"
+                      size="lg"
+                      icon={<ArrowRight className="w-4 h-4 shrink-0" />}
+                      className="w-full min-h-[48px] px-6 text-sm sm:text-base font-semibold shadow-md"
+                    >
+                      {t('landing.goToDashboard', 'Go to Your Dashboard')}
+                    </Button>
+                  </Link>
+                )}
+              </div>
+
+              {/* Secondary portal links for unauthenticated */}
+              {!isAuthenticated && (
+                <div className="flex flex-wrap items-center justify-center gap-2 pt-3">
                   <Link to="/login?role=hospital">
-                    <Button variant="outline" size="lg" icon={<Building2 className="w-4 h-4" />}>
-                      {t('landing.hospitalPortal', 'Hospital Portal')}
-                    </Button>
+                    <button className="text-xs text-slate-600 hover:text-teal-600 font-medium px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">
+                      {t('landing.hospitalPortal', 'Hospital Desk Portal →')}
+                    </button>
                   </Link>
+                  <span className="text-slate-300 hidden sm:inline">•</span>
                   <Link to="/login?role=patient">
-                    <Button variant="ghost" size="lg">
-                      {t('landing.patientLogin', 'Patient Portal')}
-                    </Button>
+                    <button className="text-xs text-slate-600 hover:text-teal-600 font-medium px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">
+                      {t('landing.patientLogin', 'Patient Portal →')}
+                    </button>
                   </Link>
-                </>
-              ) : (
-                <Link
-                  to={
-                    user?.role === 'patient'
-                      ? '/patient/dashboard'
-                      : user?.role === 'hospital'
-                      ? '/hospital/dashboard'
-                      : '/admin/dashboard'
-                  }
-                >
-                  <Button variant="secondary" size="lg" icon={<ArrowRight className="w-4 h-4" />}>
-                    {t('landing.goToDashboard', 'Go to Your Dashboard')}
-                  </Button>
-                </Link>
+                </div>
               )}
             </div>
 
             {/* 1-Click Instant Demo Launcher Bar */}
-            <div className="pt-8 max-w-2xl mx-auto">
-              <div className="p-4 bg-slate-900 text-white rounded-2xl shadow-xl border border-slate-800 space-y-3">
-                <div className="flex items-center justify-between text-xs border-b border-slate-800 pb-2">
+            <div className="pt-6 sm:pt-8 max-w-2xl mx-auto w-full">
+              <div className="p-4 sm:p-5 bg-slate-900 text-white rounded-2xl shadow-xl border border-slate-800 space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs border-b border-slate-800 pb-2.5 gap-1 text-left">
                   <span className="font-bold text-teal-400 flex items-center gap-1.5">
-                    <Activity className="w-4 h-4" />{' '}
+                    <Activity className="w-4 h-4 shrink-0" />{' '}
                     {t('landing.quickDemoTitle', 'Instant Demo Role Access (1-Click Login):')}
                   </span>
                   <span className="text-[10px] text-slate-400">Pre-seeded realistic profiles</span>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
                   <button
                     onClick={() =>
                       handleQuickDemoLogin('patient@pfis.org', 'Patient@123', '/patient/dashboard')
                     }
-                    className="p-2.5 bg-slate-800 hover:bg-teal-900/80 rounded-xl text-left border border-slate-700 hover:border-teal-500 transition-all text-xs"
+                    className="w-full p-3 bg-slate-800 hover:bg-teal-900/80 active:bg-teal-950 rounded-xl text-left border border-slate-700 hover:border-teal-500 transition-all min-h-[52px] flex flex-col justify-center group"
                   >
-                    <p className="font-bold text-white flex items-center justify-between">
-                      {t('landing.patientView', 'Patient View')} <ArrowRight className="w-3 h-3 text-teal-400" />
-                    </p>
-                    <p className="text-[11px] text-slate-400 truncate">Sunita Devi (Ramgarh)</p>
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-white text-xs sm:text-sm">
+                        {t('landing.patientView', 'Patient View')}
+                      </span>
+                      <ArrowRight className="w-3.5 h-3.5 text-teal-400 group-hover:translate-x-0.5 transition-transform shrink-0" />
+                    </div>
+                    <p className="text-[11px] text-slate-400 truncate mt-0.5">Sunita Devi (Ramgarh)</p>
                   </button>
 
                   <button
                     onClick={() =>
                       handleQuickDemoLogin('hospital@apollo.org', 'Hospital@123', '/hospital/dashboard')
                     }
-                    className="p-2.5 bg-slate-800 hover:bg-teal-900/80 rounded-xl text-left border border-slate-700 hover:border-teal-500 transition-all text-xs"
+                    className="w-full p-3 bg-slate-800 hover:bg-teal-900/80 active:bg-teal-950 rounded-xl text-left border border-slate-700 hover:border-teal-500 transition-all min-h-[52px] flex flex-col justify-center group"
                   >
-                    <p className="font-bold text-white flex items-center justify-between">
-                      {t('landing.hospitalView', 'Hospital View')} <ArrowRight className="w-3 h-3 text-teal-400" />
-                    </p>
-                    <p className="text-[11px] text-slate-400 truncate">Apollo Super Speciality</p>
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-white text-xs sm:text-sm">
+                        {t('landing.hospitalView', 'Hospital View')}
+                      </span>
+                      <ArrowRight className="w-3.5 h-3.5 text-teal-400 group-hover:translate-x-0.5 transition-transform shrink-0" />
+                    </div>
+                    <p className="text-[11px] text-slate-400 truncate mt-0.5">Apollo Super Speciality</p>
                   </button>
 
                   <button
                     onClick={() =>
                       handleQuickDemoLogin('admin@pfis.org', 'Admin@123', '/admin/dashboard')
                     }
-                    className="p-2.5 bg-slate-800 hover:bg-teal-900/80 rounded-xl text-left border border-slate-700 hover:border-teal-500 transition-all text-xs"
+                    className="w-full p-3 bg-slate-800 hover:bg-teal-900/80 active:bg-teal-950 rounded-xl text-left border border-slate-700 hover:border-teal-500 transition-all min-h-[52px] flex flex-col justify-center group sm:col-span-2 lg:col-span-1"
                   >
-                    <p className="font-bold text-white flex items-center justify-between">
-                      {t('landing.adminSuite', 'Admin Suite')} <ArrowRight className="w-3 h-3 text-teal-400" />
-                    </p>
-                    <p className="text-[11px] text-slate-400 truncate">Simulators & Heatmaps</p>
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-white text-xs sm:text-sm">
+                        {t('landing.adminSuite', 'Admin Suite')}
+                      </span>
+                      <ArrowRight className="w-3.5 h-3.5 text-teal-400 group-hover:translate-x-0.5 transition-transform shrink-0" />
+                    </div>
+                    <p className="text-[11px] text-slate-400 truncate mt-0.5">Simulators & Heatmaps</p>
                   </button>
                 </div>
               </div>
@@ -385,18 +418,18 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* 4. THE COMPLETE 9-STAGE PATIENT JOURNEY */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
             {t('landing.nineStages', 'The 9-Stage Healthcare Journey')}
           </h2>
-          <p className="text-sm text-slate-600 leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed px-2">
             From the initial symptom recognition to 30-day post-treatment follow-up, PFIS highlights
             where patients get stuck and recommends timely operational interventions.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-9 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-2.5 sm:gap-3">
           {[
             { step: '01', title: 'Medical Need', desc: 'Symptom recognized' },
             { step: '02', title: 'Hospital Search', desc: 'Facility discovery' },
@@ -410,7 +443,9 @@ export const LandingPage: React.FC = () => {
           ].map((item, idx) => (
             <div
               key={item.step}
-              className={`p-3.5 rounded-xl border text-center space-y-1.5 ${
+              className={`p-3 sm:p-3.5 rounded-xl border text-center space-y-1 sm:space-y-1.5 transition-all ${
+                idx === 8 ? 'col-span-2 sm:col-span-1' : ''
+              } ${
                 idx === 2 || idx === 3
                   ? 'bg-rose-50/60 border-rose-200'
                   : idx === 0 || idx === 1
@@ -420,22 +455,22 @@ export const LandingPage: React.FC = () => {
             >
               <span className="text-[10px] font-extrabold text-slate-400 block">{item.step}</span>
               <h5 className="font-bold text-xs text-slate-900">{item.title}</h5>
-              <p className="text-[10px] text-slate-500">{item.desc}</p>
+              <p className="text-[10px] text-slate-500 leading-snug">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* 5. WHAT-IF SIMULATOR & INTERVENTION OPTIMIZER SHOWCASE */}
-      <section className="bg-slate-900 text-white py-16 rounded-3xl max-w-7xl mx-auto px-6 sm:px-12 shadow-2xl border border-slate-800 space-y-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          <div className="space-y-6">
+      <section className="bg-slate-900 text-white py-10 sm:py-16 rounded-2xl sm:rounded-3xl max-w-7xl mx-3 sm:mx-6 lg:mx-auto px-5 sm:px-10 lg:px-12 shadow-2xl border border-slate-800 space-y-8 sm:space-y-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+          <div className="space-y-5 sm:space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-950 text-teal-300 text-xs font-bold border border-teal-800">
-              <Cpu className="w-3.5 h-3.5 text-teal-400" />
+              <Cpu className="w-3.5 h-3.5 text-teal-400 shrink-0" />
               <span>Operational Simulation Engine</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
               {t('landing.simulatorTitle', 'Simulate high-impact community interventions with precision.')}
             </h2>
 
@@ -446,14 +481,14 @@ export const LandingPage: React.FC = () => {
               )}
             </p>
 
-            <div className="flex flex-wrap gap-4 pt-2">
-              <Link to="/admin/simulator">
-                <Button variant="primary" size="md" icon={<Sparkles className="w-4 h-4" />}>
+            <div className="flex flex-col sm:flex-row gap-3 pt-2 w-full sm:w-auto">
+              <Link to="/admin/simulator" className="w-full sm:w-auto">
+                <Button variant="primary" size="md" icon={<Sparkles className="w-4 h-4" />} className="w-full sm:w-auto min-h-[44px]">
                   {t('nav.whatIfSimulator', 'Open What-If Simulator')}
                 </Button>
               </Link>
-              <Link to="/admin/interventions">
-                <Button variant="outline" size="md" className="text-slate-900 bg-white hover:bg-slate-100">
+              <Link to="/admin/interventions" className="w-full sm:w-auto">
+                <Button variant="outline" size="md" className="w-full sm:w-auto min-h-[44px] text-slate-900 bg-white hover:bg-slate-100">
                   {t('nav.budgetOptimizer', 'Try Budget Optimizer (₹10 Lakhs)')}
                 </Button>
               </Link>
@@ -461,36 +496,36 @@ export const LandingPage: React.FC = () => {
           </div>
 
           {/* Simulation Preview Card */}
-          <div className="bg-slate-800/90 rounded-2xl p-6 border border-slate-700 space-y-5">
-            <div className="flex justify-between items-center border-b border-slate-700 pb-3 text-xs">
-              <span className="font-bold text-teal-400">Simulation Scenario: Multi-Tier Community Support</span>
+          <div className="bg-slate-800/90 rounded-2xl p-4 sm:p-6 border border-slate-700 space-y-4 sm:space-y-5">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-700 pb-3 text-xs gap-1">
+              <span className="font-bold text-teal-400">Simulation Scenario: Multi-Tier Support</span>
               <span className="text-[10px] text-slate-400">Cohort: 1,000 Patients</span>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-2.5 sm:space-y-3">
               <div className="flex justify-between items-center p-3 rounded-xl bg-slate-900/80 border border-slate-700 text-xs">
                 <span>1. Baseline Completion Rate:</span>
                 <span className="font-bold text-rose-400">37%</span>
               </div>
 
               <div className="flex justify-between items-center p-3 rounded-xl bg-slate-900/80 border border-teal-900 text-xs">
-                <span className="text-teal-300">+ Scheduled Community Health Shuttle:</span>
+                <span className="text-teal-300">+ Community Health Shuttle:</span>
                 <span className="font-bold text-teal-400">37% → 62% (+25%)</span>
               </div>
 
               <div className="flex justify-between items-center p-3 rounded-xl bg-slate-900/80 border border-teal-900 text-xs">
-                <span className="text-teal-300">+ Point-of-Care Satellite Diagnostic Camp:</span>
+                <span className="text-teal-300">+ Satellite Diagnostic Camp:</span>
                 <span className="font-bold text-teal-400">62% → 79% (+17%)</span>
               </div>
 
               <div className="flex justify-between items-center p-3 rounded-xl bg-slate-900/80 border border-teal-900 text-xs">
-                <span className="text-teal-300">+ ASHA Health Worker Guided Escort:</span>
+                <span className="text-teal-300">+ ASHA Health Escort:</span>
                 <span className="font-bold text-teal-400">79% → 89% (+10%)</span>
               </div>
             </div>
 
             <div className="p-3 bg-teal-950/60 border border-teal-800 rounded-xl text-xs flex justify-between items-center">
-              <span className="text-slate-300 font-medium">Estimated Patients Saved from Dropout:</span>
+              <span className="text-slate-300 font-medium">Estimated Patients Saved:</span>
               <span className="font-black text-teal-300 text-sm">~520 Patients Helped</span>
             </div>
           </div>
@@ -499,13 +534,13 @@ export const LandingPage: React.FC = () => {
 
       {/* 6. ETHICAL AI & NON-CLINICAL SAFETY MANDATE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-teal-50/70 border border-teal-200/80 rounded-3xl p-8 sm:p-10 space-y-6">
+        <div className="bg-teal-50/70 border border-teal-200/80 rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 space-y-6">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center shrink-0">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-teal-950">
+              <h3 className="text-base sm:text-lg font-bold text-teal-950">
                 {t('landing.ethicalTitle', 'Ethical AI & Non-Clinical Safety Mandate')}
               </h3>
               <p className="text-xs text-teal-800">
@@ -514,7 +549,7 @@ export const LandingPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs text-teal-900 leading-relaxed">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-xs text-teal-900 leading-relaxed">
             <div className="space-y-1">
               <strong className="text-teal-950 block text-sm">
                 {t('landing.zeroDiagnosis', '🚫 Zero Disease Diagnosis')}

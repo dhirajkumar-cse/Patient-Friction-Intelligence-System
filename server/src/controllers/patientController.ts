@@ -6,10 +6,37 @@ import { CareRisk } from '../models/CareRisk.js';
 import { FrictionInteraction } from '../models/FrictionInteraction.js';
 import { CareJourney } from '../models/CareJourney.js';
 import { HospitalRequest } from '../models/HospitalRequest.js';
+import { Hospital } from '../models/Hospital.js';
 import { FrictionEngine } from '../intelligence/friction/frictionEngine.js';
 import { FrictionInteractionEngine } from '../intelligence/causal/frictionInteractionEngine.js';
 import { RiskEngine } from '../intelligence/risk/riskEngine.js';
 import { AuditService } from '../services/auditService.js';
+
+async function calculateRealFrictionForPatient(patientObj: any) {
+  let nearestHosp: any = null;
+  let minDistance = 2.7;
+  const pLat = patientObj.location?.latitude;
+  const pLng = patientObj.location?.longitude;
+
+  if (pLat && pLng) {
+    const allHospitals = await Hospital.find({});
+    if (allHospitals && allHospitals.length > 0) {
+      let lowest = 999999;
+      for (const h of allHospitals) {
+        const d = FrictionEngine.calculateHaversineDistance(pLat, pLng, h.latitude, h.longitude);
+        if (d < lowest) {
+          lowest = d;
+          nearestHosp = h;
+        }
+      }
+      if (lowest < 999999) {
+        minDistance = Math.round(lowest * 10) / 10;
+      }
+    }
+  }
+
+  return FrictionEngine.calculate(patientObj, nearestHosp, minDistance);
+}
 
 export class PatientController {
   public static async getMe(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -91,25 +118,33 @@ export class PatientController {
       if (residenceType) patient.residenceType = residenceType;
 
       if (location) {
+        let existingLoc = patient.location || {};
+        if (typeof existingLoc === 'string') {
+          try {
+            existingLoc = JSON.parse(existingLoc);
+          } catch {
+            existingLoc = {};
+          }
+        }
+        const newLat = location.latitude !== undefined ? location.latitude : (existingLoc.latitude || 31.2533);
+        const newLng = location.longitude !== undefined ? location.longitude : (existingLoc.longitude || 75.7042);
         patient.location = {
-          address: location.address || patient.location.address,
-          city: location.city || patient.location.city,
-          state: location.state || patient.location.state,
-          pincode: location.pincode || patient.location.pincode,
-          latitude: location.latitude !== undefined ? location.latitude : patient.location.latitude,
-          longitude: location.longitude !== undefined ? location.longitude : patient.location.longitude,
+          address: location.address || existingLoc.address || 'UniCenter, LPU Campus',
+          city: location.city || existingLoc.city || 'Phagwara',
+          state: location.state || existingLoc.state || 'Punjab',
+          pincode: location.pincode || existingLoc.pincode || '144411',
+          latitude: newLat,
+          longitude: newLng,
           geoJSON: {
             type: 'Point',
-            coordinates: [
-              location.longitude !== undefined ? location.longitude : patient.location.longitude,
-              location.latitude !== undefined ? location.latitude : patient.location.latitude,
-            ],
+            coordinates: [newLng, newLat],
           },
         };
       }
 
-      // Re-run Friction and Risk Engines
-      const frictionCalc = FrictionEngine.calculate(patient.toObject(), null, 30);
+      // Re-run Friction and Risk Engines using real nearest hospital distance
+      const pObj = typeof patient.toObject === 'function' ? patient.toObject() : patient;
+      const frictionCalc = await calculateRealFrictionForPatient(pObj);
       const frictionProfile = await FrictionProfile.create({
         patientId: patient._id,
         ...frictionCalc,
@@ -154,6 +189,7 @@ export class PatientController {
         interactions,
       });
     } catch (error: any) {
+      console.error('[PatientController.updateProfile Error]', error);
       res.status(500).json({ success: false, message: error.message || 'Update failed.' });
     }
   }
@@ -174,7 +210,8 @@ export class PatientController {
       });
 
       if (!profile) {
-        const frictionCalc = FrictionEngine.calculate(patient.toObject(), null, 30);
+        const pObj = typeof patient.toObject === 'function' ? patient.toObject() : patient;
+        const frictionCalc = await calculateRealFrictionForPatient(pObj);
         profile = await FrictionProfile.create({
           patientId: patient._id,
           ...frictionCalc,
@@ -207,7 +244,8 @@ export class PatientController {
       let risk = await CareRisk.findOne({ patientId: patient._id }).sort({ createdAt: -1 });
 
       if (!risk) {
-        const frictionCalc = FrictionEngine.calculate(patient.toObject(), null, 30);
+        const pObj = typeof patient.toObject === 'function' ? patient.toObject() : patient;
+        const frictionCalc = await calculateRealFrictionForPatient(pObj);
         const riskCalc = RiskEngine.evaluate(frictionCalc);
         risk = await CareRisk.create({
           patientId: patient._id,

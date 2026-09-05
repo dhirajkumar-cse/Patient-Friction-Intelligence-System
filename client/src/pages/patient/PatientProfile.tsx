@@ -29,12 +29,12 @@ export const PatientProfile: React.FC = () => {
   const [residenceType, setResidenceType] = useState<any>('rural_remote');
 
   // Location
-  const [address, setAddress] = useState('Village Ramgarh, Block B');
-  const [city, setCity] = useState('Ranchi');
-  const [state, setState] = useState('Jharkhand');
-  const [pincode, setPincode] = useState('834001');
-  const [latitude, setLatitude] = useState(23.3441);
-  const [longitude, setLongitude] = useState(85.3096);
+  const [address, setAddress] = useState('UniCenter, LPU Campus');
+  const [city, setCity] = useState('Phagwara');
+  const [state, setState] = useState('Punjab');
+  const [pincode, setPincode] = useState('144411');
+  const [latitude, setLatitude] = useState(31.2533);
+  const [longitude, setLongitude] = useState(75.7042);
 
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -64,12 +64,12 @@ export const PatientProfile: React.FC = () => {
           setResidenceType(p.residenceType || 'rural_remote');
 
           if (p.location) {
-            setAddress(p.location.address || '');
-            setCity(p.location.city || '');
-            setState(p.location.state || '');
-            setPincode(p.location.pincode || '');
-            setLatitude(p.location.latitude || 23.3441);
-            setLongitude(p.location.longitude || 85.3096);
+            setAddress(p.location.address || coords.address || 'UniCenter, LPU Campus');
+            setCity(p.location.city || coords.city || 'Phagwara');
+            setState(p.location.state || 'Punjab');
+            setPincode(p.location.pincode || coords.pincode || '144411');
+            setLatitude(p.location.latitude || coords.latitude || 31.2533);
+            setLongitude(p.location.longitude || coords.longitude || 75.7042);
           }
         }
       } catch (e: any) {
@@ -83,12 +83,19 @@ export const PatientProfile: React.FC = () => {
   }, []);
 
   const handleUseCurrentLocation = async () => {
-    await requestCurrentLocation();
-    if (coords.latitude && coords.longitude) {
+    const detected = await requestCurrentLocation();
+    if (detected) {
+      setLatitude(detected.latitude);
+      setLongitude(detected.longitude);
+      if (detected.address) setAddress(detected.address);
+      if (detected.city) setCity(detected.city);
+      if (detected.pincode) setPincode(detected.pincode);
+    } else if (coords.latitude && coords.longitude) {
       setLatitude(coords.latitude);
       setLongitude(coords.longitude);
-      setAddress(coords.address || 'GPS Live Location');
+      if (coords.address) setAddress(coords.address);
       if (coords.city) setCity(coords.city);
+      if (coords.pincode) setPincode(coords.pincode);
     }
   };
 

@@ -19,11 +19,31 @@ export const createApp = (): Express => {
   );
 
   // CORS Configuration
+  const allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:5000',
+    'https://pfis-sih.vercel.app',
+    config.clientUrl,
+  ];
+
   app.use(
     cors({
       origin: (origin, callback) => {
-        // Allow all in development or if origin matches CLIENT_URL
-        callback(null, true);
+        // Allow requests with no origin (mobile apps, server-to-server, curl)
+        if (!origin) {
+          return callback(null, true);
+        }
+
+        const normalizedOrigin = origin.replace(/\/+$/, '');
+        if (
+          allowedOrigins.includes(normalizedOrigin) ||
+          (config.nodeEnv === 'development' && /^http:\/\/localhost(:\d+)?$/.test(normalizedOrigin))
+        ) {
+          callback(null, true);
+        } else {
+          console.warn(`[CORS Blocked] Origin: ${origin}`);
+          callback(new Error(`Origin ${origin} not allowed by CORS policy`));
+        }
       },
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useLocation } from '../../context/LocationContext';
 import { Input, Select } from '../../components/common/Input';
 import { Button } from '../../components/common/Button';
 import { ErrorAlert } from '../../components/common/ErrorAlert';
@@ -9,6 +10,8 @@ import { User, Building2, Mail, Lock, Phone, MapPin } from 'lucide-react';
 export const Register: React.FC = () => {
   const [searchParams] = useSearchParams();
   const initialRole = searchParams.get('role') === 'hospital' ? 'hospital' : 'patient';
+  const { coords, requestCurrentLocation } = useLocation();
+
   const [role, setRole] = useState<'patient' | 'hospital'>(initialRole);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -20,8 +23,8 @@ export const Register: React.FC = () => {
   const [gender, setGender] = useState<'male' | 'female' | 'other'>('female');
   const [preferredLanguage, setPreferredLanguage] = useState('Hindi');
   const [transportAvailability, setTransportAvailability] = useState('low');
-  const [city, setCity] = useState('Ranchi');
-  const [address, setAddress] = useState('Village Ramgarh, Block B');
+  const [city, setCity] = useState(coords.city || 'Phagwara');
+  const [address, setAddress] = useState(coords.address || 'UniCenter, LPU Campus');
 
   // Hospital Specific
   const [hospitalName, setHospitalName] = useState('');
@@ -45,8 +48,11 @@ export const Register: React.FC = () => {
         password,
         role,
         phone,
-        city,
-        address,
+        city: city || coords.city || 'Phagwara',
+        address: address || coords.address || 'UniCenter, LPU Campus',
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+        pincode: coords.pincode || '144411',
       };
 
       if (role === 'patient') {

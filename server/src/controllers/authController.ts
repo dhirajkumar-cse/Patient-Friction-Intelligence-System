@@ -76,21 +76,38 @@ export class AuthController {
           appointmentFlexibility: extraDetails.appointmentFlexibility || 'inflexible_daily_wage',
           residenceType: extraDetails.residenceType || 'rural_remote',
           location: {
-            address: extraDetails.address || 'Village Ramgarh, Block B',
-            city: extraDetails.city || 'Ranchi',
-            state: extraDetails.state || 'Jharkhand',
-            pincode: extraDetails.pincode || '834001',
-            latitude: extraDetails.latitude || 23.3441,
-            longitude: extraDetails.longitude || 85.3096,
+            address: extraDetails.address || 'UniCenter, LPU Campus',
+            city: extraDetails.city || 'Phagwara',
+            state: extraDetails.state || 'Punjab',
+            pincode: extraDetails.pincode || '144411',
+            latitude: extraDetails.latitude || 31.2533,
+            longitude: extraDetails.longitude || 75.7042,
             geoJSON: {
               type: 'Point',
-              coordinates: [extraDetails.longitude || 85.3096, extraDetails.latitude || 23.3441],
+              coordinates: [extraDetails.longitude || 75.7042, extraDetails.latitude || 31.2533],
             },
           },
         });
 
-        // Initialize Friction & Risk
-        const frictionCalc = FrictionEngine.calculate(newPatient.toObject(), null, 35);
+        // Initialize Friction & Risk with real closest hospital distance
+        const allH = await Hospital.find({});
+        let initialDist = 2.7;
+        let initialHosp: any = null;
+        if (allH && allH.length > 0) {
+          let minD = 999999;
+          const pLat = newPatient.location?.latitude || 31.2533;
+          const pLng = newPatient.location?.longitude || 75.7042;
+          for (const h of allH) {
+            const d = FrictionEngine.calculateHaversineDistance(pLat, pLng, h.latitude, h.longitude);
+            if (d < minD) {
+              minD = d;
+              initialHosp = h;
+            }
+          }
+          if (minD < 999999) initialDist = Math.round(minD * 10) / 10;
+        }
+
+        const frictionCalc = FrictionEngine.calculate(newPatient.toObject(), initialHosp, initialDist);
         const frictionProfile = await FrictionProfile.create({
           patientId: newPatient._id,
           ...frictionCalc,
@@ -273,14 +290,13 @@ export class AuthController {
     res.status(200).json({ success: true, message: 'Logged out successfully.' });
   }
 
-  public static async provisionAndLoginGoogleUser(
+  public static async provisionGoogleUser(
     email: string,
     name: string,
     avatarUrl: string,
     role: any,
-    req: Request,
-    res: Response
-  ): Promise<void> {
+    req: Request
+  ): Promise<{ token: string; user: any; profile: any }> {
     const normalizedEmail = (email || '').toLowerCase().trim();
     const ADMIN_EMAILS = ['dhirajkumar464748@gmail.com', 'admin@pfis.org'];
     const isAdmin = ADMIN_EMAILS.includes(normalizedEmail);
@@ -328,20 +344,36 @@ export class AuthController {
           appointmentFlexibility: 'flexible',
           residenceType: 'semi_urban',
           location: {
-            address: 'City Center, Main Road',
-            city: 'Ranchi',
-            state: 'Jharkhand',
-            pincode: '834001',
-            latitude: 23.3441,
-            longitude: 85.3096,
+            address: 'UniCenter, LPU Campus',
+            city: 'Phagwara',
+            state: 'Punjab',
+            pincode: '144411',
+            latitude: 31.2533,
+            longitude: 75.7042,
             geoJSON: {
               type: 'Point',
-              coordinates: [85.3096, 23.3441],
+              coordinates: [75.7042, 31.2533],
             },
           },
         });
 
-        const frictionCalc = FrictionEngine.calculate(newPatient.toObject(), null, 30);
+        // Calculate initial friction based on real closest hospital
+        const allH = await Hospital.find({});
+        let initialDist = 2.7;
+        let initialHosp: any = null;
+        if (allH && allH.length > 0) {
+          let minD = 999999;
+          for (const h of allH) {
+            const d = FrictionEngine.calculateHaversineDistance(31.2533, 75.7042, h.latitude, h.longitude);
+            if (d < minD) {
+              minD = d;
+              initialHosp = h;
+            }
+          }
+          if (minD < 999999) initialDist = Math.round(minD * 10) / 10;
+        }
+
+        const frictionCalc = FrictionEngine.calculate(newPatient.toObject(), initialHosp, initialDist);
         const frictionProfile = await FrictionProfile.create({
           patientId: newPatient._id,
           ...frictionCalc,
@@ -362,17 +394,17 @@ export class AuthController {
           userId: user._id,
           name: `${name} Medical Facility`,
           type: 'Private/Charitable',
-          address: 'Station Road Medical Plaza',
-          city: 'Ranchi',
-          state: 'Jharkhand',
-          pincode: '834001',
-          latitude: 23.3629,
-          longitude: 85.3262,
+          address: 'GT Road Healthcare Plaza',
+          city: 'Phagwara',
+          state: 'Punjab',
+          pincode: '144401',
+          latitude: 31.2229,
+          longitude: 75.7725,
           geoJSON: {
             type: 'Point',
-            coordinates: [85.3262, 23.3629],
+            coordinates: [75.7725, 31.2229],
           },
-          phone: '0651-2223344',
+          phone: '01824-260234',
           email: normalizedEmail,
           emergencyAvailable: true,
           totalBeds: 150,
@@ -412,9 +444,7 @@ export class AuthController {
       details: { email: user.email, provider: 'google' },
     });
 
-    res.status(200).json({
-      success: true,
-      message: 'Google authentication successful.',
+    return {
       token,
       user: {
         id: user._id,
@@ -424,6 +454,25 @@ export class AuthController {
         phone: user.phone,
         avatarUrl: user.avatarUrl,
       },
+      profile,
+    };
+  }
+
+  public static async provisionAndLoginGoogleUser(
+    email: string,
+    name: string,
+    avatarUrl: string,
+    role: any,
+    req: Request,
+    res: Response
+  ): Promise<void> {
+    const { token, user, profile } = await AuthController.provisionGoogleUser(email, name, avatarUrl, role, req);
+
+    res.status(200).json({
+      success: true,
+      message: 'Google authentication successful.',
+      token,
+      user,
       profile,
     });
   }
@@ -538,6 +587,123 @@ export class AuthController {
     }
   }
 
+  public static async initiateGoogleOAuth(req: Request, res: Response): Promise<void> {
+    try {
+      const role = (req.query.role as string) || 'patient';
+      const clientId = (config.googleClientId || '').trim();
+
+      if (!clientId) {
+        return res.redirect(
+          `${config.clientUrl}/auth/google/callback?error=${encodeURIComponent(
+            'GOOGLE_CLIENT_ID is not configured on the backend server.'
+          )}`
+        );
+      }
+
+      const callbackUrl = `${config.serverUrl}/api/auth/google/callback`;
+      const scope = encodeURIComponent('openid email profile');
+      const state = encodeURIComponent(JSON.stringify({ role, clientId }));
+
+      const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${encodeURIComponent(
+        clientId
+      )}&redirect_uri=${encodeURIComponent(callbackUrl)}&response_type=code&scope=${scope}&access_type=offline&prompt=consent&state=${state}`;
+
+      res.redirect(authUrl);
+    } catch (error: any) {
+      console.error('[Google OAuth Initiate Error]', error);
+      res.redirect(
+        `${config.clientUrl}/auth/google/callback?error=${encodeURIComponent(
+          error.message || 'Failed to initiate Google OAuth.'
+        )}`
+      );
+    }
+  }
+
+  public static async handleGoogleCallbackGet(req: Request, res: Response): Promise<void> {
+    try {
+      const { code, state, error, error_description } = req.query;
+
+      if (error || error_description) {
+        const errMsg = (error_description || error || 'Google authentication was cancelled or rejected.') as string;
+        return res.redirect(`${config.clientUrl}/auth/google/callback?error=${encodeURIComponent(errMsg)}`);
+      }
+
+      if (!code || typeof code !== 'string') {
+        return res.redirect(
+          `${config.clientUrl}/auth/google/callback?error=${encodeURIComponent('No authorization code was provided by Google.')}`
+        );
+      }
+
+      if (!config.googleClientId || !config.googleClientSecret) {
+        return res.redirect(
+          `${config.clientUrl}/auth/google/callback?error=${encodeURIComponent('Google OAuth credentials are not configured on backend.')}`
+        );
+      }
+
+      let role: any = 'patient';
+      try {
+        if (state && typeof state === 'string') {
+          const parsed = JSON.parse(decodeURIComponent(state));
+          role = parsed.role || 'patient';
+        }
+      } catch {
+        role = (state as string) || 'patient';
+      }
+
+      const callbackUrl = `${config.serverUrl}/api/auth/google/callback`;
+
+      // Exchange authorization code for tokens with Google OAuth
+      const tokenRes = await axios.post(
+        'https://oauth2.googleapis.com/token',
+        new URLSearchParams({
+          code,
+          client_id: config.googleClientId,
+          client_secret: config.googleClientSecret,
+          redirect_uri: callbackUrl,
+          grant_type: 'authorization_code',
+        }).toString(),
+        {
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          timeout: 10000,
+        }
+      );
+
+      const { access_token } = tokenRes.data;
+
+      // Fetch user profile from Google's official userinfo endpoint
+      const userInfoRes = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+        headers: { Authorization: `Bearer ${access_token}` },
+        timeout: 10000,
+      });
+
+      const profile = userInfoRes.data;
+      const email = (profile.email || '').toLowerCase().trim();
+      const name = profile.name || profile.given_name || email.split('@')[0];
+      const avatarUrl = profile.picture || '';
+
+      if (!email) {
+        return res.redirect(
+          `${config.clientUrl}/auth/google/callback?error=${encodeURIComponent('Could not extract email address from Google profile.')}`
+        );
+      }
+
+      const { token, user } = await AuthController.provisionGoogleUser(email, name, avatarUrl, role, req);
+      const encodedUser = encodeURIComponent(JSON.stringify(user));
+
+      return res.redirect(
+        `${config.clientUrl}/auth/google/callback?token=${encodeURIComponent(token)}&user=${encodedUser}`
+      );
+    } catch (error: any) {
+      console.error('[GoogleCallback GET Error]', error.response?.data || error.message);
+      const msg =
+        error.response?.data?.error_description ||
+        error.response?.data?.error ||
+        error.message ||
+        'Google OAuth exchange failed.';
+      return res.redirect(`${config.clientUrl}/auth/google/callback?error=${encodeURIComponent(msg)}`);
+    }
+  }
+
   public static async getGoogleAuthUrl(req: Request, res: Response): Promise<void> {
     try {
       const role = (req.query.role as string) || 'admin';
@@ -551,7 +717,7 @@ export class AuthController {
         return;
       }
 
-      const redirectUri = `${config.clientUrl}/auth/google/callback`;
+      const redirectUri = `${config.serverUrl}/api/auth/google/callback`;
       const scope = encodeURIComponent('openid email profile');
       const state = encodeURIComponent(JSON.stringify({ role, clientId }));
 
@@ -570,7 +736,7 @@ export class AuthController {
 
   public static async googleCallback(req: Request, res: Response): Promise<void> {
     try {
-      const { code, role, clientId } = req.body;
+      const { code, role, clientId, redirectUri: customRedirectUri } = req.body;
 
       if (!code) {
         res.status(400).json({ success: false, message: 'Authorization code is required from Google.' });
@@ -583,7 +749,7 @@ export class AuthController {
         return;
       }
 
-      const redirectUri = `${config.clientUrl}/auth/google/callback`;
+      const redirectUri = customRedirectUri || `${config.serverUrl}/api/auth/google/callback`;
 
       // Exchange authorization code for tokens with Google OAuth
       const tokenRes = await axios.post(

@@ -63,7 +63,12 @@ import { AuditLogs } from './pages/admin/AuditLogs';
 
 export const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      }}
+    >
       <LanguageProvider>
         <AccessibilityProvider>
           <ToastProvider>

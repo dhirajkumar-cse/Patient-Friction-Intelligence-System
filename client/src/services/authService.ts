@@ -1,4 +1,4 @@
-import { api } from './api';
+import { api, API_BASE_URL } from './api';
 import { User } from '../types';
 
 export interface LoginResponse {
@@ -33,6 +33,11 @@ export const authService = {
   async saveGoogleClientId(clientId: string): Promise<{ success: boolean; message: string; clientId: string }> {
     const res = await api.post('/auth/google/config', { clientId });
     return res.data;
+  },
+
+  getGoogleOAuthRedirectUrl(role: string = 'patient'): string {
+    const base = API_BASE_URL.replace(/\/+$/, '');
+    return `${base}/auth/google?role=${encodeURIComponent(role)}`;
   },
 
   async getGoogleAuthUrl(role: string, clientId?: string): Promise<{ success: boolean; url: string }> {

@@ -17,9 +17,9 @@ export const GoogleCallback: React.FC = () => {
 
   useEffect(() => {
     // 1. If already authenticated, redirect straight to dashboard
-    const existingToken = localStorage.getItem('pfis_token');
-    const existingUser = localStorage.getItem('pfis_user');
-    if (existingToken && existingUser) {
+    const existingToken = localStorage.getItem('pfis_auth_token') || localStorage.getItem('pfis_token');
+    const existingUser = localStorage.getItem('pfis_auth_user') || localStorage.getItem('pfis_user');
+    if (existingToken && existingUser && !searchParams.get('token')) {
       try {
         const parsedUser = JSON.parse(existingUser);
         if (parsedUser.role === 'admin') {
@@ -40,19 +40,58 @@ export const GoogleCallback: React.FC = () => {
     hasCalledRef.current = true;
 
     const handleCallback = async () => {
+      const token = searchParams.get('token');
+      const userParam = searchParams.get('user');
       const code = searchParams.get('code');
       const rawState = searchParams.get('state') || 'admin';
       const errorParam = searchParams.get('error');
 
       if (errorParam) {
         setStatus('error');
-        setErrorMessage(`Google authentication was cancelled or rejected (${errorParam}).`);
+        setErrorMessage(decodeURIComponent(errorParam));
         return;
       }
 
+      // Case A: Backend OAuth Redirect with issued JWT and user details
+      if (token) {
+        try {
+          let userObj: any = null;
+          if (userParam) {
+            userObj = JSON.parse(decodeURIComponent(userParam));
+          }
+          if (!userObj) {
+            // Fallback decode payload from JWT
+            try {
+              const payloadBase64 = token.split('.')[1];
+              if (payloadBase64) {
+                userObj = JSON.parse(atob(payloadBase64));
+              }
+            } catch {}
+          }
+
+          setAuthSession(token, userObj || { role: 'patient' });
+          setUserProfile(userObj);
+          setStatus('success');
+
+          setTimeout(() => {
+            const role = userObj?.role || 'patient';
+            if (role === 'admin') navigate('/admin/dashboard', { replace: true });
+            else if (role === 'hospital') navigate('/hospital/dashboard', { replace: true });
+            else navigate('/patient/dashboard', { replace: true });
+          }, 600);
+          return;
+        } catch (err: any) {
+          console.error('[GoogleCallback Token Error]', err);
+          setStatus('error');
+          setErrorMessage('Failed to initialize local session from Google authentication response.');
+          return;
+        }
+      }
+
+      // Case B: Authorization code received (frontend flow fallback)
       if (!code) {
         setStatus('error');
-        setErrorMessage('No authorization code was received from Google.');
+        setErrorMessage('No authorization credentials were received from Google.');
         return;
       }
 
@@ -80,8 +119,7 @@ export const GoogleCallback: React.FC = () => {
             else navigate('/patient/dashboard', { replace: true });
           }, 600);
         } else {
-          // If token was already created
-          const tokenNow = localStorage.getItem('pfis_token');
+          const tokenNow = localStorage.getItem('pfis_auth_token') || localStorage.getItem('pfis_token');
           if (tokenNow) {
             navigate('/admin/dashboard', { replace: true });
             return;
@@ -91,8 +129,7 @@ export const GoogleCallback: React.FC = () => {
         }
       } catch (err: any) {
         console.error('[GoogleCallback Page Error]', err);
-        // If already authenticated in localStorage despite duplicate request error
-        const tokenNow = localStorage.getItem('pfis_token');
+        const tokenNow = localStorage.getItem('pfis_auth_token') || localStorage.getItem('pfis_token');
         if (tokenNow) {
           navigate('/admin/dashboard', { replace: true });
           return;

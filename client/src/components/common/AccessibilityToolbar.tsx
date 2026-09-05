@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAccessibility } from '../../context/AccessibilityContext';
 import { useLanguage } from '../../context/LanguageContext';
 import {
@@ -17,6 +17,7 @@ import {
 
 export const AccessibilityToolbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLElement>(null);
   const {
     textSize,
     cycleTextSize,
@@ -36,8 +37,31 @@ export const AccessibilityToolbar: React.FC = () => {
     setVoiceEnabled,
   } = useLanguage();
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false);
+    };
+    const handleClickOutside = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
-    <aside aria-label="Accessibility options" className="fixed bottom-6 left-6 z-[9990] flex flex-col items-start gap-2">
+    <aside
+      ref={containerRef}
+      aria-label="Accessibility options"
+      className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-[max(1rem,env(safe-area-inset-left))] z-[9990] flex flex-col items-start gap-2 max-w-[calc(100vw-2rem)]"
+    >
       {/* Floating Toggle Button */}
       <button
         type="button"
@@ -45,10 +69,11 @@ export const AccessibilityToolbar: React.FC = () => {
         aria-expanded={isOpen}
         aria-controls="accessibility-panel"
         aria-label="Open Accessibility Toolbar"
-        className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-navy-900 text-white dark:bg-teal-600 dark:text-navy-950 font-semibold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all border border-white/20 text-xs tracking-wide"
+        className="flex items-center gap-2 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-full bg-navy-900 text-white dark:bg-teal-600 dark:text-navy-950 font-semibold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all border border-white/20 text-xs tracking-wide min-h-[44px] touch-target"
       >
-        <Eye className="w-4 h-4 text-teal-400 dark:text-navy-950" />
+        <Eye className="w-4 h-4 text-teal-400 dark:text-navy-950 shrink-0" />
         <span className="hidden sm:inline">Accessibility Controls</span>
+        <span className="sm:hidden font-bold">Access</span>
         {isOpen ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronUp className="w-3.5 h-3.5" />}
       </button>
 
@@ -57,7 +82,7 @@ export const AccessibilityToolbar: React.FC = () => {
         <section
           id="accessibility-panel"
           aria-label="Accessibility controls settings"
-          className="w-72 sm:w-80 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl backdrop-blur-xl animate-in slide-in-from-bottom-2 duration-200 flex flex-col gap-3.5"
+          className="w-[calc(100vw-2rem)] max-w-xs sm:w-80 max-h-[72vh] overflow-y-auto p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl backdrop-blur-xl animate-in slide-in-from-bottom-2 duration-200 flex flex-col gap-3.5"
         >
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">

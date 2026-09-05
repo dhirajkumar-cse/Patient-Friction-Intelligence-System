@@ -6,12 +6,14 @@ interface LanguageSelectorProps {
   compact?: boolean;
   className?: string;
   showDialect?: boolean;
+  fullWidth?: boolean;
 }
 
 export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   compact = false,
   className = '',
   showDialect = false,
+  fullWidth = false,
 }) => {
   const {
     currentLanguage,
@@ -37,26 +39,35 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   }, []);
 
   return (
-    <div className={`relative inline-block text-left ${className}`} ref={dropdownRef}>
+    <div className={`relative ${fullWidth ? 'w-full' : 'inline-block'} text-left ${className}`} ref={dropdownRef}>
       {/* Trigger Button */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border shadow-sm ${
-          compact
+          fullWidth
+            ? 'w-full justify-between min-h-[44px] bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-700'
+            : compact
             ? 'bg-slate-800/90 text-slate-200 border-slate-700 hover:bg-slate-700'
             : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-200 dark:border-slate-800'
         }`}
         title="Choose Language"
       >
-        <Globe className="w-4 h-4 text-teal-500 animate-pulse" />
-        <span className="font-semibold">{currentLanguage.nativeName}</span>
+        <div className="flex items-center gap-2">
+          <Globe className="w-4 h-4 text-teal-500 animate-pulse" />
+          <span className="font-semibold">{currentLanguage.nativeName}</span>
+          <span className="text-xs text-slate-400 font-normal">({currentLanguage.name})</span>
+        </div>
         <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
       </button>
 
       {/* Language Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-64 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl z-50 py-2 max-h-96 overflow-y-auto">
+        <div
+          className={`absolute ${
+            fullWidth ? 'left-0 right-0 w-full' : 'right-0 w-64'
+          } mt-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl z-50 py-2 max-h-80 overflow-y-auto`}
+        >
           <div className="px-3 py-1.5 border-b border-slate-100 dark:border-slate-800 text-xs font-semibold text-slate-400 uppercase tracking-wider">
             🌐 Select Language (11 Available)
           </div>

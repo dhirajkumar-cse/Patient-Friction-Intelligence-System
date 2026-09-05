@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
@@ -80,10 +80,17 @@ export const Login: React.FC = () => {
     }
   }, [activePortal]);
 
-  // Initialize Google Identity Services if available
+  const activePortalRef = useRef(activePortal);
+  useEffect(() => {
+    activePortalRef.current = activePortal;
+  }, [activePortal]);
+
+  const isGsiInitialized = useRef(false);
+
+  // Initialize Google Identity Services once when available
   useEffect(() => {
     try {
-      if ((window as any).google?.accounts?.id) {
+      if ((window as any).google?.accounts?.id && !isGsiInitialized.current) {
         (window as any).google.accounts.id.initialize({
           client_id: GOOGLE_CLIENT_ID,
           callback: async (response: any) => {
@@ -91,7 +98,7 @@ export const Login: React.FC = () => {
               setIsGoogleLoading(true);
               setRedirectingMessage('Verifying Google credentials with MongoDB...');
               try {
-                const res = await loginWithGoogle(response.credential, activePortal);
+                const res = await loginWithGoogle(response.credential, activePortalRef.current);
                 if (res.success) {
                   setRedirectingMessage('Authenticated! Redirecting to Dashboard...');
                   setTimeout(() => {
@@ -109,11 +116,12 @@ export const Login: React.FC = () => {
             }
           },
         });
+        isGsiInitialized.current = true;
       }
     } catch (e) {
       console.warn('GIS notice', e);
     }
-  }, [activePortal, loginWithGoogle, navigate]);
+  }, [loginWithGoogle, navigate]);
 
   const portals: PortalConfig[] = [
     {
@@ -218,22 +226,14 @@ export const Login: React.FC = () => {
       const res = await authService.getGoogleAuthUrl(activePortal, GOOGLE_CLIENT_ID);
       if (res.success && res.url) {
         window.location.href = res.url;
-      } else {
-        const redirectUri = encodeURIComponent(`${window.location.origin}/auth/google/callback`);
-        const scope = encodeURIComponent('openid email profile');
-        const state = encodeURIComponent(JSON.stringify({ role: activePortal, clientId: GOOGLE_CLIENT_ID }));
-        window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${encodeURIComponent(
-          GOOGLE_CLIENT_ID
-        )}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}&access_type=offline&prompt=consent&state=${state}`;
+        return;
       }
     } catch (err: any) {
-      const redirectUri = encodeURIComponent(`${window.location.origin}/auth/google/callback`);
-      const scope = encodeURIComponent('openid email profile');
-      const state = encodeURIComponent(JSON.stringify({ role: activePortal, clientId: GOOGLE_CLIENT_ID }));
-      window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${encodeURIComponent(
-        GOOGLE_CLIENT_ID
-      )}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}&access_type=offline&prompt=consent&state=${state}`;
+      console.warn('Backend getGoogleAuthUrl did not return URL, navigating directly to backend Google OAuth route:', err);
     }
+
+    // Direct backend OAuth endpoint navigation
+    window.location.href = authService.getGoogleOAuthRedirectUrl(activePortal);
   };
 
   return (
