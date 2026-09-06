@@ -97,16 +97,30 @@ export const Navbar: React.FC = () => {
     <header className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 shadow-xs">
       <div className="w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-3 lg:gap-4">
-          {/* Logo & Brand */}
-          <div className="flex items-center gap-3 shrink-0">
-            <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-teal-400 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
-                <Activity className="w-5 h-5 stroke-[2.2]" />
+          {/* Left: Mobile Hamburger & Logo Brand */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Hamburger Button (Mobile & Tablet) */}
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? 'Close mobile menu' : 'Open mobile menu'}
+              aria-expanded={isMobileMenuOpen}
+              className="xl:hidden touch-target flex items-center justify-center p-2 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors relative cursor-pointer"
+            >
+              {isMobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
+              {isAuthenticated && unreadCount > 0 && !isMobileMenuOpen && (
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white dark:ring-slate-900 animate-pulse" />
+              )}
+            </button>
+
+            <Link to="/" className="flex items-center gap-2 sm:gap-2.5 group">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-teal-400 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
+                <Activity className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2]" />
               </div>
               <div className="flex flex-col">
-                <span className="font-extrabold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-1.5">
+                <span className="font-extrabold text-sm sm:text-base lg:text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-1.5">
                   PFIS
-                  <span className="text-[10px] bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-300 font-bold px-1.5 py-0.2 rounded-full border border-teal-200 dark:border-teal-800 uppercase">
+                  <span className="text-[9px] sm:text-[10px] bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-300 font-bold px-1.5 py-0.2 rounded-full border border-teal-200 dark:border-teal-800 uppercase">
                     v1.0
                   </span>
                 </span>
@@ -527,27 +541,13 @@ export const Navbar: React.FC = () => {
                 </div>
               )}
             </div>
-
-            {/* Mobile & Tablet Hamburger Toggle Button */}
-            <button
-              type="button"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label={isMobileMenuOpen ? 'Close mobile menu' : 'Open mobile menu'}
-              aria-expanded={isMobileMenuOpen}
-              className="xl:hidden touch-target flex items-center justify-center p-2.5 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors relative"
-            >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              {isAuthenticated && unreadCount > 0 && !isMobileMenuOpen && (
-                <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-rose-500 rounded-full ring-2 ring-white dark:ring-slate-900 animate-pulse" />
-              )}
-            </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile & Tablet Slide Drawer */}
+      {/* Mobile & Tablet Slide Drawer (Slide from Left) */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 xl:hidden flex justify-end">
+        <div className="fixed inset-0 z-50 xl:hidden flex justify-start">
           {/* Backdrop overlay */}
           <div
             className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity animate-in fade-in duration-200"
@@ -557,7 +557,7 @@ export const Navbar: React.FC = () => {
 
           {/* Drawer Sheet */}
           <div
-            className="relative w-[88vw] max-w-sm h-full bg-white dark:bg-slate-900 shadow-2xl flex flex-col z-50 overflow-hidden border-l border-slate-200 dark:border-slate-800 animate-in slide-in-from-right duration-250"
+            className="relative w-[88vw] max-w-sm h-full bg-white dark:bg-slate-900 shadow-2xl flex flex-col z-50 overflow-hidden border-r border-slate-200 dark:border-slate-800 animate-in slide-in-from-left duration-250"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile Navigation Drawer"
