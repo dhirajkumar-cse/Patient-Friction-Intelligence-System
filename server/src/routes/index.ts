@@ -10,6 +10,7 @@ import interventionRoutes from './interventionRoutes.js';
 import adminRoutes from './adminRoutes.js';
 import notificationRoutes from './notificationRoutes.js';
 import languageRoutes from './languageRoutes.js';
+import publicHealthRoutes from './publicHealthRoutes.js';
 
 const router = Router();
 
@@ -25,5 +26,6 @@ router.use('/interventions', interventionRoutes);
 router.use('/admin', adminRoutes);
 router.use('/notifications', notificationRoutes);
 router.use('/languages', languageRoutes);
+router.use('/public-health', publicHealthRoutes);
 
 export default router;

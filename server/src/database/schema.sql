@@ -208,3 +208,160 @@ CREATE TABLE IF NOT EXISTS audit_logs (
 );
 
 CREATE INDEX IF NOT EXISTS idx_audit_user ON audit_logs(user_id);
+
+-- 14. PUBLIC HEALTH TRIAGE (Operational & Clinical Tier Routing)
+CREATE TABLE IF NOT EXISTS public_health_triage (
+    id VARCHAR(64) PRIMARY KEY,
+    patient_id VARCHAR(64) REFERENCES users(id) ON DELETE CASCADE,
+    chief_complaint TEXT NOT NULL,
+    acuity_level VARCHAR(32) NOT NULL, -- 'Emergency', 'Urgent', 'Routine', 'Preventive'
+    recommended_tier VARCHAR(64) NOT NULL, -- 'Sub-Centre / AAM', 'Primary Health Centre (PHC)', 'Rural Hospital (RH) / CHC', 'District Hospital / Medical College', '108 Emergency'
+    recommended_hospital_id VARCHAR(64) REFERENCES hospitals(id) ON DELETE SET NULL,
+    symptoms_json TEXT,
+    vitals_json TEXT,
+    operational_barriers_json TEXT,
+    triage_notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 15. REFERRALS (Multi-Tier Public Health Continuity)
+CREATE TABLE IF NOT EXISTS referrals (
+    id VARCHAR(64) PRIMARY KEY,
+    referral_code VARCHAR(64) UNIQUE NOT NULL,
+    patient_id VARCHAR(64) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    patient_name VARCHAR(255) NOT NULL,
+    from_facility_id VARCHAR(64) NOT NULL REFERENCES hospitals(id),
+    from_facility_name VARCHAR(255) NOT NULL,
+    from_tier VARCHAR(64) NOT NULL,
+    to_facility_id VARCHAR(64) NOT NULL REFERENCES hospitals(id),
+    to_facility_name VARCHAR(255) NOT NULL,
+    to_tier VARCHAR(64) NOT NULL,
+    specialty_required VARCHAR(128) NOT NULL,
+    reason_for_referral TEXT NOT NULL,
+    priority VARCHAR(32) NOT NULL DEFAULT 'Routine', -- 'Routine', 'Urgent', 'Emergency'
+    transport_mode VARCHAR(64) DEFAULT 'Public Bus', -- '108 Emergency Ambulance', '102 Janani Shishu Express', 'Public Bus', 'Private Vehicle'
+    status VARCHAR(32) NOT NULL DEFAULT 'Initiated', -- 'Initiated', 'In Transit', 'Arrived', 'Specialist Consulted', 'Completed', 'Counter-Referred'
+    counter_referral_notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 16. HEALTH RECORDS (Longitudinal Interoperable Care & ABHA)
+CREATE TABLE IF NOT EXISTS health_records (
+    id VARCHAR(64) PRIMARY KEY,
+    patient_id VARCHAR(64) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    abha_id VARCHAR(64) NOT NULL,
+    facility_id VARCHAR(64) REFERENCES hospitals(id),
+    facility_name VARCHAR(255) NOT NULL,
+    doctor_name VARCHAR(255) NOT NULL,
+    record_type VARCHAR(64) NOT NULL, -- 'OPD Consultation', 'Diagnostic Report', 'Prescription', 'Immunization', 'Discharge Summary', 'Referral Note'
+    record_date VARCHAR(64) NOT NULL,
+    diagnosis TEXT NOT NULL,
+    vitals_json TEXT,
+    prescription_json TEXT,
+    notes TEXT,
+    fhir_bundle_json TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 17. DIAGNOSTICS & EQUIPMENT UPTIME
+CREATE TABLE IF NOT EXISTS diagnostics (
+    id VARCHAR(64) PRIMARY KEY,
+    facility_id VARCHAR(64) NOT NULL REFERENCES hospitals(id) ON DELETE CASCADE,
+    facility_name VARCHAR(255) NOT NULL,
+    facility_tier VARCHAR(64) NOT NULL,
+    test_name VARCHAR(255) NOT NULL,
+    category VARCHAR(64) NOT NULL, -- 'Pathology', 'Radiology', 'Cardiology', 'Microbiology'
+    is_equipment_functional BOOLEAN DEFAULT TRUE,
+    operational_hours VARCHAR(128) DEFAULT '08:00 AM - 02:00 PM',
+    technician_available BOOLEAN DEFAULT TRUE,
+    fee DECIMAL(8,2) DEFAULT 0.00,
+    tat_hours INT DEFAULT 4,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 18. DIAGNOSTIC BOOKINGS
+CREATE TABLE IF NOT EXISTS diagnostic_bookings (
+    id VARCHAR(64) PRIMARY KEY,
+    booking_number VARCHAR(64) UNIQUE NOT NULL,
+    diagnostic_id VARCHAR(64) NOT NULL REFERENCES diagnostics(id) ON DELETE CASCADE,
+    patient_id VARCHAR(64) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    patient_name VARCHAR(255) NOT NULL,
+    facility_name VARCHAR(255) NOT NULL,
+    test_name VARCHAR(255) NOT NULL,
+    scheduled_date VARCHAR(64) NOT NULL,
+    sample_status VARCHAR(64) DEFAULT 'Slot Confirmed', -- 'Slot Confirmed', 'Sample Collected', 'Processing', 'Report Ready'
+    report_url TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 19. ESSENTIAL MEDICINES (e-Aushadhi Real-Time Inventory)
+CREATE TABLE IF NOT EXISTS essential_medicines (
+    id VARCHAR(64) PRIMARY KEY,
+    facility_id VARCHAR(64) NOT NULL REFERENCES hospitals(id) ON DELETE CASCADE,
+    facility_name VARCHAR(255) NOT NULL,
+    facility_tier VARCHAR(64) NOT NULL,
+    medicine_name VARCHAR(255) NOT NULL,
+    generic_name VARCHAR(255) NOT NULL,
+    category VARCHAR(128) NOT NULL, -- 'Antibiotic', 'Analgesic', 'Anti-Hypertensive', 'Anti-Diabetic', 'Maternal Health', 'Emergency / Antidote', 'Vaccine'
+    dosage_form VARCHAR(64) NOT NULL, -- 'Tablet', 'Syrup', 'Injection', 'Capsule', 'Sachet'
+    stock_count INT NOT NULL DEFAULT 100,
+    min_threshold INT NOT NULL DEFAULT 20,
+    status VARCHAR(32) NOT NULL DEFAULT 'In Stock', -- 'In Stock', 'Low Stock', 'Out of Stock'
+    batch_number VARCHAR(64),
+    expiry_date VARCHAR(64),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 20. HIGH-RISK REGISTRY (Maternal, Child & Chronic NCDs)
+CREATE TABLE IF NOT EXISTS high_risk_registry (
+    id VARCHAR(64) PRIMARY KEY,
+    patient_id VARCHAR(64) NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    patient_name VARCHAR(255) NOT NULL,
+    cohort_type VARCHAR(64) NOT NULL, -- 'Maternal (HRP)', 'Child (Immunization)', 'Chronic NCD (Hypertension)', 'Chronic NCD (Diabetes)', 'Tuberculosis (DOTS)'
+    risk_level VARCHAR(32) NOT NULL DEFAULT 'Moderate', -- 'High Risk', 'Moderate Risk', 'Critical'
+    primary_condition VARCHAR(255) NOT NULL,
+    current_milestone VARCHAR(255) NOT NULL,
+    next_due_date VARCHAR(64) NOT NULL,
+    status VARCHAR(32) NOT NULL DEFAULT 'Active', -- 'Active', 'Overdue', 'Completed', 'Escalated'
+    assigned_asha_name VARCHAR(255),
+    assigned_facility_id VARCHAR(64) REFERENCES hospitals(id),
+    follow_up_notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 21. FRONTLINE TASKS & BENEFICIARIES (ASHA / ANM / CHO)
+CREATE TABLE IF NOT EXISTS frontline_tasks (
+    id VARCHAR(64) PRIMARY KEY,
+    worker_id VARCHAR(64) NOT NULL,
+    worker_name VARCHAR(255) NOT NULL,
+    worker_role VARCHAR(64) NOT NULL DEFAULT 'ASHA', -- 'ASHA', 'ANM', 'CHO'
+    village_name VARCHAR(255) NOT NULL,
+    beneficiary_name VARCHAR(255) NOT NULL,
+    beneficiary_phone VARCHAR(64),
+    task_type VARCHAR(64) NOT NULL, -- 'Doorstep Triage', 'ANC Home Visit', 'Child Immunization Due', 'TB Medicine Dispense', 'Assisted Teleconsult'
+    due_date VARCHAR(64) NOT NULL,
+    status VARCHAR(32) NOT NULL DEFAULT 'Pending', -- 'Pending', 'Completed', 'Rescheduled'
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 22. EMERGENCY DISPATCHES (108 SOS)
+CREATE TABLE IF NOT EXISTS emergency_dispatches (
+    id VARCHAR(64) PRIMARY KEY,
+    dispatch_number VARCHAR(64) UNIQUE NOT NULL,
+    patient_name VARCHAR(255) NOT NULL,
+    phone VARCHAR(64) NOT NULL,
+    location_name VARCHAR(255) NOT NULL,
+    latitude DECIMAL(10,6),
+    longitude DECIMAL(10,6),
+    emergency_type VARCHAR(128) NOT NULL, -- 'Road Accident / Trauma', 'Cardiac / Chest Pain', 'Maternal / Labor', 'Snake Bite / Poisoning', 'Pediatric Emergency'
+    assigned_ambulance_vehicle VARCHAR(64) NOT NULL,
+    eta_minutes INT NOT NULL DEFAULT 12,
+    destination_hospital_id VARCHAR(64) REFERENCES hospitals(id),
+    destination_hospital_name VARCHAR(255) NOT NULL,
+    status VARCHAR(32) NOT NULL DEFAULT 'Dispatched', -- 'Dispatched', 'En Route', 'Patient Picked', 'Arrived at Hospital', 'Resolved'
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+

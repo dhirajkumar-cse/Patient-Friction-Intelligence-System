@@ -34,6 +34,11 @@ import {
   UserCheck,
   RefreshCw,
   Navigation,
+  GitFork,
+  Pill,
+  HeartPulse,
+  HeartHandshake,
+  Stethoscope,
 } from 'lucide-react';
 
 export const PatientDashboard: React.FC = () => {
@@ -327,6 +332,137 @@ export const PatientDashboard: React.FC = () => {
             <div className="pt-2 flex items-center justify-between text-xs font-bold text-slate-300 group-hover:text-white">
               <span>View Documents</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </Link>
+        </div>
+      </div>
+
+      {/* 2b. SIH 26133 Integrated Public Health Care-Access Suite */}
+      <div className="space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-300 text-[10px] font-bold uppercase tracking-wider border border-teal-200 dark:border-teal-800">
+              <Sparkles className="w-3 h-3" /> SIH 26133 • Govt. of Maharashtra Public Health System
+            </div>
+            <h2 className="text-base sm:text-lg font-black text-slate-900 dark:text-white mt-1">
+              Integrated Rural Care & Public Facility Support
+            </h2>
+          </div>
+          <span className="text-xs text-slate-400">Strengthening Primary to Tertiary Health Continuum</span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* 1. Digital Triage & Tier Router */}
+          <Link
+            to="/patient/triage"
+            className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-teal-400 shadow-xs hover:shadow-md transition-all flex items-start gap-3.5 group"
+          >
+            <div className="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950 text-teal-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              <Stethoscope className="w-5 h-5" />
+            </div>
+            <div className="space-y-1">
+              <h3 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1">
+                <span>Digital Triage & Tier Router</span>
+                <ArrowRight className="w-3.5 h-3.5 text-teal-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Determine whether to visit <strong>Sub-Centre</strong>, <strong>PHC</strong>, or <strong>Rural Hospital</strong> to avoid 60km travel.
+              </p>
+            </div>
+          </Link>
+
+          {/* 2. Tiered Referral Tracking */}
+          <Link
+            to="/patient/referrals"
+            className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-emerald-400 shadow-xs hover:shadow-md transition-all flex items-start gap-3.5 group"
+          >
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              <GitFork className="w-5 h-5" />
+            </div>
+            <div className="space-y-1">
+              <h3 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1">
+                <span>Referral Tracking Hub</span>
+                <ArrowRight className="w-3.5 h-3.5 text-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Multi-tier pipeline (PHC ➡️ RH ➡️ DH) with 102/108 transit status and counter-referral feedback loop.
+              </p>
+            </div>
+          </Link>
+
+          {/* 3. Longitudinal Records & ABHA */}
+          <Link
+            to="/patient/health-records"
+            className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-blue-400 shadow-xs hover:shadow-md transition-all flex items-start gap-3.5 group"
+          >
+            <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              <FileText className="w-5 h-5" />
+            </div>
+            <div className="space-y-1">
+              <h3 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1">
+                <span>Health Records & ABHA</span>
+                <ArrowRight className="w-3.5 h-3.5 text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Interoperable 14-digit ABHA card, chronological consultation history, and ABDM FHIR JSON export.
+              </p>
+            </div>
+          </Link>
+
+          {/* 4. Diagnostic Network & Equipment Uptime */}
+          <Link
+            to="/patient/diagnostics"
+            className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-violet-400 shadow-xs hover:shadow-md transition-all flex items-start gap-3.5 group"
+          >
+            <div className="w-10 h-10 rounded-xl bg-violet-50 dark:bg-violet-950 text-violet-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              <Activity className="w-5 h-5" />
+            </div>
+            <div className="space-y-1">
+              <h3 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1">
+                <span>Diagnostic Equipment Uptime</span>
+                <ArrowRight className="w-3.5 h-3.5 text-violet-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Verify functional status of <strong>Digital X-Ray</strong>, <strong>Ultrasound</strong>, and <strong>CBNAAT TB</strong> labs.
+              </p>
+            </div>
+          </Link>
+
+          {/* 5. e-Aushadhi Essential Medicines */}
+          <Link
+            to="/patient/medicines"
+            className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-teal-400 shadow-xs hover:shadow-md transition-all flex items-start gap-3.5 group"
+          >
+            <div className="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950 text-teal-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              <Pill className="w-5 h-5" />
+            </div>
+            <div className="space-y-1">
+              <h3 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1">
+                <span>e-Aushadhi Medicine Stock</span>
+                <ArrowRight className="w-3.5 h-3.5 text-teal-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Real-time Essential Drug List (EDL) inventory across facilities with alternate stock locator.
+              </p>
+            </div>
+          </Link>
+
+          {/* 6. High-Risk Care & Follow-up */}
+          <Link
+            to="/patient/high-risk"
+            className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-rose-400 shadow-xs hover:shadow-md transition-all flex items-start gap-3.5 group"
+          >
+            <div className="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950 text-rose-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              <HeartPulse className="w-5 h-5" />
+            </div>
+            <div className="space-y-1">
+              <h3 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1">
+                <span>High-Risk Care & Follow-up</span>
+                <ArrowRight className="w-3.5 h-3.5 text-rose-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Tracking for <strong>High-Risk Pregnancies</strong>, <strong>Child Immunization</strong>, and <strong>Chronic NCDs</strong>.
+              </p>
             </div>
           </Link>
         </div>

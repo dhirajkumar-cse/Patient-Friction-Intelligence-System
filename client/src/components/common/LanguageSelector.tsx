@@ -56,7 +56,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         <div className="flex items-center gap-2">
           <Globe className="w-4 h-4 text-teal-500 animate-pulse" />
           <span className="font-semibold">{currentLanguage.nativeName}</span>
-          <span className="text-xs text-slate-400 font-normal">({currentLanguage.name})</span>
+          <span className="text-xs text-slate-400 font-normal hidden xl:inline">({currentLanguage.name})</span>
         </div>
         <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
       </button>

@@ -6,6 +6,14 @@ import { FrictionRepository } from '../database/repositories/FrictionRepository.
 import { RequestRepository } from '../database/repositories/RequestRepository.js';
 import { DocumentRepository } from '../database/repositories/DocumentRepository.js';
 import { NotificationRepository } from '../database/repositories/NotificationRepository.js';
+import { PublicHealthRepository } from '../database/repositories/PublicHealthRepository.js';
+import {
+  MAHARASHTRA_PUBLIC_HEALTH_FACILITIES,
+  SEED_ESSENTIAL_MEDICINES,
+  SEED_DIAGNOSTICS,
+  SEED_HIGH_RISK_PATIENTS,
+  SEED_FRONTLINE_TASKS,
+} from './publicHealthSeedData.js';
 
 export const runRelationalSeed = async (): Promise<void> => {
   try {
@@ -16,7 +24,8 @@ export const runRelationalSeed = async (): Promise<void> => {
     // 1. Check if admin exists
     const existingAdmin = await UserRepository.findByEmail('admin@pfis.org');
     if (existingAdmin) {
-      console.log('[Seed] Relational database already seeded. Skipping re-seed.');
+      console.log('[Seed] Relational database already seeded. Checking SIH public health modules...');
+      await seedPublicHealthData();
       return;
     }
 
@@ -280,6 +289,8 @@ export const runRelationalSeed = async (): Promise<void> => {
       link: '/patient/requests',
     });
 
+    await seedPublicHealthData();
+
     console.log('[Seed] Relational database seeding finished successfully!');
     console.log('  -> Admin: admin@pfis.org (Admin@123)');
     console.log('  -> Admin: dhirajkumar464748@gmail.com (Admin@123)');
@@ -290,3 +301,206 @@ export const runRelationalSeed = async (): Promise<void> => {
     console.error('[Seed Error] Failed to seed relational database:', err.message);
   }
 };
+
+async function seedPublicHealthData(): Promise<void> {
+  try {
+    const existingMeds = await PublicHealthRepository.getMedicines();
+    if (existingMeds && existingMeds.length > 0) {
+      console.log('[Seed] SIH Public Health modules already populated.');
+      return;
+    }
+
+    console.log('[Seed] Populating Maharashtra Public Health Facilities & SIH 26133 modules...');
+
+    // 1. Facilities
+    const seededFacilities: any[] = [];
+    for (const fac of MAHARASHTRA_PUBLIC_HEALTH_FACILITIES) {
+      const hosp = await HospitalRepository.create({
+        id: fac.id,
+        name: `${fac.name}`,
+        type: `Government (${fac.tier})`,
+        city: fac.city,
+        address: fac.address,
+        latitude: fac.latitude,
+        longitude: fac.longitude,
+        phone: fac.phone,
+        total_beds: fac.totalBeds,
+        available_beds: fac.availableBeds,
+        emergency_24x7: fac.emergency24x7,
+        teleconsult_available: fac.teleconsultAvailable,
+        accessibility_facilities: `NQAS Quality Score: ${fac.nqasScore}/100 | Diagnostics: ${fac.diagnosticFacilities.join(', ')}`,
+      });
+      seededFacilities.push(hosp);
+
+      for (const dept of fac.departments) {
+        await HospitalRepository.addService({
+          hospital_id: hosp.id,
+          name: dept.name,
+          department: dept.department,
+          total_daily_tokens: dept.totalTokens,
+          available_tokens: dept.availableTokens,
+          fee: dept.fee,
+          is_active: true,
+        });
+      }
+    }
+
+    const patient = await UserRepository.findByEmail('patient@pfis.org');
+    const patientId = patient?.id || 'demo-patient-sunita';
+
+    // 2. Essential Medicines (e-Aushadhi)
+    const { getDB } = await import('../database/db.js');
+    const db = getDB();
+
+    for (let i = 0; i < SEED_ESSENTIAL_MEDICINES.length; i++) {
+      const med = SEED_ESSENTIAL_MEDICINES[i];
+      const fac = seededFacilities[i % seededFacilities.length];
+      await db.query(
+        `INSERT INTO essential_medicines (id, facility_id, facility_name, facility_tier, medicine_name, generic_name, category, dosage_form, stock_count, min_threshold, status, batch_number, expiry_date, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)`,
+        [
+          `med-${i + 1}`,
+          fac.id,
+          fac.name,
+          med.facility_tier,
+          med.medicine_name,
+          med.generic_name,
+          med.category,
+          med.dosage_form,
+          med.stock_count,
+          med.min_threshold,
+          med.status,
+          med.batch_number,
+          med.expiry_date,
+          new Date().toISOString(),
+        ]
+      );
+    }
+
+    // 3. Diagnostics
+    for (let i = 0; i < SEED_DIAGNOSTICS.length; i++) {
+      const diag = SEED_DIAGNOSTICS[i];
+      const fac = seededFacilities[(i + 1) % seededFacilities.length];
+      await db.query(
+        `INSERT INTO diagnostics (id, facility_id, facility_name, facility_tier, test_name, category, is_equipment_functional, operational_hours, technician_available, fee, tat_hours, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
+        [
+          `dx-${i + 1}`,
+          fac.id,
+          fac.name,
+          diag.facility_tier,
+          diag.test_name,
+          diag.category,
+          diag.is_equipment_functional,
+          diag.operational_hours,
+          diag.technician_available,
+          diag.fee,
+          diag.tat_hours,
+          new Date().toISOString(),
+        ]
+      );
+    }
+
+    // 4. High-Risk Registry
+    for (const hr of SEED_HIGH_RISK_PATIENTS) {
+      await PublicHealthRepository.createHighRiskEntry({
+        patient_id: patientId,
+        patient_name: hr.patient_name,
+        cohort_type: hr.cohort_type,
+        risk_level: hr.risk_level,
+        primary_condition: hr.primary_condition,
+        current_milestone: hr.current_milestone,
+        next_due_date: hr.next_due_date,
+        status: hr.status,
+        assigned_asha_name: hr.assigned_asha_name,
+        follow_up_notes: hr.follow_up_notes,
+      });
+    }
+
+    // 5. Frontline Tasks
+    for (const ft of SEED_FRONTLINE_TASKS) {
+      await PublicHealthRepository.createFrontlineTask(ft);
+    }
+
+    // 6. Longitudinal Health Records (Sunita Devi)
+    await PublicHealthRepository.createHealthRecord({
+      patient_id: patientId,
+      abha_id: '91-4582-7391-2041@abdm',
+      facility_name: 'Primary Health Centre (PHC) Mahabaleshwar',
+      doctor_name: 'Dr. Anand Shinde, MBBS (Medical Officer)',
+      record_type: 'OPD Consultation',
+      record_date: '2026-08-14',
+      diagnosis: 'Essential Hypertension Stage-2 with borderline Type 2 Diabetes Mellitus',
+      vitals_json: JSON.stringify({ bp: '168/102 mmHg', pulse: '84 bpm', spo2: '97%', weightKg: '68' }),
+      prescription_json: JSON.stringify([
+        { name: 'Amlodipine 5mg', dosage: '1 Tab Daily OD Morning', duration: '30 Days' },
+        { name: 'Metformin 500mg ER', dosage: '1 Tab BD After Meals', duration: '30 Days' },
+      ]),
+      notes: 'Advised salt restriction, regular walking, and quarterly serum creatinine check.',
+      fhir_bundle_json: JSON.stringify({ resourceType: 'Bundle', type: 'document', entry: [{ resourceType: 'Composition', title: 'PFIS Interoperable Clinical Summary' }] }),
+    });
+
+    await PublicHealthRepository.createHealthRecord({
+      patient_id: patientId,
+      abha_id: '91-4582-7391-2041@abdm',
+      facility_name: 'Rural Hospital Wai (30-Bedded Community Health Centre)',
+      doctor_name: 'Dr. Sneha Kulkarni, MD (Medicine)',
+      record_type: 'Diagnostic Report',
+      record_date: '2026-07-02',
+      diagnosis: 'Routine Non-Communicable Disease Pathology Evaluation',
+      vitals_json: JSON.stringify({ fastingSugar: '142 mg/dL', ppSugar: '210 mg/dL', hba1c: '7.8%' }),
+      notes: 'HbA1c elevated. Recommend continued adherence to Metformin and dietary counseling by ASHA.',
+    });
+
+    // 7. Tiered Referrals
+    await PublicHealthRepository.createReferral({
+      patient_id: patientId,
+      patient_name: 'Sunita Devi',
+      from_facility_id: seededFacilities[1].id,
+      from_facility_name: seededFacilities[1].name,
+      from_tier: 'Primary Health Centre (PHC)',
+      to_facility_id: seededFacilities[2].id,
+      to_facility_name: seededFacilities[2].name,
+      to_tier: 'Rural Hospital (RH)',
+      specialty_required: 'General Medicine & Diagnostic Sonography',
+      reason_for_referral: 'Persistent systolic BP > 165 mmHg with severe headache and calf numbness. Requires 12-lead ECG, USG, and specialist physician review.',
+      priority: 'Urgent',
+      transport_mode: '102 Janani / Shishu Ambulatory Van',
+      status: 'In Transit',
+      counter_referral_notes: 'PHC Medical Officer initiated transit; Rural Hospital Casualty informed.',
+    });
+
+    await PublicHealthRepository.createReferral({
+      patient_id: patientId,
+      patient_name: 'Anandi Deepak Shinde',
+      from_facility_id: seededFacilities[0].id,
+      from_facility_name: seededFacilities[0].name,
+      from_tier: 'Sub-Centre / AAM',
+      to_facility_id: seededFacilities[2].id,
+      to_facility_name: seededFacilities[2].name,
+      to_tier: 'Rural Hospital (RH)',
+      specialty_required: 'Obstetrics & High-Risk Pregnancy Care',
+      reason_for_referral: 'Severe 3rd Trimester Anemia (Hb 7.2 g/dL) at 34 Weeks Gestation. Requires IV Iron Sucrose therapy and obstetric Doppler ultrasound.',
+      priority: 'Urgent',
+      transport_mode: '102 Janani Shishu Express',
+      status: 'Initiated',
+      counter_referral_notes: 'ASHA Tai Sunanda accompanied patient; scheduled for Wednesday morning arrival.',
+    });
+
+    // 8. Emergency 108 SOS Dispatch
+    await PublicHealthRepository.createEmergencyDispatch({
+      patient_name: 'Tukaram Jadhav (Satara Medha Valley)',
+      phone: '98221-88902',
+      location_name: 'Medha Valley Ghat Road, KM Marker 14',
+      emergency_type: 'Cardiac / Acute Chest Pain',
+      assigned_ambulance_vehicle: 'MH-11-AX-1081 (Advanced Life Support 108)',
+      eta_minutes: 8,
+      destination_hospital_id: seededFacilities[4].id,
+      destination_hospital_name: seededFacilities[4].name,
+      status: 'En Route',
+    });
+
+    console.log('[Seed] SIH 26133 Public Health dataset seeded successfully!');
+  } catch (error: any) {
+    console.error('[Seed Error] Failed to seed public health data:', error.message);
+  }
+}
+

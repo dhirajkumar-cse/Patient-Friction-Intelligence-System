@@ -42,6 +42,13 @@ import { DigitalTwinSimulator } from './pages/patient/DigitalTwinSimulator';
 import { TeleconsultationRoom } from './pages/patient/TeleconsultationRoom';
 import { PatientNotifications } from './pages/patient/PatientNotifications';
 import { PatientSettings } from './pages/patient/PatientSettings';
+import { DigitalTriagePage } from './pages/patient/DigitalTriagePage';
+import { ReferralTrackingPage } from './pages/patient/ReferralTrackingPage';
+import { LongitudinalRecordsPage } from './pages/patient/LongitudinalRecordsPage';
+import { DiagnosticsPage } from './pages/patient/DiagnosticsPage';
+import { MedicineAvailabilityPage } from './pages/patient/MedicineAvailabilityPage';
+import { HighRiskFollowUpPage } from './pages/patient/HighRiskFollowUpPage';
+import { FrontlineWorkerPortal } from './pages/patient/FrontlineWorkerPortal';
 
 // Hospital Pages
 import { HospitalDashboard } from './pages/hospital/HospitalDashboard';
@@ -49,6 +56,7 @@ import { HospitalRequests } from './pages/hospital/HospitalRequests';
 import { HospitalRequestDetails } from './pages/hospital/HospitalRequestDetails';
 import { HospitalDepartments } from './pages/hospital/HospitalDepartments';
 import { HospitalProfile } from './pages/hospital/HospitalProfile';
+import { FacilityQualityDashboard } from './pages/hospital/FacilityQualityDashboard';
 
 // Admin Pages
 import { AdminDashboard } from './pages/admin/AdminDashboard';
@@ -104,6 +112,14 @@ export const App: React.FC = () => {
                     <Route path="/patient" element={<PatientLayout />}>
                       <Route index element={<Navigate to="/patient/dashboard" replace />} />
                       <Route path="dashboard" element={<PatientDashboard />} />
+                      <Route path="triage" element={<DigitalTriagePage />} />
+                      <Route path="referrals" element={<ReferralTrackingPage />} />
+                      <Route path="health-records" element={<LongitudinalRecordsPage />} />
+                      <Route path="diagnostics" element={<DiagnosticsPage />} />
+                      <Route path="medicines" element={<MedicineAvailabilityPage />} />
+                      <Route path="high-risk" element={<HighRiskFollowUpPage />} />
+                      <Route path="frontline" element={<FrontlineWorkerPortal />} />
+                      <Route path="facility-metrics" element={<FacilityQualityDashboard />} />
                       <Route path="profile" element={<PatientProfile />} />
                       <Route path="hospitals" element={<NearbyHospitals />} />
                       <Route path="hospitals/:id" element={<HospitalDetails />} />
@@ -122,10 +138,20 @@ export const App: React.FC = () => {
                     <Route path="/hospital" element={<HospitalLayout />}>
                       <Route index element={<Navigate to="/hospital/dashboard" replace />} />
                       <Route path="dashboard" element={<HospitalDashboard />} />
+                      <Route path="triage" element={<DigitalTriagePage />} />
+                      <Route path="referrals" element={<ReferralTrackingPage />} />
+                      <Route path="health-records" element={<LongitudinalRecordsPage />} />
+                      <Route path="facility-metrics" element={<FacilityQualityDashboard />} />
+                      <Route path="medicines" element={<MedicineAvailabilityPage />} />
+                      <Route path="diagnostics" element={<DiagnosticsPage />} />
+                      <Route path="high-risk" element={<HighRiskFollowUpPage />} />
+                      <Route path="frontline" element={<FrontlineWorkerPortal />} />
                       <Route path="requests" element={<HospitalRequests />} />
                       <Route path="requests/:id" element={<HospitalRequestDetails />} />
                       <Route path="departments" element={<HospitalDepartments />} />
                       <Route path="teleconsult" element={<TeleconsultationRoom />} />
+                      <Route path="hospitals" element={<NearbyHospitals />} />
+                      <Route path="digital-twin" element={<DigitalTwinSimulator />} />
                       <Route path="profile" element={<HospitalProfile />} />
                       <Route path="notifications" element={<PatientNotifications />} />
                       <Route path="settings" element={<PatientSettings />} />
@@ -135,9 +161,18 @@ export const App: React.FC = () => {
                     <Route path="/admin" element={<AdminLayout />}>
                       <Route index element={<Navigate to="/admin/dashboard" replace />} />
                       <Route path="dashboard" element={<AdminDashboard />} />
+                      <Route path="triage" element={<DigitalTriagePage />} />
+                      <Route path="referrals" element={<ReferralTrackingPage />} />
+                      <Route path="health-records" element={<LongitudinalRecordsPage />} />
+                      <Route path="medicines" element={<MedicineAvailabilityPage />} />
+                      <Route path="diagnostics" element={<DiagnosticsPage />} />
+                      <Route path="high-risk" element={<HighRiskFollowUpPage />} />
+                      <Route path="frontline" element={<FrontlineWorkerPortal />} />
+                      <Route path="facility-metrics" element={<FacilityQualityDashboard />} />
                       <Route path="friction-map" element={<PopulationFrictionMap />} />
                       <Route path="simulator" element={<WhatIfSimulator />} />
                       <Route path="digital-twin" element={<DigitalTwinSimulator />} />
+                      <Route path="teleconsult" element={<TeleconsultationRoom />} />
                       <Route path="interventions" element={<InterventionOptimizer />} />
                       <Route path="care-leakage" element={<CareLeakage />} />
                       <Route path="care-failure" element={<CareFailure />} />

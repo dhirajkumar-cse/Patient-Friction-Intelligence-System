@@ -27,7 +27,8 @@ export const SimpleModeToggle: React.FC<SimpleModeToggleProps> = ({ className = 
       }
     >
       <Sparkles className={`w-3.5 h-3.5 ${simpleLanguageMode ? 'text-amber-100 animate-spin-slow' : 'text-amber-500'}`} />
-      <span>{t('common.simpleLanguage', 'Simple Language Mode')}</span>
+      <span className="hidden xl:inline">{t('common.simpleLanguage', 'Simple Language Mode')}</span>
+      <span className="xl:hidden">Simple Mode</span>
       {simpleLanguageMode && (
         <span className="ml-1 px-1.5 py-0.2 rounded bg-amber-700/60 text-[10px] uppercase tracking-wide">
           ON

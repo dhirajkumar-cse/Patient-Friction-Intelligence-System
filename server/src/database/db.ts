@@ -90,6 +90,15 @@ class EmbeddedSQLDriver implements IDatabaseClient {
     documents: [],
     notifications: [],
     audit_logs: [],
+    public_health_triage: [],
+    referrals: [],
+    health_records: [],
+    diagnostics: [],
+    diagnostic_bookings: [],
+    essential_medicines: [],
+    high_risk_registry: [],
+    frontline_tasks: [],
+    emergency_dispatches: [],
   };
 
   constructor() {

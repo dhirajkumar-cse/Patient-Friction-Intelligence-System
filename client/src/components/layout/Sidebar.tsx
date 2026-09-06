@@ -18,6 +18,11 @@ import {
   Sliders,
   Layers,
   Settings,
+  Activity,
+  FileText,
+  Pill,
+  HeartPulse,
+  HeartHandshake,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -30,6 +35,13 @@ export const Sidebar: React.FC = () => {
 
   const patientLinks = [
     { name: t('nav.dashboard', 'Dashboard'), path: '/patient/dashboard', icon: LayoutDashboard },
+    { name: 'Digital Triage & Tier Router', path: '/patient/triage', icon: Activity },
+    { name: 'Referral Tracking Hub', path: '/patient/referrals', icon: GitFork },
+    { name: 'Health Records & ABHA', path: '/patient/health-records', icon: FileText },
+    { name: 'Diagnostic Network & Uptime', path: '/patient/diagnostics', icon: Activity },
+    { name: 'e-Aushadhi Medicines', path: '/patient/medicines', icon: Pill },
+    { name: 'High-Risk Care & Follow-up', path: '/patient/high-risk', icon: HeartPulse },
+    { name: 'ASHA Frontline Seva', path: '/patient/frontline', icon: HeartHandshake },
     { name: 'Digital Twin Simulator', path: '/patient/digital-twin', icon: Sparkles },
     { name: 'Live Teleconsultation', path: '/patient/teleconsult', icon: Layers },
     { name: t('nav.hospitals', 'Find Nearby Hospitals'), path: '/patient/hospitals', icon: MapPin },
@@ -43,6 +55,10 @@ export const Sidebar: React.FC = () => {
 
   const hospitalLinks = [
     { name: t('nav.dashboard', 'Hospital Dashboard'), path: '/hospital/dashboard', icon: LayoutDashboard },
+    { name: 'Tiered Referral Management', path: '/hospital/referrals', icon: GitFork },
+    { name: 'Facility Quality & NQAS', path: '/hospital/facility-metrics', icon: BarChart3 },
+    { name: 'Pharmacy Stock (e-Aushadhi)', path: '/hospital/medicines', icon: Pill },
+    { name: 'Diagnostic Equipment Status', path: '/hospital/diagnostics', icon: Activity },
     { name: t('nav.triageQueue', 'Patient Requests Queue'), path: '/hospital/requests', icon: ListOrdered },
     { name: 'Teleconsultation Triage', path: '/hospital/teleconsult', icon: Layers },
     { name: t('nav.opdManagement', 'Departments & OPD'), path: '/hospital/departments', icon: Layers },
@@ -52,6 +68,9 @@ export const Sidebar: React.FC = () => {
 
   const adminLinks = [
     { name: t('nav.dashboard', 'System Dashboard'), path: '/admin/dashboard', icon: LayoutDashboard },
+    { name: 'State Referral Pipeline', path: '/admin/referrals', icon: GitFork },
+    { name: 'High-Risk Follow-up Registry', path: '/admin/high-risk', icon: HeartPulse },
+    { name: 'NQAS Facility Quality Index', path: '/admin/facility-metrics', icon: BarChart3 },
     { name: 'Friction Digital Twin', path: '/admin/digital-twin', icon: Sparkles },
     { name: t('nav.whatIfSimulator', 'What-If Simulator'), path: '/admin/simulator', icon: Cpu },
     { name: t('nav.budgetOptimizer', 'Budget Optimizer'), path: '/admin/interventions', icon: Sliders },
@@ -68,7 +87,7 @@ export const Sidebar: React.FC = () => {
     role === 'patient' ? patientLinks : role === 'hospital' ? hospitalLinks : adminLinks;
 
   return (
-    <aside className="w-64 bg-white dark:bg-slate-900 border-r border-slate-200/80 dark:border-slate-800 min-h-[calc(100vh-4rem)] p-4 flex flex-col justify-between hidden md:flex">
+    <aside className="w-64 bg-white dark:bg-slate-900 border-r border-slate-200/80 dark:border-slate-800 min-h-[calc(100vh-4rem)] p-4 flex flex-col justify-between hidden lg:flex shrink-0">
       <div className="space-y-6">
         <div>
           <h5 className="px-3 text-[11px] font-bold uppercase tracking-wider text-slate-400">
